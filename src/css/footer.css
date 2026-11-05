@@ -1,34 +1,37 @@
 /*
- * Footer: forest band with the andwis curve rising above it, brand column,
- * footer menu, social, legal links and the statutory disclosure.
+ * Footer: forest band, brand column, footer menu, social, legal links and
+ * the statutory disclosure.
  *
- * The curve pseudo-element is 120vw wide and overhangs each side, so the
- * footer carries overflow-x: clip (clip, not hidden — the curve sits above
- * the footer's top edge and needs the vertical axis left visible).
+ * The curve (Figma): the section ABOVE the footer dips down into it, so the
+ * ::before sits inside the footer's top edge, painted in that section's
+ * colour (--footer-curve-color, set by the sibling rules below) and masked
+ * with the andwis wave flipped vertically. It is 120vw wide and overhangs
+ * each side, hence overflow-x: clip on the footer.
  */
 
 #footer {
+	--curve-h: clamp(40px, 7vw, 110px);
+	--footer-curve-color: var(--col-paper);
+
 	position: relative;
 	margin-top: clamp(4rem, 8vw, 7rem);
-	padding-block: var(--space-5) var(--space-3);
+	padding-block: calc(var(--curve-h) + clamp(3.5rem, 7vw, 6rem)) var(--space-3);
 	background: var(--col-forest);
 	color: var(--col-paper);
 	overflow-x: clip;
 
-	/* The curve box is exactly as tall as the drawn curve (mask stretched to
-	   fill it), so it always sits fully above the footer's top edge — a
-	   bottom-aligned "100% auto" mask inside a taller box ends up hidden
-	   behind the footer on narrow screens. */
+	/* Mask stretched to the box (preserveAspectRatio none) so the curve is
+	   always exactly --curve-h tall whatever the viewport width; the -1px
+	   top hides any sub-pixel seam against the section above. */
 	&::before {
 		content: "";
 		position: absolute;
-		top: calc(-1 * var(--curve-h) + 1px);
+		top: -1px;
 		left: 50%;
 		width: 120vw;
 		height: var(--curve-h);
-		--curve-h: clamp(32px, 6vw, 90px);
-		background-color: var(--col-forest);
-		transform: translateX(-50%);
+		background-color: var(--footer-curve-color);
+		transform: translateX(-50%) scaleY(-1);
 		mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 66' preserveAspectRatio='none' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
 		mask-position: center bottom;
 		mask-repeat: no-repeat;
@@ -52,11 +55,29 @@
 	}
 }
 
-/* A page whose last block is already a CTA/form band sits straight on the
-   curve; the global CTA band (footer.php) removes the top margin itself. */
+/* The curve takes the colour of whatever sits directly above the footer:
+   the global CTA band, or the page's last block when the band is skipped.
+   A coloured band also sits straight on the footer with no gap. */
+.site-cta + #footer {
+	--footer-curve-color: var(--col-mint);
+}
+
+main:has(> .bg-sage-tint:last-child) + #footer {
+	--footer-curve-color: var(--col-sage-tint);
+}
+
+main:has(> .bg-sage:last-child) + #footer {
+	--footer-curve-color: var(--col-sage);
+}
+
+main:has(> .bg-forest:last-child) + #footer {
+	--footer-curve-color: var(--col-forest-deep);
+}
+
 .site-cta + #footer,
-.cb-cta + #footer,
-.cb-form + #footer {
+main:has(> .bg-sage-tint:last-child) + #footer,
+main:has(> .bg-sage:last-child) + #footer,
+main:has(> .bg-forest:last-child) + #footer {
 	margin-top: 0;
 }
 
@@ -107,18 +128,30 @@
 	align-items: center;
 	gap: 0.5rem;
 	margin-top: var(--space-3);
-	color: var(--col-sage);
-	font-size: var(--fs-caption);
+	color: var(--col-paper);
+	font-size: var(--fs-small);
 	font-weight: var(--fw-600);
+
+	/* The icon helper emits a bare SVG with no width, so size it here. */
+	& svg {
+		width: 0.9em;
+		height: 0.9em;
+		flex: 0 0 auto;
+		fill: currentColor;
+		transition: transform var(--transition);
+	}
+
+	&:hover svg,
+	&:focus-visible svg {
+		transform: translateX(3px);
+	}
 }
 
 .site-footer__nav h3 {
 	margin: 0 0 var(--space-2);
-	font-size: var(--fs-micro);
+	font-size: var(--fs-small);
 	font-weight: var(--fw-600);
-	letter-spacing: var(--ls-caps);
-	text-transform: uppercase;
-	color: var(--col-sage);
+	color: var(--col-mint);
 }
 
 .site-footer__menu {
@@ -228,37 +261,45 @@
 
 /* ---------- Global CTA band (footer.php, from Site-Wide Settings) ---------- */
 
+/* Mint band, everything centred, heading at hero scale (Figma). The footer's
+   own ::before paints this band's mint dipping down into the forest. */
 .site-cta {
+	position: relative;
+	z-index: 1;
 	padding-block: var(--section-y);
-	background: var(--col-sage-tint);
+	background: var(--col-mint);
+	color: var(--col-ink);
+	text-align: center;
 
 	& .site-cta__inner {
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
 		align-items: center;
-		justify-content: space-between;
-		gap: var(--space-4) var(--space-5);
+		gap: var(--space-4);
 	}
 
 	& .site-cta__copy {
-		flex: 1 1 24rem;
-		min-width: 0;
+		max-width: 44rem;
 	}
 
 	& h2 {
 		margin: 0;
+		color: var(--col-forest-deep);
+		font-size: var(--fs-hero);
+		line-height: 1.05;
 	}
 
 	& p {
-		margin: var(--space-2) 0 0;
-		max-width: 40rem;
-		color: var(--col-ink-soft);
+		margin: var(--space-3) auto 0;
+		max-width: 36rem;
+		color: var(--col-forest-deep);
 		font-size: var(--fs-body-lg);
 	}
 
 	& .site-cta__actions {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--space-3);
 	}
 }

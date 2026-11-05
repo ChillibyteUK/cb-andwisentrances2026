@@ -378,8 +378,7 @@
 
 /* Pick up the next sibling section's background (page.php echoes blocks as
    direct siblings; the global CTA band is .site-cta). */
-.cb-hero:has(+ .bg-sage-tint),
-.cb-hero:has(+ .site-cta) {
+.cb-hero:has(+ .bg-sage-tint) {
 	--hero-curve-color: var(--col-sage-tint);
 }
 

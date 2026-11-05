@@ -132,6 +132,19 @@ textarea {
 	--btn-ghost-ink-hover: var(--col-forest);
 }
 
+/* Forest fill for mint/sage backgrounds where the mint pill would vanish;
+   the sweep runs the other way (mint slides in on hover). */
+.btn-forest {
+	background-color: var(--col-forest);
+	background-image: linear-gradient(90deg, var(--col-mint) 50%, transparent 75%, transparent 100%);
+	color: var(--col-paper);
+
+	&:hover,
+	&:focus-visible {
+		color: var(--col-ink);
+	}
+}
+
 /* Outline on dark: mint border, mint fill sweeps in. Used in heroes. */
 .btn-outline {
 	border-color: var(--col-mint);

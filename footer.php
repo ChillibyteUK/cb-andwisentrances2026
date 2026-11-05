@@ -120,7 +120,7 @@ if ( $show_band ) {
 			?>
 		</div>
 		<div class="site-cta__actions">
-			<a class="btn" href="<?php echo esc_url( $cbae_ctas['quote']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['quote']['text'] ); ?></a>
+			<a class="btn btn-forest" href="<?php echo esc_url( $cbae_ctas['quote']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['quote']['text'] ); ?></a>
 			<a class="btn btn-ghost" href="<?php echo esc_url( $cbae_ctas['survey']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['survey']['text'] ); ?></a>
 		</div>
 	</div>
