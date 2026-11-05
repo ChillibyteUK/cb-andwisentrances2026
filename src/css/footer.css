@@ -80,12 +80,12 @@
 		height: auto;
 	}
 
-	& .logo-andwis,
-	& .logo-word {
+	& .logo-andwis {
 		fill: var(--col-paper);
 	}
 
-	& .logo-dot {
+	& .logo-dot,
+	& .logo-word {
 		fill: var(--col-mint);
 	}
 

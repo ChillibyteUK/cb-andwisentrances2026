@@ -1,11 +1,11 @@
 /*
  * Header + primary nav.
  *
- * #masthead is fixed (fixed-header.css module) and starts transparent over a
- * page that opens with the Hero block (body.has-hero — see header.php). Once
- * the page scrolls, or on any page without a hero, it is a white bar
- * (.is-solid, added by src/js/header.js). Over a hero the logo and links are
- * paper; solid, they're ink.
+ * #masthead is fixed (fixed-header.css module) and is always the light
+ * translucent strip andwis lifts uses, hero or not; a page that opens with
+ * the Hero block (body.has-hero — see header.php) simply runs the hero up
+ * under it. src/js/header.js adds .is-solid on scroll, which only firms the
+ * bar up slightly.
  *
  * Nav breakpoint: 992px, matching the "lg" breakpoint in
  * src/build/tokens.config.js. CSS custom properties can't be read inside an
@@ -16,7 +16,10 @@
 	--nav-ink: var(--col-ink);
 	--nav-logo: var(--col-forest);
 
-	background-color: var(--col-paper);
+	/* Always the light translucent strip, hero or not (matches andwis
+	   lifts); .is-solid (src/js/header.js) just firms it up on scroll. */
+	background-color: rgb(255 255 255 / 0.9);
+	backdrop-filter: saturate(160%) blur(10px);
 	border-bottom: 1px solid transparent;
 	transition:
 		background-color 400ms ease,
@@ -24,17 +27,9 @@
 		box-shadow 400ms ease;
 }
 
-body.has-hero #masthead:not(.is-solid):not(:focus-within) {
-	--nav-ink: var(--col-paper);
-	--nav-logo: var(--col-paper);
-
-	background-color: transparent;
-}
-
 #masthead.is-solid,
 #masthead:focus-within {
-	background-color: rgb(255 255 255 / 0.94);
-	backdrop-filter: saturate(160%) blur(10px);
+	background-color: rgb(255 255 255 / 0.96);
 	border-bottom-color: rgb(16 66 31 / 0.08);
 }
 
@@ -62,7 +57,7 @@ body.has-hero main {
 	& svg,
 	& img {
 		display: block;
-		width: clamp(10rem, 16vw, 14rem);
+		width: clamp(12rem, 44vw, 15rem);
 		height: auto;
 	}
 
@@ -76,10 +71,9 @@ body.has-hero main {
 	}
 
 	& .logo-word {
-		fill: var(--nav-logo);
+		fill: var(--col-emerald);
 		font-family: var(--font-family-base);
 		font-weight: var(--fw-700);
-		transition: fill 400ms ease;
 	}
 }
 
@@ -261,7 +255,7 @@ body.has-hero main {
 	   the brand and links run slightly smaller there and relax at xl. */
 	.navbar-brand svg,
 	.navbar-brand img {
-		width: clamp(8.5rem, 12vw, 14rem);
+		width: clamp(11rem, 15vw, 19rem);
 	}
 
 	.navbar-nav > .nav-item > .nav-link {
@@ -320,7 +314,7 @@ body.has-hero main {
 
 		.navbar-brand svg,
 		.navbar-brand img {
-			width: clamp(10rem, 16vw, 14rem);
+			width: clamp(14rem, 17vw, 20rem);
 		}
 	}
 
