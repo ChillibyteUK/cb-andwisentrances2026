@@ -1570,6 +1570,56 @@ main:has(> .bg-forest:last-child) + #footer {
 	line-height: 1.6;
 }
 
+/* "Back to top?" pill (Figma): mint, centred, forest disc with an up arrow. */
+.site-footer__top {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	margin-top: var(--space-5);
+}
+
+.back-to-top {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+	padding: 0.6rem 0.6rem 0.6rem 2.25rem;
+	border: 0;
+	border-radius: var(--radius-pill);
+	background: var(--col-mint);
+	color: var(--col-forest-deep);
+	font-family: inherit;
+	font-size: var(--fs-body-lg);
+	font-weight: var(--fw-700);
+	line-height: 1.2;
+	cursor: pointer;
+	transition: background-color 300ms ease;
+}
+
+.back-to-top svg {
+		flex: 0 0 auto;
+		width: 3rem;
+		height: 3rem;
+		padding: 0.95rem;
+		border-radius: 50%;
+		background: var(--col-forest-deep);
+		color: var(--col-mint);
+		transition: transform 300ms ease;
+	}
+
+.back-to-top:hover,.back-to-top:focus-visible {
+		background: var(--col-sage);
+	}
+
+:is(.back-to-top:hover,.back-to-top:focus-visible) svg {
+			transform: translateY(-2px);
+		}
+
+.back-to-top:focus-visible {
+		outline: 2px solid var(--col-mint);
+		outline-offset: 3px;
+	}
+
 @media (min-width: 768px) {
 	.site-footer__main {
 		grid-template-columns: 1.4fr 1fr 1fr;

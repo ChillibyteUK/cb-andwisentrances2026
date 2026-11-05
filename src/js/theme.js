@@ -6,6 +6,7 @@ import { initFade } from './fade';
 import { initCounters } from './counter';
 import { initFilters } from './filter';
 import { initAccordions } from './accordion';
+import { initBackToTop } from './back-to-top';
 
 document.addEventListener('DOMContentLoaded', () => {
 	initHeader();
@@ -16,4 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	initCounters();
 	initFilters();
 	initAccordions();
+	initBackToTop();
 });

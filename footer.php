@@ -255,6 +255,13 @@ if ( $show_band ) {
 			?>
 		</div>
 	</div>
+
+	<div class="container site-footer__top">
+		<button type="button" class="back-to-top" data-back-to-top>
+			<span><?php esc_html_e( 'Back to top?', 'cb-andwisentrances2026' ); ?></span>
+			<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.5 13.5 12h-11z" fill="currentColor"/></svg>
+		</button>
+	</div>
 </footer>
 
 <?php wp_footer(); ?>
