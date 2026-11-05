@@ -61,6 +61,9 @@ textarea {
 	background-image: linear-gradient(90deg, var(--col-forest) 50%, transparent 75%, transparent 100%);
 	background-size: 400%;
 	background-position: 100%;
+	/* The sweep image is 4x the button; left to repeat, a sub-pixel gap at
+	   the right edge shows the next tile's forest start as a dark sliver. */
+	background-repeat: no-repeat;
 	color: var(--col-ink);
 	font-family: inherit;
 	font-size: var(--fs-caption);
