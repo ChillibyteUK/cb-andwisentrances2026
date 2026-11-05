@@ -318,18 +318,16 @@ body.has-hero main {
 		-webkit-text-stroke: 0.4px currentColor;
 	}
 
-	.dropdown-menu,
-	.dropdown-menu.is-open {
+	/* Single-class selector on purpose: the per-style rules below share its
+	   specificity and come later, so their margin/padding win. */
+	.dropdown-menu {
 		position: absolute;
 		top: 100%;
+		display: none;
 		margin: 0;
 		padding: 0;
 		border: 0;
 		z-index: 10;
-	}
-
-	.dropdown-menu {
-		display: none;
 	}
 
 	.dropdown-menu.is-open {
