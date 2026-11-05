@@ -1,5 +1,5 @@
 /*!
- * cb-js-skeleton2026 v1.0.0 (https://github.com/ChillibyteUK/cb-js-skeleton2026)
+ * cb-andwisentrances2026 v1.0.0 (https://github.com/ChillibyteUK/cb-andwisentrances2026)
  * Copyright 2026 Chillibyte - DS
  * Licensed under GPL-3.0
  */

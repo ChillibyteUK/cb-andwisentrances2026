@@ -10,7 +10,7 @@
  * expands blocks via do_blocks only; the injector works on the filtered
  * string it is given), so this never trips the footnote counter or recurses.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
  * @param string $html Markup to scan.
  * @return array[] Each: match (nth h2 overall), id, text, auto (bool).
  */
-function cb_js_skeleton_collect_h2s( $html ) {
+function cb_andwisentrances2026_collect_h2s( $html ) {
 	$entries = array();
 
 	if ( ! preg_match_all( '/<h2\b([^>]*)>(.*?)<\/h2>/is', $html, $matches, PREG_SET_ORDER ) ) {
@@ -93,13 +93,13 @@ function cb_js_skeleton_collect_h2s( $html ) {
  * @param string $content Filtered post content.
  * @return string Content with h2 ids filled in.
  */
-function cb_js_skeleton_auto_heading_ids( $content ) {
+function cb_andwisentrances2026_auto_heading_ids( $content ) {
 	if ( false === stripos( $content, '<h2' ) ) {
 		return $content;
 	}
 
 	$by_match = array();
-	foreach ( cb_js_skeleton_collect_h2s( $content ) as $entry ) {
+	foreach ( cb_andwisentrances2026_collect_h2s( $content ) as $entry ) {
 		if ( $entry['auto'] ) {
 			$by_match[ $entry['match'] ] = $entry['id'];
 		}
@@ -125,7 +125,7 @@ function cb_js_skeleton_auto_heading_ids( $content ) {
 		$content
 	);
 }
-add_filter( 'the_content', 'cb_js_skeleton_auto_heading_ids', 20 );
+add_filter( 'the_content', 'cb_andwisentrances2026_auto_heading_ids', 20 );
 
 /**
  * Render the table of contents for a post's h2s. Empty string when none.
@@ -139,7 +139,7 @@ add_filter( 'the_content', 'cb_js_skeleton_auto_heading_ids', 20 );
  * @param int|WP_Post|null $post Post to index. Defaults to the loop post.
  * @return string ToC nav HTML (already escaped).
  */
-function cb_js_skeleton_toc( $post = null ) {
+function cb_andwisentrances2026_toc( $post = null ) {
 	$post = get_post( $post );
 
 	if ( ! $post ) {
@@ -147,7 +147,7 @@ function cb_js_skeleton_toc( $post = null ) {
 	}
 
 	$items = '';
-	foreach ( cb_js_skeleton_collect_h2s( do_blocks( $post->post_content ) ) as $entry ) {
+	foreach ( cb_andwisentrances2026_collect_h2s( do_blocks( $post->post_content ) ) as $entry ) {
 		$items .= '<li class="cb-toc__item"><a class="cb-toc__link" href="#' . esc_attr( $entry['id'] ) . '">' . esc_html( $entry['text'] ) . '</a></li>';
 	}
 
@@ -155,6 +155,6 @@ function cb_js_skeleton_toc( $post = null ) {
 		return '';
 	}
 
-	return '<nav class="cb-toc" aria-label="' . esc_attr__( 'Table of contents', 'cb-js-skeleton2026' ) . '"><p class="cb-toc__title text-label">' . esc_html__( 'Contents', 'cb-js-skeleton2026' ) . '</p><ol class="cb-toc__list">' . $items . '</ol></nav>';
+	return '<nav class="cb-toc" aria-label="' . esc_attr__( 'Table of contents', 'cb-andwisentrances2026' ) . '"><p class="cb-toc__title text-label">' . esc_html__( 'Contents', 'cb-andwisentrances2026' ) . '</p><ol class="cb-toc__list">' . $items . '</ol></nav>';
 }
-add_shortcode( 'cb_toc', 'cb_js_skeleton_toc' );
+add_shortcode( 'cb_toc', 'cb_andwisentrances2026_toc' );

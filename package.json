@@ -1,5 +1,5 @@
 {
-  "name": "cb-js-skeleton2026",
+  "name": "cb-andwisentrances2026",
   "version": "1.0.0",
   "description": "Standalone base WordPress theme. No parent theme, no Bootstrap — own lightweight CSS reusing Bootstrap-style naming.",
   "main": "index.js",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChillibyteUK/cb-js-skeleton2026.git"
+    "url": "git+https://github.com/ChillibyteUK/cb-andwisentrances2026.git"
   },
   "keywords": [
     "wordpress",
@@ -41,7 +41,7 @@
   ],
   "author": "Chillibyte - DS",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/ChillibyteUK/cb-js-skeleton2026",
+  "homepage": "https://github.com/ChillibyteUK/cb-andwisentrances2026",
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@babel/core": "^7.26.10",

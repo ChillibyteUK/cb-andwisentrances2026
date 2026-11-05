@@ -5,17 +5,17 @@
  * linkmod/icon handling, no Bootstrap 4/5 branching. Submenus are shown via
  * dropdown-toggle buttons, which are accessible and work with keyboard navigation.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'CB_JS_Skeleton_Nav_Walker' ) ) {
+if ( ! class_exists( 'Andwis_Entrances_2026_Nav_Walker' ) ) {
 
 	/**
 	 * Custom nav walker.
 	 */
-	class CB_JS_Skeleton_Nav_Walker extends Walker_Nav_Menu {
+	class Andwis_Entrances_2026_Nav_Walker extends Walker_Nav_Menu {
 
 		/**
 		 * Holds the id of the submenu currently being opened, so start_lvl()

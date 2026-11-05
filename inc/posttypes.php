@@ -5,7 +5,7 @@
  * Duplicate one of the register_post_type() calls below (commented out) as
  * a starting point for a new post type — nothing is registered by default.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_register_post_types() {
+function cb_andwisentrances2026_register_post_types() {
 
 	/*
 	register_post_type(
@@ -51,7 +51,7 @@ function cb_js_skeleton_register_post_types() {
 	*/
 
 }
-add_action( 'init', 'cb_js_skeleton_register_post_types' );
+add_action( 'init', 'cb_andwisentrances2026_register_post_types' );
 
 /**
  * Serve page.php for singular views of any custom post type that has no
@@ -72,7 +72,7 @@ add_action( 'init', 'cb_js_skeleton_register_post_types' );
  * @param string $template Template path WordPress would otherwise use.
  * @return string
  */
-function cb_js_skeleton_use_page_template_for_cpts( $template ) {
+function cb_andwisentrances2026_use_page_template_for_cpts( $template ) {
 	if ( is_singular() && ! is_page() && ! is_singular( 'post' ) && 'single.php' === basename( $template ) ) {
 		$page_template = get_query_template( 'page' );
 
@@ -83,4 +83,4 @@ function cb_js_skeleton_use_page_template_for_cpts( $template ) {
 
 	return $template;
 }
-add_filter( 'template_include', 'cb_js_skeleton_use_page_template_for_cpts' );
+add_filter( 'template_include', 'cb_andwisentrances2026_use_page_template_for_cpts' );

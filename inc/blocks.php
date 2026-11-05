@@ -2,7 +2,7 @@
 /**
  * Register native blocks.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,12 +14,12 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_register_blocks() {
+function cb_andwisentrances2026_register_blocks() {
 	foreach ( glob( get_template_directory() . '/blocks/*/block.json' ) as $block_json ) {
 		register_block_type( dirname( $block_json ) );
 	}
 }
-add_action( 'init', 'cb_js_skeleton_register_blocks' );
+add_action( 'init', 'cb_andwisentrances2026_register_blocks' );
 
 /**
  * Tweak block registration for non-theme blocks.
@@ -38,8 +38,8 @@ add_action( 'init', 'cb_js_skeleton_register_blocks' );
  * @param string $name Block type name.
  * @return array
  */
-function cb_js_skeleton_core_block_type_args( $args, $name ) {
-	$GLOBALS['cb_js_skeleton_original_block_categories'][ $name ] = isset( $args['category'] ) ? $args['category'] : '';
+function cb_andwisentrances2026_core_block_type_args( $args, $name ) {
+	$GLOBALS['cb_andwisentrances2026_original_block_categories'][ $name ] = isset( $args['category'] ) ? $args['category'] : '';
 
 	$theme_namespace = wp_get_theme()->get( 'TextDomain' ) . '/';
 	$wrapped_blocks  = array( 'core/paragraph', 'core/heading', 'core/list', 'core/separator', 'core/buttons' );
@@ -55,12 +55,12 @@ function cb_js_skeleton_core_block_type_args( $args, $name ) {
 	}
 
 	if ( in_array( $name, $wrapped_blocks, true ) ) {
-		$args['render_callback'] = 'cb_js_skeleton_wrap_block_in_container';
+		$args['render_callback'] = 'cb_andwisentrances2026_wrap_block_in_container';
 	}
 
 	return $args;
 }
-add_filter( 'register_block_type_args', 'cb_js_skeleton_core_block_type_args', 10, 2 );
+add_filter( 'register_block_type_args', 'cb_andwisentrances2026_core_block_type_args', 10, 2 );
 
 /**
  * Register a single Gutenberg category for non-theme blocks.
@@ -68,7 +68,7 @@ add_filter( 'register_block_type_args', 'cb_js_skeleton_core_block_type_args', 1
  * @param array $categories Existing block categories.
  * @return array
  */
-function cb_js_skeleton_register_gutenberg_block_category( $categories ) {
+function cb_andwisentrances2026_register_gutenberg_block_category( $categories ) {
 	foreach ( $categories as $category ) {
 		if ( isset( $category['slug'] ) && 'gutenberg' === $category['slug'] ) {
 			return $categories;
@@ -86,7 +86,7 @@ function cb_js_skeleton_register_gutenberg_block_category( $categories ) {
 
 	return $categories;
 }
-add_filter( 'block_categories_all', 'cb_js_skeleton_register_gutenberg_block_category' );
+add_filter( 'block_categories_all', 'cb_andwisentrances2026_register_gutenberg_block_category' );
 
 /**
  * Register the category that this theme's own native blocks (blocks/*) are
@@ -98,13 +98,13 @@ add_filter( 'block_categories_all', 'cb_js_skeleton_register_gutenberg_block_cat
  * rather than a generic "theme" slug — WordPress core already registers a
  * category with that exact slug for legacy widget blocks, and this theme
  * disallows that whole category as noise (see
- * cb_js_skeleton_get_disallowed_gutenberg_blocks()), which silently hides
+ * cb_andwisentrances2026_get_disallowed_gutenberg_blocks()), which silently hides
  * every block registered under a colliding "theme" slug too.
  *
  * @param array $categories Existing block categories.
  * @return array
  */
-function cb_js_skeleton_register_theme_block_category( $categories ) {
+function cb_andwisentrances2026_register_theme_block_category( $categories ) {
 	$theme = wp_get_theme();
 	$slug  = $theme->get( 'TextDomain' );
 
@@ -125,7 +125,7 @@ function cb_js_skeleton_register_theme_block_category( $categories ) {
 
 	return $categories;
 }
-add_filter( 'block_categories_all', 'cb_js_skeleton_register_theme_block_category' );
+add_filter( 'block_categories_all', 'cb_andwisentrances2026_register_theme_block_category' );
 
 /**
  * Return disallowed Gutenberg blocks for this theme.
@@ -135,7 +135,7 @@ add_filter( 'block_categories_all', 'cb_js_skeleton_register_theme_block_categor
  *
  * @return array<string, array<string>>
  */
-function cb_js_skeleton_get_disallowed_gutenberg_blocks() {
+function cb_andwisentrances2026_get_disallowed_gutenberg_blocks() {
 	return array(
 		'categories'        => array(
 			'theme',
@@ -178,14 +178,14 @@ function cb_js_skeleton_get_disallowed_gutenberg_blocks() {
  * @param bool|array $allowed_block_types Current allowed block types.
  * @return bool|array
  */
-function cb_js_skeleton_disallow_unwanted_core_blocks( $allowed_block_types ) {
+function cb_andwisentrances2026_disallow_unwanted_core_blocks( $allowed_block_types ) {
 	$registered_blocks       = WP_Block_Type_Registry::get_instance()->get_all_registered();
-	$disallowed_gutenberg    = cb_js_skeleton_get_disallowed_gutenberg_blocks();
+	$disallowed_gutenberg    = cb_andwisentrances2026_get_disallowed_gutenberg_blocks();
 	$disallowed_blocks = array_keys(
 		array_filter(
 			$registered_blocks,
 			static function ( $block_type, $block_name ) use ( $disallowed_gutenberg ) {
-				$original_categories    = isset( $GLOBALS['cb_js_skeleton_original_block_categories'] ) ? $GLOBALS['cb_js_skeleton_original_block_categories'] : array();
+				$original_categories    = isset( $GLOBALS['cb_andwisentrances2026_original_block_categories'] ) ? $GLOBALS['cb_andwisentrances2026_original_block_categories'] : array();
 				$original_category      = isset( $original_categories[ $block_name ] ) ? $original_categories[ $block_name ] : ( isset( $block_type->category ) ? $block_type->category : '' );
 				$is_disallowed_category = in_array( $original_category, $disallowed_gutenberg['categories'], true );
 				$is_widget_block        = 'widgets' === $original_category && ! in_array( $block_name, $disallowed_gutenberg['widget_exceptions'], true );
@@ -221,7 +221,7 @@ function cb_js_skeleton_disallow_unwanted_core_blocks( $allowed_block_types ) {
 
 	return $allowed_block_types;
 }
-add_filter( 'allowed_block_types_all', 'cb_js_skeleton_disallow_unwanted_core_blocks' );
+add_filter( 'allowed_block_types_all', 'cb_andwisentrances2026_disallow_unwanted_core_blocks' );
 
 /**
  * Render callback that wraps a core block's content in .container.
@@ -233,7 +233,7 @@ add_filter( 'allowed_block_types_all', 'cb_js_skeleton_disallow_unwanted_core_bl
  * @param string $content    Rendered block content.
  * @return string
  */
-function cb_js_skeleton_wrap_block_in_container( $attributes, $content ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
+function cb_andwisentrances2026_wrap_block_in_container( $attributes, $content ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 	if ( is_single() ) {
 		return $content;
 	}

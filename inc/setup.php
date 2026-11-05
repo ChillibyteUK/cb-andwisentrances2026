@@ -2,7 +2,7 @@
 /**
  * Theme setup — supports, nav menus.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,8 +12,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_setup() {
-	load_theme_textdomain( 'cb-js-skeleton2026', get_template_directory() . '/languages' );
+function cb_andwisentrances2026_setup() {
+	load_theme_textdomain( 'cb-andwisentrances2026', get_template_directory() . '/languages' );
 
 	add_theme_support( 'title-tag' ); // Site title in <head> — no separate "site title" support needed beyond this.
 	add_theme_support( 'post-thumbnails' );
@@ -26,12 +26,12 @@ function cb_js_skeleton_setup() {
 	// Rename/extend per project.
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary Menu', 'cb-js-skeleton2026' ),
-			'footer'  => __( 'Footer Menu', 'cb-js-skeleton2026' ),
+			'primary' => __( 'Primary Menu', 'cb-andwisentrances2026' ),
+			'footer'  => __( 'Footer Menu', 'cb-andwisentrances2026' ),
 		)
 	);
 }
-add_action( 'after_setup_theme', 'cb_js_skeleton_setup' );
+add_action( 'after_setup_theme', 'cb_andwisentrances2026_setup' );
 
 /**
  * Turn off the block editor's Notes feature (WP core's "collaboration"
@@ -47,11 +47,11 @@ add_action( 'after_setup_theme', 'cb_js_skeleton_setup' );
  *
  * @return void
  */
-function cb_js_skeleton_disable_editor_notes() {
+function cb_andwisentrances2026_disable_editor_notes() {
 	foreach ( get_post_types( array(), 'names' ) as $post_type ) {
 		if ( post_type_supports( $post_type, 'editor' ) ) {
 			add_post_type_support( $post_type, 'editor', array( 'notes' => false ) );
 		}
 	}
 }
-add_action( 'init', 'cb_js_skeleton_disable_editor_notes', 20 );
+add_action( 'init', 'cb_andwisentrances2026_disable_editor_notes', 20 );

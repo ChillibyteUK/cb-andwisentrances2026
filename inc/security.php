@@ -6,7 +6,7 @@
  * UI), alongside security response headers, head cleanup, XML-RPC
  * lockdown, generic login errors and author/REST user-enumeration blocks.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,30 +18,30 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_disable_comments() {
-	add_action( 'init', 'cb_js_skeleton_disable_comments_post_type_support' );
+function cb_andwisentrances2026_disable_comments() {
+	add_action( 'init', 'cb_andwisentrances2026_disable_comments_post_type_support' );
 
 	add_filter( 'comments_open', '__return_false', 20, 2 );
 	add_filter( 'pings_open', '__return_false', 20, 2 );
 	add_filter( 'comments_array', '__return_empty_array', 10, 2 );
 
-	add_action( 'admin_menu', 'cb_js_skeleton_remove_comments_menu' );
-	add_action( 'admin_init', 'cb_js_skeleton_redirect_comment_pages' );
-	add_action( 'admin_bar_menu', 'cb_js_skeleton_remove_comments_admin_bar', 999 );
-	add_action( 'admin_init', 'cb_js_skeleton_hide_discussion_settings' );
-	add_action( 'admin_menu', 'cb_js_skeleton_remove_discussion_menu' );
+	add_action( 'admin_menu', 'cb_andwisentrances2026_remove_comments_menu' );
+	add_action( 'admin_init', 'cb_andwisentrances2026_redirect_comment_pages' );
+	add_action( 'admin_bar_menu', 'cb_andwisentrances2026_remove_comments_admin_bar', 999 );
+	add_action( 'admin_init', 'cb_andwisentrances2026_hide_discussion_settings' );
+	add_action( 'admin_menu', 'cb_andwisentrances2026_remove_discussion_menu' );
 
-	add_filter( 'manage_posts_columns', 'cb_js_skeleton_remove_comments_column' );
-	add_filter( 'manage_pages_columns', 'cb_js_skeleton_remove_comments_column' );
+	add_filter( 'manage_posts_columns', 'cb_andwisentrances2026_remove_comments_column' );
+	add_filter( 'manage_pages_columns', 'cb_andwisentrances2026_remove_comments_column' );
 }
-cb_js_skeleton_disable_comments();
+cb_andwisentrances2026_disable_comments();
 
 /**
  * Strip comments/trackbacks support from every post type.
  *
  * @return void
  */
-function cb_js_skeleton_disable_comments_post_type_support() {
+function cb_andwisentrances2026_disable_comments_post_type_support() {
 	foreach ( get_post_types() as $post_type ) {
 		if ( post_type_supports( $post_type, 'comments' ) ) {
 			remove_post_type_support( $post_type, 'comments' );
@@ -56,7 +56,7 @@ function cb_js_skeleton_disable_comments_post_type_support() {
  * @param array $columns List-table columns.
  * @return array
  */
-function cb_js_skeleton_remove_comments_column( $columns ) {
+function cb_andwisentrances2026_remove_comments_column( $columns ) {
 	unset( $columns['comments'] );
 	return $columns;
 }
@@ -66,7 +66,7 @@ function cb_js_skeleton_remove_comments_column( $columns ) {
  *
  * @return void
  */
-function cb_js_skeleton_remove_comments_menu() {
+function cb_andwisentrances2026_remove_comments_menu() {
 	remove_menu_page( 'edit-comments.php' );
 }
 
@@ -75,7 +75,7 @@ function cb_js_skeleton_remove_comments_menu() {
  *
  * @return void
  */
-function cb_js_skeleton_remove_discussion_menu() {
+function cb_andwisentrances2026_remove_discussion_menu() {
 	remove_submenu_page( 'options-general.php', 'options-discussion.php' );
 }
 
@@ -84,7 +84,7 @@ function cb_js_skeleton_remove_discussion_menu() {
  *
  * @return void
  */
-function cb_js_skeleton_redirect_comment_pages() {
+function cb_andwisentrances2026_redirect_comment_pages() {
 	global $pagenow;
 
 	if ( 'edit-comments.php' === $pagenow ) {
@@ -99,7 +99,7 @@ function cb_js_skeleton_redirect_comment_pages() {
  * @param WP_Admin_Bar $wp_admin_bar Admin bar instance.
  * @return void
  */
-function cb_js_skeleton_remove_comments_admin_bar( $wp_admin_bar ) {
+function cb_andwisentrances2026_remove_comments_admin_bar( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'comments' );
 }
 
@@ -109,8 +109,8 @@ function cb_js_skeleton_remove_comments_admin_bar( $wp_admin_bar ) {
  *
  * @return void
  */
-function cb_js_skeleton_hide_discussion_settings() {
-	add_action( 'admin_head', 'cb_js_skeleton_hide_discussion_settings_css' );
+function cb_andwisentrances2026_hide_discussion_settings() {
+	add_action( 'admin_head', 'cb_andwisentrances2026_hide_discussion_settings_css' );
 }
 
 /**
@@ -118,7 +118,7 @@ function cb_js_skeleton_hide_discussion_settings() {
  *
  * @return void
  */
-function cb_js_skeleton_hide_discussion_settings_css() {
+function cb_andwisentrances2026_hide_discussion_settings_css() {
 	global $pagenow;
 
 	if ( 'options-discussion.php' === $pagenow ) {
@@ -133,12 +133,12 @@ function cb_js_skeleton_hide_discussion_settings_css() {
  *
  * @return void
  */
-function cb_js_skeleton_disable_gravatars() {
+function cb_andwisentrances2026_disable_gravatars() {
 	add_filter( 'pre_option_show_avatars', '__return_zero' );
 	add_filter( 'user_profile_picture_description', '__return_empty_string' );
-	add_filter( 'get_avatar', 'cb_js_skeleton_disable_gravatar', 10, 5 );
+	add_filter( 'get_avatar', 'cb_andwisentrances2026_disable_gravatar', 10, 5 );
 }
-cb_js_skeleton_disable_gravatars();
+cb_andwisentrances2026_disable_gravatars();
 
 /**
  * Answer every avatar request with nothing.
@@ -153,7 +153,7 @@ cb_js_skeleton_disable_gravatars();
  * @param string $alt            Alt text.
  * @return string
  */
-function cb_js_skeleton_disable_gravatar( $avatar, $id_or_email, $size, $default_avatar, $alt ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+function cb_andwisentrances2026_disable_gravatar( $avatar, $id_or_email, $size, $default_avatar, $alt ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 	return '';
 }
 
@@ -163,12 +163,12 @@ function cb_js_skeleton_disable_gravatar( $avatar, $id_or_email, $size, $default
  *
  * @return void
  */
-function cb_js_skeleton_disable_tags() {
-	add_action( 'init', 'cb_js_skeleton_unregister_tags', 999 );
-	add_action( 'admin_menu', 'cb_js_skeleton_remove_tags_menu' );
-	add_action( 'add_meta_boxes', 'cb_js_skeleton_remove_tags_metabox', 999 );
+function cb_andwisentrances2026_disable_tags() {
+	add_action( 'init', 'cb_andwisentrances2026_unregister_tags', 999 );
+	add_action( 'admin_menu', 'cb_andwisentrances2026_remove_tags_menu' );
+	add_action( 'add_meta_boxes', 'cb_andwisentrances2026_remove_tags_metabox', 999 );
 }
-cb_js_skeleton_disable_tags();
+cb_andwisentrances2026_disable_tags();
 
 /**
  * Detach post_tag from posts and hide every scrap of its UI, without
@@ -176,7 +176,7 @@ cb_js_skeleton_disable_tags();
  *
  * @return void
  */
-function cb_js_skeleton_unregister_tags() {
+function cb_andwisentrances2026_unregister_tags() {
 	unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 
 	global $wp_taxonomies;
@@ -195,7 +195,7 @@ function cb_js_skeleton_unregister_tags() {
  *
  * @return void
  */
-function cb_js_skeleton_remove_tags_menu() {
+function cb_andwisentrances2026_remove_tags_menu() {
 	remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' );
 }
 
@@ -204,7 +204,7 @@ function cb_js_skeleton_remove_tags_menu() {
  *
  * @return void
  */
-function cb_js_skeleton_remove_tags_metabox() {
+function cb_andwisentrances2026_remove_tags_metabox() {
 	remove_meta_box( 'tagsdiv-post_tag', 'post', 'side' );
 }
 
@@ -217,7 +217,7 @@ function cb_js_skeleton_remove_tags_metabox() {
  *
  * @return void
  */
-function cb_js_skeleton_disable_emojis() {
+function cb_andwisentrances2026_disable_emojis() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -225,10 +225,10 @@ function cb_js_skeleton_disable_emojis() {
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	add_filter( 'tiny_mce_plugins', 'cb_js_skeleton_disable_emojis_tinymce' );
+	add_filter( 'tiny_mce_plugins', 'cb_andwisentrances2026_disable_emojis_tinymce' );
 	add_filter( 'emoji_svg_url', '__return_false' );
 }
-cb_js_skeleton_disable_emojis();
+cb_andwisentrances2026_disable_emojis();
 
 /**
  * Strip the emoji plugin from TinyMCE.
@@ -236,7 +236,7 @@ cb_js_skeleton_disable_emojis();
  * @param array $plugins TinyMCE plugins.
  * @return array
  */
-function cb_js_skeleton_disable_emojis_tinymce( $plugins ) {
+function cb_andwisentrances2026_disable_emojis_tinymce( $plugins ) {
 	if ( is_array( $plugins ) ) {
 		return array_diff( $plugins, array( 'wpemoji' ) );
 	}
@@ -250,12 +250,12 @@ function cb_js_skeleton_disable_emojis_tinymce( $plugins ) {
  *
  * @return void
  */
-function cb_js_skeleton_suppress_dashboard_widgets() {
+function cb_andwisentrances2026_suppress_dashboard_widgets() {
 	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
 	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 }
-add_action( 'wp_dashboard_setup', 'cb_js_skeleton_suppress_dashboard_widgets' );
+add_action( 'wp_dashboard_setup', 'cb_andwisentrances2026_suppress_dashboard_widgets' );
 
 /**
  * Send fixed security response headers on every response.
@@ -270,7 +270,7 @@ add_action( 'wp_dashboard_setup', 'cb_js_skeleton_suppress_dashboard_widgets' );
  *
  * @return void
  */
-function cb_js_skeleton_send_security_headers() {
+function cb_andwisentrances2026_send_security_headers() {
 	if ( headers_sent() ) {
 		return;
 	}
@@ -284,7 +284,7 @@ function cb_js_skeleton_send_security_headers() {
 	header( 'X-Content-Type-Options: nosniff' );
 	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 }
-add_action( 'send_headers', 'cb_js_skeleton_send_security_headers' );
+add_action( 'send_headers', 'cb_andwisentrances2026_send_security_headers' );
 
 /**
  * Strip version and discovery tags from wp_head: generator, RSD, WLW
@@ -293,15 +293,15 @@ add_action( 'send_headers', 'cb_js_skeleton_send_security_headers' );
  *
  * @return void
  */
-function cb_js_skeleton_head_cleanup() {
+function cb_andwisentrances2026_head_cleanup() {
 	remove_action( 'wp_head', 'wp_generator' );
 	remove_action( 'wp_head', 'rsd_link' );
 	remove_action( 'wp_head', 'wlwmanifest_link' );
 	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 	remove_action( 'wp_head', 'pingback_link' );
-	add_filter( 'wp_headers', 'cb_js_skeleton_remove_pingback_header' );
+	add_filter( 'wp_headers', 'cb_andwisentrances2026_remove_pingback_header' );
 }
-cb_js_skeleton_head_cleanup();
+cb_andwisentrances2026_head_cleanup();
 
 /**
  * Drop the X-Pingback response header (pairs with the pingback_link
@@ -310,7 +310,7 @@ cb_js_skeleton_head_cleanup();
  * @param array $headers Response headers.
  * @return array
  */
-function cb_js_skeleton_remove_pingback_header( $headers ) {
+function cb_andwisentrances2026_remove_pingback_header( $headers ) {
 	unset( $headers['X-Pingback'] );
 	return $headers;
 }
@@ -321,10 +321,10 @@ function cb_js_skeleton_remove_pingback_header( $headers ) {
  *
  * @return void
  */
-function cb_js_skeleton_disable_xmlrpc() {
+function cb_andwisentrances2026_disable_xmlrpc() {
 	add_filter( 'xmlrpc_enabled', '__return_false' );
 }
-cb_js_skeleton_disable_xmlrpc();
+cb_andwisentrances2026_disable_xmlrpc();
 
 /**
  * Return a generic login error so failed logins never reveal whether
@@ -332,10 +332,10 @@ cb_js_skeleton_disable_xmlrpc();
  *
  * @return string
  */
-function cb_js_skeleton_generic_login_errors() {
-	return __( 'Invalid username or password.', 'cb-js-skeleton2026' );
+function cb_andwisentrances2026_generic_login_errors() {
+	return __( 'Invalid username or password.', 'cb-andwisentrances2026' );
 }
-add_filter( 'login_errors', 'cb_js_skeleton_generic_login_errors' );
+add_filter( 'login_errors', 'cb_andwisentrances2026_generic_login_errors' );
 
 /**
  * Block ?author=N user enumeration scans: author archives and plain
@@ -343,13 +343,13 @@ add_filter( 'login_errors', 'cb_js_skeleton_generic_login_errors' );
  *
  * @return void
  */
-function cb_js_skeleton_block_author_enumeration() {
+function cb_andwisentrances2026_block_author_enumeration() {
 	if ( is_author() || isset( $_GET['author'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- value never used, presence alone triggers the redirect.
 		wp_safe_redirect( home_url( '/' ), 301 );
 		exit;
 	}
 }
-add_action( 'template_redirect', 'cb_js_skeleton_block_author_enumeration' );
+add_action( 'template_redirect', 'cb_andwisentrances2026_block_author_enumeration' );
 
 /**
  * Hide user routes (/wp/v2/users*) from the REST index for logged-out
@@ -359,7 +359,7 @@ add_action( 'template_redirect', 'cb_js_skeleton_block_author_enumeration' );
  * @param array $endpoints Registered REST routes.
  * @return array
  */
-function cb_js_skeleton_restrict_rest_users( $endpoints ) {
+function cb_andwisentrances2026_restrict_rest_users( $endpoints ) {
 	if ( is_user_logged_in() ) {
 		return $endpoints;
 	}
@@ -372,4 +372,4 @@ function cb_js_skeleton_restrict_rest_users( $endpoints ) {
 
 	return $endpoints;
 }
-add_filter( 'rest_endpoints', 'cb_js_skeleton_restrict_rest_users' );
+add_filter( 'rest_endpoints', 'cb_andwisentrances2026_restrict_rest_users' );

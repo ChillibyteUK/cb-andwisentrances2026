@@ -1,4 +1,4 @@
-# cb-js-skeleton2026
+# cb-andwisentrances2026
 
 Standalone base WordPress theme. Check it out, rename it, build on it — this
 is a one-time-checkout base, not a live dependency: fixes made here aren't
@@ -13,15 +13,15 @@ section below for how blocks work here.
 ## Starting a new project
 
 ```
-git clone git@github.com:ChillibyteUK/cb-js-skeleton2026.git my-new-project
+git clone git@github.com:ChillibyteUK/cb-andwisentrances2026.git my-new-project
 cd my-new-project
 ./setup.sh
 ```
 
 `setup.sh` prompts for a theme name, suggests a slug from it (press enter to
 accept, or type your own — names and slugs often want to diverge), then
-renames every `cb-js-skeleton2026` / `CB JS Skeleton 2026` / `cb_js_skeleton_` /
-`CB_JS_Skeleton_` reference across the whole repo to match, and resets git to a
+renames every `cb-andwisentrances2026` / `andwis entrances 2026` / `cb_andwisentrances2026_` /
+`Andwis_Entrances_2026_` reference across the whole repo to match, and resets git to a
 single fresh commit (no skeleton commit history, no GitHub repo created —
 that part's manual: `gh repo create ChillibyteUK/{slug} --public --source=.
 --push` when you're ready). Refuses to run on a dirty tree or an

@@ -1,6 +1,6 @@
 /**
  * Add/remove/reorder rows and per-row image selection for `repeater`-type
- * settings fields (see cb_js_skeleton_render_repeater_field() in
+ * settings fields (see cb_andwisentrances2026_render_repeater_field() in
  * inc/options.php). Generic — works for any repeater's sub-fields without
  * knowing their names, since row markup (including the empty-row
  * <template>) is fully rendered server-side; this only wires interactions.
@@ -11,23 +11,23 @@
  * side. The visible 1/2/3 row-number badge is purely cosmetic though, and
  * does need renumbering here after every add/remove/move.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 ( function ( $ ) {
 	'use strict';
 
 	function renumberRows( $rowsWrap ) {
-		$rowsWrap.find( '.cb-js-skeleton-settings-repeater__row' ).each( function ( i ) {
-			$( this ).find( '.cb-js-skeleton-settings-repeater__number' ).text( i + 1 );
+		$rowsWrap.find( '.cb-andwisentrances2026-settings-repeater__row' ).each( function ( i ) {
+			$( this ).find( '.cb-andwisentrances2026-settings-repeater__number' ).text( i + 1 );
 		} );
 	}
 
 	function bindImagePicker( $row ) {
-		$row.find( '.cb-js-skeleton-settings-repeater__select-image' ).on( 'click', function ( event ) {
+		$row.find( '.cb-andwisentrances2026-settings-repeater__select-image' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
 			var $button = $( this );
-			var $wrap = $button.closest( '.cb-js-skeleton-settings-repeater__image, .cb-js-skeleton-settings-repeater__file' );
+			var $wrap = $button.closest( '.cb-andwisentrances2026-settings-repeater__image, .cb-andwisentrances2026-settings-repeater__file' );
 
 			var frame = wp.media( {
 				title: $button.data( 'select-label' ),
@@ -41,47 +41,47 @@
 					? attachment.sizes.thumbnail.url
 					: attachment.url;
 
-				$wrap.find( '.cb-js-skeleton-settings-repeater__image-input' ).val( attachment.id );
+				$wrap.find( '.cb-andwisentrances2026-settings-repeater__image-input' ).val( attachment.id );
 				$wrap.find( 'img' ).attr( 'src', src ).show();
-				$wrap.find( '.cb-js-skeleton-settings-repeater__file-name' ).text( attachment.filename || attachment.title || '' );
-				$wrap.find( '.cb-js-skeleton-settings-repeater__clear-image' ).show();
+				$wrap.find( '.cb-andwisentrances2026-settings-repeater__file-name' ).text( attachment.filename || attachment.title || '' );
+				$wrap.find( '.cb-andwisentrances2026-settings-repeater__clear-image' ).show();
 			} );
 
 			frame.open();
 		} );
 
-		$row.find( '.cb-js-skeleton-settings-repeater__clear-image' ).on( 'click', function ( event ) {
+		$row.find( '.cb-andwisentrances2026-settings-repeater__clear-image' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
 			var $button = $( this );
-			var $wrap = $button.closest( '.cb-js-skeleton-settings-repeater__image, .cb-js-skeleton-settings-repeater__file' );
+			var $wrap = $button.closest( '.cb-andwisentrances2026-settings-repeater__image, .cb-andwisentrances2026-settings-repeater__file' );
 
-			$wrap.find( '.cb-js-skeleton-settings-repeater__image-input' ).val( '' );
+			$wrap.find( '.cb-andwisentrances2026-settings-repeater__image-input' ).val( '' );
 			$wrap.find( 'img' ).attr( 'src', '' ).hide();
-			$wrap.find( '.cb-js-skeleton-settings-repeater__file-name' ).text( 'No file selected.' );
+			$wrap.find( '.cb-andwisentrances2026-settings-repeater__file-name' ).text( 'No file selected.' );
 			$button.hide();
 		} );
 	}
 
 	function bindRowActions( $row, $rowsWrap ) {
-		$row.find( '.cb-js-skeleton-settings-repeater__remove-row' ).on( 'click', function ( event ) {
+		$row.find( '.cb-andwisentrances2026-settings-repeater__remove-row' ).on( 'click', function ( event ) {
 			event.preventDefault();
 			$row.remove();
 			renumberRows( $rowsWrap );
 		} );
 
-		$row.find( '.cb-js-skeleton-settings-repeater__move-up' ).on( 'click', function ( event ) {
+		$row.find( '.cb-andwisentrances2026-settings-repeater__move-up' ).on( 'click', function ( event ) {
 			event.preventDefault();
-			var $prev = $row.prev( '.cb-js-skeleton-settings-repeater__row' );
+			var $prev = $row.prev( '.cb-andwisentrances2026-settings-repeater__row' );
 			if ( $prev.length ) {
 				$row.insertBefore( $prev );
 				renumberRows( $rowsWrap );
 			}
 		} );
 
-		$row.find( '.cb-js-skeleton-settings-repeater__move-down' ).on( 'click', function ( event ) {
+		$row.find( '.cb-andwisentrances2026-settings-repeater__move-down' ).on( 'click', function ( event ) {
 			event.preventDefault();
-			var $next = $row.next( '.cb-js-skeleton-settings-repeater__row' );
+			var $next = $row.next( '.cb-andwisentrances2026-settings-repeater__row' );
 			if ( $next.length ) {
 				$row.insertAfter( $next );
 				renumberRows( $rowsWrap );
@@ -92,17 +92,17 @@
 	}
 
 	$( function () {
-		$( '.cb-js-skeleton-settings-repeater' ).each( function () {
+		$( '.cb-andwisentrances2026-settings-repeater' ).each( function () {
 			var $field = $( this );
-			var $rowsWrap = $field.find( '.cb-js-skeleton-settings-repeater__rows' );
+			var $rowsWrap = $field.find( '.cb-andwisentrances2026-settings-repeater__rows' );
 			var templateHtml = $field.find( 'template' )[ 0 ].innerHTML;
 			var rowCounter = 0;
 
-			$rowsWrap.find( '.cb-js-skeleton-settings-repeater__row' ).each( function () {
+			$rowsWrap.find( '.cb-andwisentrances2026-settings-repeater__row' ).each( function () {
 				bindRowActions( $( this ), $rowsWrap );
 			} );
 
-			$field.find( '.cb-js-skeleton-settings-repeater__add-row' ).on( 'click', function ( event ) {
+			$field.find( '.cb-andwisentrances2026-settings-repeater__add-row' ).on( 'click', function ( event ) {
 				event.preventDefault();
 				rowCounter += 1;
 				var index = 'new_' + Date.now() + '_' + rowCounter;

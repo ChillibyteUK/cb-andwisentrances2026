@@ -3,7 +3,7 @@
  * Enqueue theme CSS/JS. filemtime versioning, no dependencies (no jQuery,
  * no Bootstrap JS) — plain vanilla output, loads immediately.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_enqueue_styles() {
+function cb_andwisentrances2026_enqueue_styles() {
 	$rel = '/css/theme.min.css';
 	$abs = get_stylesheet_directory() . $rel;
 	if ( file_exists( $abs ) ) {
-		wp_enqueue_style( 'cb-js-skeleton-theme', get_stylesheet_directory_uri() . $rel, array(), filemtime( $abs ) );
+		wp_enqueue_style( 'cb-andwisentrances2026-theme', get_stylesheet_directory_uri() . $rel, array(), filemtime( $abs ) );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'cb_js_skeleton_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'cb_andwisentrances2026_enqueue_styles' );
 
 /**
  * Enqueue a file from js/vendor/, filemtime-versioned like everything else.
@@ -40,7 +40,7 @@ add_action( 'wp_enqueue_scripts', 'cb_js_skeleton_enqueue_styles' );
  *                         gsap plugin depending on the 'gsap' handle itself).
  * @return void
  */
-function cb_js_skeleton_enqueue_vendor( $handle, $file, $is_css = false, $deps = array() ) {
+function cb_andwisentrances2026_enqueue_vendor( $handle, $file, $is_css = false, $deps = array() ) {
 	$rel = '/js/vendor/' . $file;
 	$abs = get_stylesheet_directory() . $rel;
 	if ( ! file_exists( $abs ) ) {
@@ -61,27 +61,27 @@ function cb_js_skeleton_enqueue_vendor( $handle, $file, $is_css = false, $deps =
  *
  * @return void
  */
-function cb_js_skeleton_enqueue_fonts() {
-	// wp_enqueue_style( 'cb-js-skeleton-typekit', 'https://use.typekit.net/KIT_ID.css', array(), null );
+function cb_andwisentrances2026_enqueue_fonts() {
+	// wp_enqueue_style( 'cb-andwisentrances2026-typekit', 'https://use.typekit.net/KIT_ID.css', array(), null );
 }
-// add_action( 'wp_enqueue_scripts', 'cb_js_skeleton_enqueue_fonts' );
-// add_action( 'enqueue_block_editor_assets', 'cb_js_skeleton_enqueue_fonts' );
+// add_action( 'wp_enqueue_scripts', 'cb_andwisentrances2026_enqueue_fonts' );
+// add_action( 'enqueue_block_editor_assets', 'cb_andwisentrances2026_enqueue_fonts' );
 
 /**
  * Enqueue theme.min.js.
  *
  * @return void
  */
-function cb_js_skeleton_enqueue_scripts() {
+function cb_andwisentrances2026_enqueue_scripts() {
 
-	// cb_js_skeleton_enqueue_vendor( 'gsap', 'gsap.min.js' );
-	// cb_js_skeleton_enqueue_vendor( 'lenis-style', 'lenis.css', true );
-	// cb_js_skeleton_enqueue_vendor( 'lenis', 'lenis.min.js' );
+	// cb_andwisentrances2026_enqueue_vendor( 'gsap', 'gsap.min.js' );
+	// cb_andwisentrances2026_enqueue_vendor( 'lenis-style', 'lenis.css', true );
+	// cb_andwisentrances2026_enqueue_vendor( 'lenis', 'lenis.min.js' );
 
 	$rel = '/js/theme.min.js';
 	$abs = get_stylesheet_directory() . $rel;
 	if ( file_exists( $abs ) ) {
-		wp_enqueue_script( 'cb-js-skeleton-theme', get_stylesheet_directory_uri() . $rel, array(), filemtime( $abs ), true );
+		wp_enqueue_script( 'cb-andwisentrances2026-theme', get_stylesheet_directory_uri() . $rel, array(), filemtime( $abs ), true );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'cb_js_skeleton_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', 'cb_andwisentrances2026_enqueue_scripts' );

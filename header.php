@@ -2,7 +2,7 @@
 /**
  * Header template.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 ?><!DOCTYPE html>
@@ -38,7 +38,7 @@
 					'menu_class'     => 'navbar-nav',
 					'container'      => false,
 					'fallback_cb'    => false,
-					'walker'         => new CB_JS_Skeleton_Nav_Walker(),
+					'walker'         => new Andwis_Entrances_2026_Nav_Walker(),
 				)
 			);
 			?>

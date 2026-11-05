@@ -18,17 +18,17 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
  * inc/blocks.php's blocks/*block.json glob (this folder has no
  * block.json — it's a format, not a block).
  */
-const FORMAT_NAME = 'cb-js-skeleton2026/lede';
+const FORMAT_NAME = 'cb-andwisentrances2026/lede';
 
 registerFormatType( FORMAT_NAME, {
-	title: __( 'Lede', 'cb-js-skeleton2026' ),
+	title: __( 'Lede', 'cb-andwisentrances2026' ),
 	tagName: 'span',
 	className: 'text-body-l-medium',
 	edit( { isActive, value, onChange } ) {
 		return (
 			<RichTextToolbarButton
 				icon="editor-textcolor"
-				title={ __( 'Lede', 'cb-js-skeleton2026' ) }
+				title={ __( 'Lede', 'cb-andwisentrances2026' ) }
 				onClick={ () => onChange( toggleFormat( value, { type: FORMAT_NAME } ) ) }
 				isActive={ isActive }
 			/>

@@ -277,17 +277,17 @@ for i in "${!field_names[@]}"; do
   [ -n "$help" ] && help_attr="\n\t\t\t\thelp={ __( '${help}', '${theme_slug}' ) }"
 
   help_para=""
-  [ -n "$help" ] && help_para="\n\t\t\t\t<p className=\"cb-js-skeleton-editor-field__help\">{ __( '${help}', '${theme_slug}' ) }</p>"
+  [ -n "$help" ] && help_para="\n\t\t\t\t<p className=\"cb-andwisentrances2026-editor-field__help\">{ __( '${help}', '${theme_slug}' ) }</p>"
 
   url_help_para=""
-  [ -n "$help" ] && url_help_para="\n\t\t\t<p className=\"cb-js-skeleton-editor-field__help\">{ __( '${help}', '${theme_slug}' ) }</p>"
+  [ -n "$help" ] && url_help_para="\n\t\t\t<p className=\"cb-andwisentrances2026-editor-field__help\">{ __( '${help}', '${theme_slug}' ) }</p>"
 
   case "$type" in
     text)
       field_html+=("\t\t\t<TextControl\n\t\t\t\tlabel={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name} }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }${help_attr}\n\t\t\t/>\n")
       ;;
     url)
-      field_html+=("\t\t\t<div className=\"cb-js-skeleton-editor-field\">\n\t\t\t\t<label className=\"cb-js-skeleton-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<URLInput\n\t\t\t\t\tvalue={ ${name} || '' }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }\n\t\t\t\t/>${url_help_para}\n\t\t\t</div>\n")
+      field_html+=("\t\t\t<div className=\"cb-andwisentrances2026-editor-field\">\n\t\t\t\t<label className=\"cb-andwisentrances2026-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<URLInput\n\t\t\t\t\tvalue={ ${name} || '' }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }\n\t\t\t\t/>${url_help_para}\n\t\t\t</div>\n")
       ;;
     number)
       field_html+=("\t\t\t<TextControl\n\t\t\t\ttype=\"number\"\n\t\t\t\tlabel={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name} }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: Number( value ) } ) }${help_attr}\n\t\t\t/>\n")
@@ -296,7 +296,7 @@ for i in "${!field_names[@]}"; do
       field_html+=("\t\t\t<TextareaControl\n\t\t\t\tlabel={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name} }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }${help_attr}\n\t\t\t/>\n")
       ;;
     richtext)
-      field_html+=("\t\t\t<div className=\"cb-js-skeleton-editor-field\">\n\t\t\t\t<label className=\"cb-js-skeleton-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<RichText\n\t\t\t\t\ttagName=\"div\"\n\t\t\t\t\tclassName=\"cb-js-skeleton-editor-field__control\"\n\t\t\t\t\taria-label={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\t\tplaceholder={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\t\tvalue={ ${name} }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }\n\t\t\t\t/>${help_para}\n\t\t\t</div>\n")
+      field_html+=("\t\t\t<div className=\"cb-andwisentrances2026-editor-field\">\n\t\t\t\t<label className=\"cb-andwisentrances2026-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<RichText\n\t\t\t\t\ttagName=\"div\"\n\t\t\t\t\tclassName=\"cb-andwisentrances2026-editor-field__control\"\n\t\t\t\t\taria-label={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\t\tplaceholder={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\t\tvalue={ ${name} }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }\n\t\t\t\t/>${help_para}\n\t\t\t</div>\n")
       ;;
     checkbox)
       field_html+=("\t\t\t<ToggleControl\n\t\t\t\tlabel={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\tchecked={ ${name} }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }${help_attr}\n\t\t\t/>\n")
@@ -311,10 +311,10 @@ for i in "${!field_names[@]}"; do
       field_html+=("\t\t\t<SelectControl\n\t\t\t\tlabel={ __( '${label}', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name} }\n\t\t\t\toptions={ [\n\t\t\t\t\t{ label: '', value: '' },\n$(printf "%b" "$options_js")\t\t\t\t] }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}: value } ) }${help_attr}\n\t\t\t/>\n")
       ;;
     image)
-      field_html+=("\t\t\t<div className=\"cb-js-skeleton-editor-field\">\n\t\t\t\t<label className=\"cb-js-skeleton-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<MediaUploadCheck>\n\t\t\t\t\t<MediaUpload\n\t\t\t\t\t\tonSelect={ ( media ) =>\n\t\t\t\t\t\t\tsetAttributes( {\n\t\t\t\t\t\t\t\t${name}Id: media.id,\n\t\t\t\t\t\t\t\t${name}Url: media.url,\n\t\t\t\t\t\t\t\t${name}Alt: media.alt || '',\n\t\t\t\t\t\t\t} )\n\t\t\t\t\t\t}\n\t\t\t\t\t\tallowedTypes={ [ 'image' ] }\n\t\t\t\t\t\tvalue={ ${name}Id }\n\t\t\t\t\t\trender={ ( { open } ) => (\n\t\t\t\t\t\t\t<div className=\"cb-js-skeleton-editor-field__control\">\n\t\t\t\t\t\t\t\t{ ${name}Url && (\n\t\t\t\t\t\t\t\t\t<img\n\t\t\t\t\t\t\t\t\t\tsrc={ ${name}Url }\n\t\t\t\t\t\t\t\t\t\talt={ ${name}Alt }\n\t\t\t\t\t\t\t\t\t\tstyle={ { maxWidth: '200px', display: 'block', marginBottom: '8px' } }\n\t\t\t\t\t\t\t\t\t/>\n\t\t\t\t\t\t\t\t) }\n\t\t\t\t\t\t\t\t<Button variant=\"secondary\" onClick={ open }>\n\t\t\t\t\t\t\t\t\t{ ${name}Url ? __( 'Replace ${label}', '${theme_slug}' ) : __( 'Select ${label}', '${theme_slug}' ) }\n\t\t\t\t\t\t\t\t</Button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t) }\n\t\t\t\t\t/>\n\t\t\t\t</MediaUploadCheck>${help_para}\n\t\t\t</div>\n")
+      field_html+=("\t\t\t<div className=\"cb-andwisentrances2026-editor-field\">\n\t\t\t\t<label className=\"cb-andwisentrances2026-editor-field__label\">{ __( '${label}', '${theme_slug}' ) }</label>\n\t\t\t\t<MediaUploadCheck>\n\t\t\t\t\t<MediaUpload\n\t\t\t\t\t\tonSelect={ ( media ) =>\n\t\t\t\t\t\t\tsetAttributes( {\n\t\t\t\t\t\t\t\t${name}Id: media.id,\n\t\t\t\t\t\t\t\t${name}Url: media.url,\n\t\t\t\t\t\t\t\t${name}Alt: media.alt || '',\n\t\t\t\t\t\t\t} )\n\t\t\t\t\t\t}\n\t\t\t\t\t\tallowedTypes={ [ 'image' ] }\n\t\t\t\t\t\tvalue={ ${name}Id }\n\t\t\t\t\t\trender={ ( { open } ) => (\n\t\t\t\t\t\t\t<div className=\"cb-andwisentrances2026-editor-field__control\">\n\t\t\t\t\t\t\t\t{ ${name}Url && (\n\t\t\t\t\t\t\t\t\t<img\n\t\t\t\t\t\t\t\t\t\tsrc={ ${name}Url }\n\t\t\t\t\t\t\t\t\t\talt={ ${name}Alt }\n\t\t\t\t\t\t\t\t\t\tstyle={ { maxWidth: '200px', display: 'block', marginBottom: '8px' } }\n\t\t\t\t\t\t\t\t\t/>\n\t\t\t\t\t\t\t\t) }\n\t\t\t\t\t\t\t\t<Button variant=\"secondary\" onClick={ open }>\n\t\t\t\t\t\t\t\t\t{ ${name}Url ? __( 'Replace ${label}', '${theme_slug}' ) : __( 'Select ${label}', '${theme_slug}' ) }\n\t\t\t\t\t\t\t\t</Button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t) }\n\t\t\t\t\t/>\n\t\t\t\t</MediaUploadCheck>${help_para}\n\t\t\t</div>\n")
       ;;
     link)
-      link_html="\t\t\t<TextControl\n\t\t\t\tlabel={ __( '${label} Text', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name}Text }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}Text: value } ) }\n\t\t\t/>\n\t\t\t<div className=\"cb-js-skeleton-editor-field\">\n\t\t\t\t<label className=\"cb-js-skeleton-editor-field__label\">{ __( '${label} URL', '${theme_slug}' ) }</label>\n\t\t\t\t<URLInput\n\t\t\t\t\tvalue={ ${name}Url || '' }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}Url: value } ) }\n\t\t\t\t/>${url_help_para}\n\t\t\t</div>\n"
+      link_html="\t\t\t<TextControl\n\t\t\t\tlabel={ __( '${label} Text', '${theme_slug}' ) }\n\t\t\t\tvalue={ ${name}Text }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}Text: value } ) }\n\t\t\t/>\n\t\t\t<div className=\"cb-andwisentrances2026-editor-field\">\n\t\t\t\t<label className=\"cb-andwisentrances2026-editor-field__label\">{ __( '${label} URL', '${theme_slug}' ) }</label>\n\t\t\t\t<URLInput\n\t\t\t\t\tvalue={ ${name}Url || '' }\n\t\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}Url: value } ) }\n\t\t\t\t/>${url_help_para}\n\t\t\t</div>\n"
       if [ "${field_link_targets[$i]}" = "1" ]; then
         link_html+="\t\t\t<ToggleControl\n\t\t\t\tlabel={ __( 'Open ${label} in a new tab', '${theme_slug}' ) }\n\t\t\t\tchecked={ ${name}Target }\n\t\t\t\tonChange={ ( value ) => setAttributes( { ${name}Target: value } ) }\n\t\t\t/>\n"
       fi
@@ -359,7 +359,7 @@ done
   if [ -n "$attr_destructure_line" ]; then
     echo "	const { ${attr_destructure_line} } = attributes;"
   fi
-  echo "	const blockProps = useBlockProps( { className: 'container cb-js-skeleton-editor-block' } );"
+  echo "	const blockProps = useBlockProps( { className: 'container cb-andwisentrances2026-editor-block' } );"
   echo ""
   echo "	return ("
   echo "		<EditorBlockShell blockProps={ blockProps } clientId={ clientId } title=\"${block_name}\" textDomain=\"${theme_slug}\">"

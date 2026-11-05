@@ -1,4 +1,4 @@
-# cb-js-skeleton2026
+# cb-andwisentrances2026
 
 Read this in full before touching anything — several decisions here are
 deliberate and not obvious from the code alone. If you're about to reach for
@@ -91,7 +91,7 @@ doesn't exist, no matter how standard it looks.
   widget areas, comments, tags, author archives, `archive.php`, `search.php`.
   All confirmed rare-to-never in real usage across ~40 projects/year. If a
   specific project needs one, add it there, not here.
-- **Site-Wide Settings is core, not per-project.** `inc/options.php` — a plain Settings API page (no ACF), storing one serialized array option (`cb_js_skeleton_site_settings`). Read values elsewhere with `cb_js_skeleton_get_setting( $key )`. "Crucial to every theme" per the person building this. GA/GTM only fire for logged-out visitors (`inc/head-tags.php`) so the team's own traffic doesn't skew analytics — a real, previously-known gap in the old `lc-iology2025` theme (fires for everyone there), fixed here from the start rather than retrofitted. GTM's noscript fallback is on `wp_body_open`, not buried in the footer — that's where Google's own docs say it belongs. The SVG icon-upload tab the ACF version of this page had is deliberately not ported here — deferred to a future plugin, not rebuilt as part of dropping ACF. `get_icon()`/`get_icon_choices()` (`inc/utilities.php`) still work exactly as before; just drop an .svg into `img/icons/` by hand instead of uploading it through wp-admin.
+- **Site-Wide Settings is core, not per-project.** `inc/options.php` — a plain Settings API page (no ACF), storing one serialized array option (`cb_andwisentrances2026_site_settings`). Read values elsewhere with `cb_andwisentrances2026_get_setting( $key )`. "Crucial to every theme" per the person building this. GA/GTM only fire for logged-out visitors (`inc/head-tags.php`) so the team's own traffic doesn't skew analytics — a real, previously-known gap in the old `lc-iology2025` theme (fires for everyone there), fixed here from the start rather than retrofitted. GTM's noscript fallback is on `wp_body_open`, not buried in the footer — that's where Google's own docs say it belongs. The SVG icon-upload tab the ACF version of this page had is deliberately not ported here — deferred to a future plugin, not rebuilt as part of dropping ACF. `get_icon()`/`get_icon_choices()` (`inc/utilities.php`) still work exactly as before; just drop an .svg into `img/icons/` by hand instead of uploading it through wp-admin.
 - **Native blocks, not ACF.** Each block is a directory under `blocks/{slug}/`:
   `block.json` (name/title/attributes/supports), `src/index.js` +
   `src/edit.js` (the editing UI — React, using WordPress's own field
@@ -154,7 +154,7 @@ inc/
   enqueue.php           Enqueues css/theme.min.css + js/theme.min.js, filemtime-versioned
   class-nav-walker.php  Lightweight Walker_Nav_Menu — nav-link/dropdown-menu classes, no JS
   blocks.php            Globs blocks/*/block.json and register_block_type()s each one — no per-block code
-  options.php           Site-Wide Settings page (plain Settings API, one array option) + cb_js_skeleton_get_setting()
+  options.php           Site-Wide Settings page (plain Settings API, one array option) + cb_andwisentrances2026_get_setting()
   head-tags.php          Font preload (fonts/*.woff2 glob) + GA/GTM (logged-out only) + Google/Bing verification, reading from the options page
   block-usage.php        [block_usage_table] shortcode — QA utility, lists every block against the published pages/posts using it
   utilities.php          Reusable, project-agnostic functions (parse_phone, pluralise, estimate_reading_time_in_minutes, get_icon/get_icon_choices) — safe to lift verbatim into any project on this skeleton. Project-specific helpers go in inc/helpers.php instead, created only when needed, not scaffolded here.
@@ -185,7 +185,7 @@ blocks/                 One directory per block (add_block.sh scaffolds here)
                         shared column headers; or 'column' — stacked, each with its own visible label).
                         Renders its own add/move-up/move-down/remove controls — no native Gutenberg UI
                         exists for this outside InnerBlocks. Matching CSS in src/css/editor.css
-                        (.cb-js-skeleton-repeater-field*).
+                        (.cb-andwisentrances2026-repeater-field*).
     PostTypePicker.js    Generic single-post picker — the block-editor equivalent of ACF's single
                         `post_object` field (`return_format: object`). Search-as-you-type via
                         `ComboboxControl`, backed by `@wordpress/core-data` rather than a custom REST
@@ -233,8 +233,8 @@ add_block.sh            Prompts for a block name, then loops prompting for each 
 rm_block.sh             Removes a block: the whole blocks/{slug} directory, and
                         src/blocks/{slug}.css if present. No registration to undo.
 setup.sh                One-time bootstrap for a NEW project checked out from this skeleton —
-                        prompts for a theme name + slug, renames every cb-js-skeleton2026 /
-                        CB JS Skeleton 2026 / cb_js_skeleton_ / CB_JS_Skeleton_ reference, resets git to
+                        prompts for a theme name + slug, renames every cb-andwisentrances2026 /
+                        andwis entrances 2026 / cb_andwisentrances2026_ / Andwis_Entrances_2026_ reference, resets git to
                         a fresh single commit. Refuses to run twice (idempotency guard) or on a
                         dirty tree. Does NOT create a GitHub repo — that's a deliberate manual
                         step (gh repo create), not automated. See README.md.

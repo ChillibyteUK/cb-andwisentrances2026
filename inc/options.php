@@ -1,8 +1,8 @@
 <?php
 /**
  * Site-Wide Settings page — plain Settings API, one array option
- * (cb_js_skeleton_site_settings). Replaces the old ACF options page; read
- * values elsewhere in the theme with cb_js_skeleton_get_setting( $key ).
+ * (cb_andwisentrances2026_site_settings). Replaces the old ACF options page; read
+ * values elsewhere in the theme with cb_andwisentrances2026_get_setting( $key ).
  *
  * The Icons tab (SVG upload straight into img/icons/) from the ACF version
  * of this page is deliberately not ported here — deferred to a future
@@ -21,7 +21,7 @@
  * types working end to end; rename or replace them with real per-project
  * fields.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @var string
  */
-define( 'CB_JS_SKELETON_SETTINGS_OPTION', 'cb_js_skeleton_site_settings' );
+define( 'CB_ANDWISENTRANCES2026_SETTINGS_OPTION', 'cb_andwisentrances2026_site_settings' );
 
 /**
  * Read one Site-Wide Settings value.
@@ -40,22 +40,22 @@ define( 'CB_JS_SKELETON_SETTINGS_OPTION', 'cb_js_skeleton_site_settings' );
  * @param string $default Fallback if the key isn't set.
  * @return string
  */
-function cb_js_skeleton_get_setting( $key, $default = '' ) {
-	$settings = get_option( CB_JS_SKELETON_SETTINGS_OPTION, array() );
+function cb_andwisentrances2026_get_setting( $key, $default = '' ) {
+	$settings = get_option( CB_ANDWISENTRANCES2026_SETTINGS_OPTION, array() );
 	return isset( $settings[ $key ] ) && '' !== $settings[ $key ] ? $settings[ $key ] : $default;
 }
 
 /**
  * Read a `gallery`-type setting as an array of attachment IDs.
  *
- * Stored as a CSV string (see cb_js_skeleton_render_gallery_field()) — order
+ * Stored as a CSV string (see cb_andwisentrances2026_render_gallery_field()) — order
  * is the display order.
  *
  * @param string $key Setting key, e.g. 'example_gallery'.
  * @return int[]
  */
-function cb_js_skeleton_get_gallery_setting( $key ) {
-	$ids = array_filter( array_map( 'absint', explode( ',', cb_js_skeleton_get_setting( $key ) ) ) );
+function cb_andwisentrances2026_get_gallery_setting( $key ) {
+	$ids = array_filter( array_map( 'absint', explode( ',', cb_andwisentrances2026_get_setting( $key ) ) ) );
 	return array_values( $ids );
 }
 
@@ -64,112 +64,112 @@ function cb_js_skeleton_get_gallery_setting( $key ) {
  *
  * @return void
  */
-function cb_js_skeleton_register_settings_page() {
+function cb_andwisentrances2026_register_settings_page() {
 	add_menu_page(
 		'Site-Wide Settings',
 		'Site-Wide Settings',
 		'edit_posts',
 		'theme-general-settings',
-		'cb_js_skeleton_render_settings_page',
+		'cb_andwisentrances2026_render_settings_page',
 		'dashicons-admin-generic',
 		80
 	);
 
-	register_setting( 'cb_js_skeleton_settings', CB_JS_SKELETON_SETTINGS_OPTION );
+	register_setting( 'cb_andwisentrances2026_settings', CB_ANDWISENTRANCES2026_SETTINGS_OPTION );
 
-	add_settings_section( 'cb_js_skeleton_general', 'General', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_js_skeleton_social', 'Social', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_js_skeleton_tracking', 'Tracking & Verification', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_js_skeleton_scripts', 'Scripts', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_js_skeleton_gallery', 'Gallery', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_js_skeleton_repeater', 'Repeater', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_general', 'General', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_social', 'Social', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_tracking', 'Tracking & Verification', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_scripts', 'Scripts', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_gallery', 'Gallery', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_repeater', 'Repeater', '__return_false', 'theme-general-settings' );
 
 	$fields = array(
 		'email'                     => array(
 			'label'   => 'Email',
 			'type'    => 'email',
-			'section' => 'cb_js_skeleton_general',
+			'section' => 'cb_andwisentrances2026_general',
 		),
 		'phone'                     => array(
 			'label'   => 'Phone',
 			'type'    => 'text',
-			'section' => 'cb_js_skeleton_general',
+			'section' => 'cb_andwisentrances2026_general',
 		),
 		'facebook_url'              => array(
 			'label'       => 'Facebook URL',
 			'type'        => 'url',
-			'section'     => 'cb_js_skeleton_social',
+			'section'     => 'cb_andwisentrances2026_social',
 			'placeholder' => 'https://facebook.com/...',
 			'description' => 'Leave blank to hide this icon from [social_icons].',
 		),
 		'instagram_url'             => array(
 			'label'       => 'Instagram URL',
 			'type'        => 'url',
-			'section'     => 'cb_js_skeleton_social',
+			'section'     => 'cb_andwisentrances2026_social',
 			'placeholder' => 'https://instagram.com/...',
 			'description' => 'Leave blank to hide this icon from [social_icons].',
 		),
 		'ga_property'               => array(
 			'label'       => 'GA Property',
 			'type'        => 'text',
-			'section'     => 'cb_js_skeleton_tracking',
+			'section'     => 'cb_andwisentrances2026_tracking',
 			'placeholder' => 'G-XXXXXXX',
 			'description' => 'Google Analytics measurement ID. Only fires for logged-out visitors.',
 		),
 		'gtm_property'              => array(
 			'label'       => 'GTM Property',
 			'type'        => 'text',
-			'section'     => 'cb_js_skeleton_tracking',
+			'section'     => 'cb_andwisentrances2026_tracking',
 			'placeholder' => 'GTM-XXXXXXX',
 			'description' => 'Google Tag Manager container ID. Only fires for logged-out visitors.',
 		),
 		'google_site_verification'  => array(
 			'label'       => 'Google Site Verification',
 			'type'        => 'text',
-			'section'     => 'cb_js_skeleton_tracking',
+			'section'     => 'cb_andwisentrances2026_tracking',
 			'description' => 'Content value of the google-site-verification meta tag.',
 		),
 		'bing_site_verification'    => array(
 			'label'       => 'Bing Site Verification',
 			'type'        => 'text',
-			'section'     => 'cb_js_skeleton_tracking',
+			'section'     => 'cb_andwisentrances2026_tracking',
 			'description' => 'Content value of the msvalidate.01 meta tag.',
 		),
 		'custom_head'               => array(
 			'label'       => 'Head',
 			'type'        => 'code',
-			'section'     => 'cb_js_skeleton_scripts',
+			'section'     => 'cb_andwisentrances2026_scripts',
 			'description' => 'Printed in <head> after the managed GA/GTM tags. Paste vendor snippets verbatim, <script> tags and all — nothing is escaped or filtered.',
 		),
 		'custom_body_open'          => array(
 			'label'       => 'Body Open',
 			'type'        => 'code',
-			'section'     => 'cb_js_skeleton_scripts',
+			'section'     => 'cb_andwisentrances2026_scripts',
 			'description' => 'Printed immediately after <body> opens, after the GTM noscript fallback. Where <noscript> tracking pixels belong.',
 		),
 		'custom_body_close'         => array(
 			'label'       => 'Body Close',
 			'type'        => 'code',
-			'section'     => 'cb_js_skeleton_scripts',
+			'section'     => 'cb_andwisentrances2026_scripts',
 			'description' => 'Printed just before </body>. Use for anything that must not block rendering — chat widgets, late-loading embeds.',
 		),
 		'custom_scripts_logged_out_only' => array(
 			'label'       => 'Logged-Out Visitors Only',
 			'type'        => 'checkbox',
-			'section'     => 'cb_js_skeleton_scripts',
+			'section'     => 'cb_andwisentrances2026_scripts',
 			'default'     => '1',
 			'description' => 'On by default, matching GA/GTM — keeps the team\'s own traffic out of whatever these scripts measure. Untick if a slot holds something every visitor should see, e.g. a chat widget.',
 		),
 		'example_gallery'           => array(
 			'label'       => 'Example Gallery',
 			'type'        => 'gallery',
-			'section'     => 'cb_js_skeleton_gallery',
-			'description' => 'A fixed multi-image list — e.g. accreditation badges, a logo strip. Read with cb_js_skeleton_get_repeater_setting-style helper of your own, mirroring cb_js_skeleton_get_footer_accreditation_ids() in the cb-hts-js-2026 sibling theme.',
+			'section'     => 'cb_andwisentrances2026_gallery',
+			'description' => 'A fixed multi-image list — e.g. accreditation badges, a logo strip. Read with cb_andwisentrances2026_get_repeater_setting-style helper of your own, mirroring cb_andwisentrances2026_get_footer_accreditation_ids() in the cb-hts-js-2026 sibling theme.',
 		),
 		'example_repeater'          => array(
 			'label'       => 'Example Repeater',
 			'type'        => 'repeater',
-			'section'     => 'cb_js_skeleton_repeater',
+			'section'     => 'cb_andwisentrances2026_repeater',
 			'sub_fields'  => array(
 				'name' => array(
 					'label' => 'Name',
@@ -180,7 +180,7 @@ function cb_js_skeleton_register_settings_page() {
 					'type'  => 'image',
 				),
 			),
-			'description' => 'Genuinely repeating structured rows — e.g. a client-logo list. Read with cb_js_skeleton_get_repeater_setting( \'example_repeater\' ).',
+			'description' => 'Genuinely repeating structured rows — e.g. a client-logo list. Read with cb_andwisentrances2026_get_repeater_setting( \'example_repeater\' ).',
 		),
 	);
 
@@ -188,14 +188,14 @@ function cb_js_skeleton_register_settings_page() {
 		add_settings_field(
 			$key,
 			$field['label'],
-			'cb_js_skeleton_render_settings_field',
+			'cb_andwisentrances2026_render_settings_field',
 			'theme-general-settings',
 			$field['section'],
 			array_merge( $field, array( 'key' => $key ) )
 		);
 	}
 }
-add_action( 'admin_menu', 'cb_js_skeleton_register_settings_page' );
+add_action( 'admin_menu', 'cb_andwisentrances2026_register_settings_page' );
 
 /**
  * Read a `repeater`-type setting as an array of row arrays.
@@ -208,8 +208,8 @@ add_action( 'admin_menu', 'cb_js_skeleton_register_settings_page' );
  * @param string $key Setting key, e.g. 'example_repeater'.
  * @return array[]
  */
-function cb_js_skeleton_get_repeater_setting( $key ) {
-	$rows = cb_js_skeleton_get_setting( $key, array() );
+function cb_andwisentrances2026_get_repeater_setting( $key ) {
+	$rows = cb_andwisentrances2026_get_setting( $key, array() );
 	return is_array( $rows ) ? $rows : array();
 }
 
@@ -219,7 +219,7 @@ function cb_js_skeleton_get_repeater_setting( $key ) {
  * @param string $hook_suffix Current admin page hook.
  * @return void
  */
-function cb_js_skeleton_settings_page_assets( $hook_suffix ) {
+function cb_andwisentrances2026_settings_page_assets( $hook_suffix ) {
 	if ( 'toplevel_page_theme-general-settings' !== $hook_suffix ) {
 		return;
 	}
@@ -230,9 +230,9 @@ function cb_js_skeleton_settings_page_assets( $hook_suffix ) {
 	// hand-maintained admin scripts, and a static version serves stale JS
 	// after deploys.
 	$admin_scripts = array(
-		'cb-js-skeleton-gallery-field'     => array( 'js/gallery-field.js', array( 'jquery' ) ),
-		'cb-js-skeleton-settings-repeater' => array( 'js/repeater-field.js', array( 'jquery' ) ),
-		'cb-js-skeleton-tabs'              => array( 'js/tabs.js', array() ),
+		'cb-andwisentrances2026-gallery-field'     => array( 'js/gallery-field.js', array( 'jquery' ) ),
+		'cb-andwisentrances2026-settings-repeater' => array( 'js/repeater-field.js', array( 'jquery' ) ),
+		'cb-andwisentrances2026-tabs'              => array( 'js/tabs.js', array() ),
 	);
 
 	foreach ( $admin_scripts as $handle => $script ) {
@@ -249,7 +249,7 @@ function cb_js_skeleton_settings_page_assets( $hook_suffix ) {
 		}
 	}
 }
-add_action( 'admin_enqueue_scripts', 'cb_js_skeleton_settings_page_assets' );
+add_action( 'admin_enqueue_scripts', 'cb_andwisentrances2026_settings_page_assets' );
 
 /**
  * Render a single settings field — text/email/url input, a textarea, a
@@ -258,38 +258,38 @@ add_action( 'admin_enqueue_scripts', 'cb_js_skeleton_settings_page_assets' );
  * @param array $args Field args: key, type, placeholder, description.
  * @return void
  */
-function cb_js_skeleton_render_settings_field( $args ) {
+function cb_andwisentrances2026_render_settings_field( $args ) {
 	if ( 'gallery' === $args['type'] ) {
-		cb_js_skeleton_render_gallery_field( $args );
+		cb_andwisentrances2026_render_gallery_field( $args );
 		return;
 	}
 
 	if ( 'repeater' === $args['type'] ) {
-		cb_js_skeleton_render_repeater_field( $args );
+		cb_andwisentrances2026_render_repeater_field( $args );
 		return;
 	}
 
 	if ( 'richtext' === $args['type'] ) {
-		cb_js_skeleton_render_richtext_field( $args );
+		cb_andwisentrances2026_render_richtext_field( $args );
 		return;
 	}
 
 	if ( 'textarea' === $args['type'] || 'code' === $args['type'] ) {
-		cb_js_skeleton_render_textarea_field( $args );
+		cb_andwisentrances2026_render_textarea_field( $args );
 		return;
 	}
 
 	if ( 'checkbox' === $args['type'] ) {
-		cb_js_skeleton_render_checkbox_field( $args );
+		cb_andwisentrances2026_render_checkbox_field( $args );
 		return;
 	}
 
-	$value = cb_js_skeleton_get_setting( $args['key'] );
+	$value = cb_andwisentrances2026_get_setting( $args['key'] );
 	?>
 	<input
 		type="<?php echo esc_attr( $args['type'] ); ?>"
 		id="<?php echo esc_attr( $args['key'] ); ?>"
-		name="<?php echo esc_attr( CB_JS_SKELETON_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
+		name="<?php echo esc_attr( CB_ANDWISENTRANCES2026_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
 		value="<?php echo esc_attr( $value ); ?>"
 		placeholder="<?php echo esc_attr( $args['placeholder'] ?? '' ); ?>"
 		class="regular-text"
@@ -317,13 +317,13 @@ function cb_js_skeleton_render_settings_field( $args ) {
  * @param array $args Field args: key, type, placeholder, rows, description.
  * @return void
  */
-function cb_js_skeleton_render_textarea_field( $args ) {
-	$value   = cb_js_skeleton_get_setting( $args['key'] );
+function cb_andwisentrances2026_render_textarea_field( $args ) {
+	$value   = cb_andwisentrances2026_get_setting( $args['key'] );
 	$is_code = 'code' === $args['type'];
 	?>
 	<textarea
 		id="<?php echo esc_attr( $args['key'] ); ?>"
-		name="<?php echo esc_attr( CB_JS_SKELETON_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
+		name="<?php echo esc_attr( CB_ANDWISENTRANCES2026_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
 		placeholder="<?php echo esc_attr( $args['placeholder'] ?? '' ); ?>"
 		rows="<?php echo (int) ( $args['rows'] ?? ( $is_code ? 10 : 4 ) ); ?>"
 		class="large-text"
@@ -350,13 +350,13 @@ function cb_js_skeleton_render_textarea_field( $args ) {
  * @param array $args Field args: key, rows, description.
  * @return void
  */
-function cb_js_skeleton_render_richtext_field( $args ) {
-	$value = cb_js_skeleton_get_setting( $args['key'] );
+function cb_andwisentrances2026_render_richtext_field( $args ) {
+	$value = cb_andwisentrances2026_get_setting( $args['key'] );
 	wp_editor(
 		$value,
-		'cb_js_skeleton_' . $args['key'],
+		'cb_andwisentrances2026_' . $args['key'],
 		array(
-			'textarea_name' => sprintf( '%s[%s]', CB_JS_SKELETON_SETTINGS_OPTION, $args['key'] ),
+			'textarea_name' => sprintf( '%s[%s]', CB_ANDWISENTRANCES2026_SETTINGS_OPTION, $args['key'] ),
 			'textarea_rows' => $args['rows'] ?? 8,
 			'media_buttons' => false,
 		)
@@ -377,16 +377,16 @@ function cb_js_skeleton_render_richtext_field( $args ) {
  * possible: absent means genuinely-never-saved (fall back to `default`),
  * '0' means deliberately unticked.
  *
- * Note this only works because cb_js_skeleton_get_setting() treats '' as
+ * Note this only works because cb_andwisentrances2026_get_setting() treats '' as
  * unset but returns '0' as-is — and '0' is falsey in PHP, so callers can just
  * test the returned value.
  *
  * @param array $args Field args: key, label, default, description.
  * @return void
  */
-function cb_js_skeleton_render_checkbox_field( $args ) {
-	$value = cb_js_skeleton_get_setting( $args['key'], $args['default'] ?? '0' );
-	$name  = sprintf( '%s[%s]', CB_JS_SKELETON_SETTINGS_OPTION, $args['key'] );
+function cb_andwisentrances2026_render_checkbox_field( $args ) {
+	$value = cb_andwisentrances2026_get_setting( $args['key'], $args['default'] ?? '0' );
+	$name  = sprintf( '%s[%s]', CB_ANDWISENTRANCES2026_SETTINGS_OPTION, $args['key'] );
 	?>
 	<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0">
 	<label>
@@ -419,17 +419,17 @@ function cb_js_skeleton_render_checkbox_field( $args ) {
  * @param array $args Field args: key, description.
  * @return void
  */
-function cb_js_skeleton_render_gallery_field( $args ) {
-	$ids = cb_js_skeleton_get_gallery_setting( $args['key'] );
+function cb_andwisentrances2026_render_gallery_field( $args ) {
+	$ids = cb_andwisentrances2026_get_gallery_setting( $args['key'] );
 	?>
-	<div class="cb-js-skeleton-gallery-field">
+	<div class="cb-andwisentrances2026-gallery-field">
 		<input
 			type="hidden"
 			id="<?php echo esc_attr( $args['key'] ); ?>"
-			name="<?php echo esc_attr( CB_JS_SKELETON_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
+			name="<?php echo esc_attr( CB_ANDWISENTRANCES2026_SETTINGS_OPTION ); ?>[<?php echo esc_attr( $args['key'] ); ?>]"
 			value="<?php echo esc_attr( implode( ',', $ids ) ); ?>"
 		>
-		<ul class="cb-js-skeleton-gallery-field__preview" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 8px; list-style: none;">
+		<ul class="cb-andwisentrances2026-gallery-field__preview" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 8px; list-style: none;">
 			<?php
 			foreach ( $ids as $id ) {
 				$thumb = wp_get_attachment_image_src( $id, 'thumbnail' );
@@ -443,11 +443,11 @@ function cb_js_skeleton_render_gallery_field( $args ) {
 			?>
 		</ul>
 		<?php if ( ! empty( $ids ) ) : ?>
-			<p class="description" style="margin-top: -4px;"><?php esc_html_e( 'Drag thumbnails to reorder.', 'cb-js-skeleton2026' ); ?></p>
+			<p class="description" style="margin-top: -4px;"><?php esc_html_e( 'Drag thumbnails to reorder.', 'cb-andwisentrances2026' ); ?></p>
 		<?php endif; ?>
 		<p>
-			<button type="button" class="button cb-js-skeleton-gallery-field__select">Edit Gallery</button>
-			<button type="button" class="button cb-js-skeleton-gallery-field__clear">Clear</button>
+			<button type="button" class="button cb-andwisentrances2026-gallery-field__select">Edit Gallery</button>
+			<button type="button" class="button cb-andwisentrances2026-gallery-field__clear">Clear</button>
 		</p>
 	</div>
 	<?php
@@ -472,12 +472,12 @@ function cb_js_skeleton_render_gallery_field( $args ) {
  * @param array $args Field args: key, sub_fields, description.
  * @return void
  */
-function cb_js_skeleton_render_repeater_field( $args ) {
+function cb_andwisentrances2026_render_repeater_field( $args ) {
 	$key        = $args['key'];
 	$sub_fields = $args['sub_fields'];
-	$rows       = cb_js_skeleton_get_repeater_setting( $key );
+	$rows       = cb_andwisentrances2026_get_repeater_setting( $key );
 	?>
-	<div class="cb-js-skeleton-settings-repeater" data-repeater-key="<?php echo esc_attr( $key ); ?>">
+	<div class="cb-andwisentrances2026-settings-repeater" data-repeater-key="<?php echo esc_attr( $key ); ?>">
 		<div style="display: flex; align-items: center; gap: 12px; padding: 0 12px; margin-bottom: 4px;">
 			<span style="flex: none; width: 22px;"></span>
 			<?php
@@ -490,20 +490,20 @@ function cb_js_skeleton_render_repeater_field( $args ) {
 			?>
 			<span style="flex: none; width: 92px;"></span>
 		</div>
-		<div class="cb-js-skeleton-settings-repeater__rows">
+		<div class="cb-andwisentrances2026-settings-repeater__rows">
 			<?php
 			$number = 0;
 			foreach ( $rows as $index => $row ) {
 				++$number;
-				echo cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $number ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped internally.
+				echo cb_andwisentrances2026_render_repeater_row( $key, $index, $sub_fields, $row, $number ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped internally.
 			}
 			?>
 		</div>
-		<template class="cb-js-skeleton-settings-repeater__template">
-			<?php echo cb_js_skeleton_render_repeater_row( $key, '__INDEX__', $sub_fields, array(), 0 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped internally. ?>
+		<template class="cb-andwisentrances2026-settings-repeater__template">
+			<?php echo cb_andwisentrances2026_render_repeater_row( $key, '__INDEX__', $sub_fields, array(), 0 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped internally. ?>
 		</template>
 		<p>
-			<button type="button" class="button button-primary cb-js-skeleton-settings-repeater__add-row">Add row</button>
+			<button type="button" class="button button-primary cb-andwisentrances2026-settings-repeater__add-row">Add row</button>
 		</p>
 	</div>
 	<?php
@@ -527,24 +527,24 @@ function cb_js_skeleton_render_repeater_field( $args ) {
  *                                with DOM order after any add/remove/move.
  * @return string
  */
-function cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $number ) {
+function cb_andwisentrances2026_render_repeater_row( $key, $index, $sub_fields, $row, $number ) {
 	ob_start();
 	?>
-	<div class="cb-js-skeleton-settings-repeater__row" style="display: flex; align-items: flex-end; gap: 12px; border: 1px solid #ccc; padding: 12px; margin-bottom: 8px;">
+	<div class="cb-andwisentrances2026-settings-repeater__row" style="display: flex; align-items: flex-end; gap: 12px; border: 1px solid #ccc; padding: 12px; margin-bottom: 8px;">
 		<span
-			class="cb-js-skeleton-settings-repeater__number"
+			class="cb-andwisentrances2026-settings-repeater__number"
 			style="flex: none; align-self: center; display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #f0f0f1; font-size: 12px; font-weight: 600; color: #50575e;"
 		><?php echo (int) $number; ?></span>
 		<?php
 		foreach ( $sub_fields as $sub_key => $sub_field ) {
-			$name  = sprintf( '%s[%s][%s][%s]', CB_JS_SKELETON_SETTINGS_OPTION, $key, $index, $sub_key );
+			$name  = sprintf( '%s[%s][%s][%s]', CB_ANDWISENTRANCES2026_SETTINGS_OPTION, $key, $index, $sub_key );
 			$value = $row[ $sub_key ] ?? '';
 
 			if ( 'image' === $sub_field['type'] ) {
 				$thumb = $value ? wp_get_attachment_image_src( absint( $value ), 'thumbnail' ) : false;
 				?>
 			<div
-				class="cb-js-skeleton-settings-repeater__image"
+				class="cb-andwisentrances2026-settings-repeater__image"
 				style="flex: none; position: relative; width: 64px; height: 64px; background: #fff; border: 1px solid #ccc;"
 			>
 				<img
@@ -554,21 +554,21 @@ function cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $n
 				>
 				<input
 					type="hidden"
-					class="cb-js-skeleton-settings-repeater__image-input"
+					class="cb-andwisentrances2026-settings-repeater__image-input"
 					name="<?php echo esc_attr( $name ); ?>"
 					value="<?php echo esc_attr( $value ); ?>"
 				>
 				<div style="position: absolute; inset: auto 0 0 0; display: flex; background: rgba(0, 0, 0, 0.6);">
 					<button
 						type="button"
-						class="cb-js-skeleton-settings-repeater__select-image"
+						class="cb-andwisentrances2026-settings-repeater__select-image"
 						data-select-label="Select <?php echo esc_attr( $sub_field['label'] ); ?>"
 						title="<?php echo esc_attr( ( $thumb ? 'Replace ' : 'Select ' ) . $sub_field['label'] ); ?>"
 						style="flex: 1; background: none; border: none; color: #fff; cursor: pointer; padding: 2px 0; font-size: 11px; line-height: 1;"
 					>&#9998;</button>
 					<button
 						type="button"
-						class="cb-js-skeleton-settings-repeater__clear-image"
+						class="cb-andwisentrances2026-settings-repeater__clear-image"
 						title="Clear"
 						style="flex: 1; background: none; border: none; color: #fff; cursor: pointer; padding: 2px 0; font-size: 13px; line-height: 1; <?php echo $thumb ? '' : 'display: none;'; ?>"
 					>&times;</button>
@@ -579,28 +579,28 @@ function cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $n
 				$file_name = $value ? basename( get_attached_file( absint( $value ) ) ) : '';
 				?>
 			<div
-				class="cb-js-skeleton-settings-repeater__file"
+				class="cb-andwisentrances2026-settings-repeater__file"
 				style="flex: 1 1 0%; min-width: 0;"
 			>
 				<span
-					class="cb-js-skeleton-settings-repeater__file-name"
+					class="cb-andwisentrances2026-settings-repeater__file-name"
 					style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; margin-bottom: 4px;"
 				><?php echo $file_name ? esc_html( $file_name ) : 'No file selected.'; ?></span>
 				<input
 					type="hidden"
-					class="cb-js-skeleton-settings-repeater__image-input"
+					class="cb-andwisentrances2026-settings-repeater__image-input"
 					name="<?php echo esc_attr( $name ); ?>"
 					value="<?php echo esc_attr( $value ); ?>"
 				>
 				<button
 					type="button"
-					class="button cb-js-skeleton-settings-repeater__select-image"
+					class="button cb-andwisentrances2026-settings-repeater__select-image"
 					data-select-label="Select <?php echo esc_attr( $sub_field['label'] ); ?>"
 					data-button-text="Use this file"
 				>Select file</button>
 				<button
 					type="button"
-					class="button cb-js-skeleton-settings-repeater__clear-image"
+					class="button cb-andwisentrances2026-settings-repeater__clear-image"
 					<?php echo $file_name ? '' : 'style="display: none;"'; ?>
 				>Clear</button>
 			</div>
@@ -619,10 +619,10 @@ function cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $n
 			}
 		}
 		?>
-		<div class="cb-js-skeleton-settings-repeater__row-actions" style="flex: none; display: flex; gap: 4px;">
-			<button type="button" class="button cb-js-skeleton-settings-repeater__move-up" title="Move up">&#9650;</button>
-			<button type="button" class="button cb-js-skeleton-settings-repeater__move-down" title="Move down">&#9660;</button>
-			<button type="button" class="button cb-js-skeleton-settings-repeater__remove-row" title="Remove">&times;</button>
+		<div class="cb-andwisentrances2026-settings-repeater__row-actions" style="flex: none; display: flex; gap: 4px;">
+			<button type="button" class="button cb-andwisentrances2026-settings-repeater__move-up" title="Move up">&#9650;</button>
+			<button type="button" class="button cb-andwisentrances2026-settings-repeater__move-down" title="Move down">&#9660;</button>
+			<button type="button" class="button cb-andwisentrances2026-settings-repeater__remove-row" title="Remove">&times;</button>
 		</div>
 	</div>
 	<?php
@@ -642,7 +642,7 @@ function cb_js_skeleton_render_repeater_row( $key, $index, $sub_fields, $row, $n
  *
  * @return void
  */
-function cb_js_skeleton_render_settings_page() {
+function cb_andwisentrances2026_render_settings_page() {
 	global $wp_settings_sections;
 
 	$sections = $wp_settings_sections['theme-general-settings'] ?? array();
@@ -650,8 +650,8 @@ function cb_js_skeleton_render_settings_page() {
 	<div class="wrap">
 		<h1>Site-Wide Settings</h1>
 		<form action="options.php" method="post">
-			<?php settings_fields( 'cb_js_skeleton_settings' ); ?>
-			<div class="cb-js-skeleton-tabs" data-tabs>
+			<?php settings_fields( 'cb_andwisentrances2026_settings' ); ?>
+			<div class="cb-andwisentrances2026-tabs" data-tabs>
 				<h2 class="nav-tab-wrapper" data-tabs-nav>
 					<?php
 					$is_first = true;
@@ -668,7 +668,7 @@ function cb_js_skeleton_render_settings_page() {
 				$is_first = true;
 				foreach ( $sections as $section_id => $section ) {
 					?>
-				<div class="cb-js-skeleton-tabs__panel" data-tabs-panel="<?php echo esc_attr( $section_id ); ?>" style="padding-top: 20px;" <?php echo $is_first ? '' : 'hidden'; ?>>
+				<div class="cb-andwisentrances2026-tabs__panel" data-tabs-panel="<?php echo esc_attr( $section_id ); ?>" style="padding-top: 20px;" <?php echo $is_first ? '' : 'hidden'; ?>>
 					<?php
 					if ( is_callable( $section['callback'] ) ) {
 						call_user_func( $section['callback'], $section );

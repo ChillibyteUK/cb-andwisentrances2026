@@ -4,7 +4,7 @@
  * preloads, GA/GTM (logged-out visitors only, so the team's own traffic
  * doesn't skew analytics), and search-engine verification meta tags.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_preload_fonts() {
+function cb_andwisentrances2026_preload_fonts() {
 	$fonts_dir = get_stylesheet_directory() . '/fonts';
 	$fonts_url = get_stylesheet_directory_uri() . '/fonts';
 
@@ -28,7 +28,7 @@ function cb_js_skeleton_preload_fonts() {
 		);
 	}
 }
-add_action( 'wp_head', 'cb_js_skeleton_preload_fonts', 1 );
+add_action( 'wp_head', 'cb_andwisentrances2026_preload_fonts', 1 );
 
 /**
  * GA/GTM tags and search-engine verification meta — all read from the
@@ -37,9 +37,9 @@ add_action( 'wp_head', 'cb_js_skeleton_preload_fonts', 1 );
  *
  * @return void
  */
-function cb_js_skeleton_head_tags() {
+function cb_andwisentrances2026_head_tags() {
 	if ( ! is_user_logged_in() ) {
-		$ga_property = cb_js_skeleton_get_setting( 'ga_property' );
+		$ga_property = cb_andwisentrances2026_get_setting( 'ga_property' );
 		if ( $ga_property ) {
 			?>
 			<!-- Google Analytics -->
@@ -53,7 +53,7 @@ function cb_js_skeleton_head_tags() {
 			<?php
 		}
 
-		$gtm_property = cb_js_skeleton_get_setting( 'gtm_property' );
+		$gtm_property = cb_andwisentrances2026_get_setting( 'gtm_property' );
 		if ( $gtm_property ) {
 			?>
 			<!-- Google Tag Manager -->
@@ -65,17 +65,17 @@ function cb_js_skeleton_head_tags() {
 		}
 	}
 
-	$google_verification = cb_js_skeleton_get_setting( 'google_site_verification' );
+	$google_verification = cb_andwisentrances2026_get_setting( 'google_site_verification' );
 	if ( $google_verification ) {
 		printf( '<meta name="google-site-verification" content="%s" />' . "\n", esc_attr( $google_verification ) );
 	}
 
-	$bing_verification = cb_js_skeleton_get_setting( 'bing_site_verification' );
+	$bing_verification = cb_andwisentrances2026_get_setting( 'bing_site_verification' );
 	if ( $bing_verification ) {
 		printf( '<meta name="msvalidate.01" content="%s" />' . "\n", esc_attr( $bing_verification ) );
 	}
 }
-add_action( 'wp_head', 'cb_js_skeleton_head_tags', 1 );
+add_action( 'wp_head', 'cb_andwisentrances2026_head_tags', 1 );
 
 /**
  * GTM noscript fallback — placed right after <body> opens via wp_body_open,
@@ -84,12 +84,12 @@ add_action( 'wp_head', 'cb_js_skeleton_head_tags', 1 );
  *
  * @return void
  */
-function cb_js_skeleton_gtm_noscript() {
+function cb_andwisentrances2026_gtm_noscript() {
 	if ( is_user_logged_in() ) {
 		return;
 	}
 
-	$gtm_property = cb_js_skeleton_get_setting( 'gtm_property' );
+	$gtm_property = cb_andwisentrances2026_get_setting( 'gtm_property' );
 	if ( ! $gtm_property ) {
 		return;
 	}
@@ -99,7 +99,7 @@ function cb_js_skeleton_gtm_noscript() {
 	<!-- End Google Tag Manager (noscript) -->
 	<?php
 }
-add_action( 'wp_body_open', 'cb_js_skeleton_gtm_noscript' );
+add_action( 'wp_body_open', 'cb_andwisentrances2026_gtm_noscript' );
 
 /**
  * Print one of the three raw script slots from the Site-Wide Settings
@@ -114,14 +114,14 @@ add_action( 'wp_body_open', 'cb_js_skeleton_gtm_noscript' );
  * @param string $key Setting key: custom_head, custom_body_open, custom_body_close.
  * @return void
  */
-function cb_js_skeleton_print_custom_scripts( $key ) {
+function cb_andwisentrances2026_print_custom_scripts( $key ) {
 	// Default-on, matching GA/GTM — see the checkbox renderer for why '0' and
 	// not '' is the unticked value.
-	if ( cb_js_skeleton_get_setting( 'custom_scripts_logged_out_only', '1' ) && is_user_logged_in() ) {
+	if ( cb_andwisentrances2026_get_setting( 'custom_scripts_logged_out_only', '1' ) && is_user_logged_in() ) {
 		return;
 	}
 
-	$markup = cb_js_skeleton_get_setting( $key );
+	$markup = cb_andwisentrances2026_get_setting( $key );
 	if ( ! $markup ) {
 		return;
 	}
@@ -137,10 +137,10 @@ function cb_js_skeleton_print_custom_scripts( $key ) {
  *
  * @return void
  */
-function cb_js_skeleton_custom_head_scripts() {
-	cb_js_skeleton_print_custom_scripts( 'custom_head' );
+function cb_andwisentrances2026_custom_head_scripts() {
+	cb_andwisentrances2026_print_custom_scripts( 'custom_head' );
 }
-add_action( 'wp_head', 'cb_js_skeleton_custom_head_scripts', 99 );
+add_action( 'wp_head', 'cb_andwisentrances2026_custom_head_scripts', 99 );
 
 /**
  * Body-open slot — runs after the GTM noscript fallback above (default
@@ -148,17 +148,17 @@ add_action( 'wp_head', 'cb_js_skeleton_custom_head_scripts', 99 );
  *
  * @return void
  */
-function cb_js_skeleton_custom_body_open_scripts() {
-	cb_js_skeleton_print_custom_scripts( 'custom_body_open' );
+function cb_andwisentrances2026_custom_body_open_scripts() {
+	cb_andwisentrances2026_print_custom_scripts( 'custom_body_open' );
 }
-add_action( 'wp_body_open', 'cb_js_skeleton_custom_body_open_scripts', 20 );
+add_action( 'wp_body_open', 'cb_andwisentrances2026_custom_body_open_scripts', 20 );
 
 /**
  * Body-close slot.
  *
  * @return void
  */
-function cb_js_skeleton_custom_body_close_scripts() {
-	cb_js_skeleton_print_custom_scripts( 'custom_body_close' );
+function cb_andwisentrances2026_custom_body_close_scripts() {
+	cb_andwisentrances2026_print_custom_scripts( 'custom_body_close' );
 }
-add_action( 'wp_footer', 'cb_js_skeleton_custom_body_close_scripts', 99 );
+add_action( 'wp_footer', 'cb_andwisentrances2026_custom_body_close_scripts', 99 );

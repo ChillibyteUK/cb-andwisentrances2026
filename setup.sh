@@ -2,18 +2,18 @@
 set -e
 
 # One-time bootstrap: run this straight after checking out and renaming the
-# skeleton directory for a new project. Renames every cb-js-skeleton2026 /
-# CB JS Skeleton 2026 / cb_js_skeleton_ / CB_JS_SKELETON_ / CB_JS_Skeleton_ reference to
+# skeleton directory for a new project. Renames every cb-andwisentrances2026 /
+# andwis entrances 2026 / cb_andwisentrances2026_ / CB_ANDWISENTRANCES2026_ / Andwis_Entrances_2026_ reference to
 # your new theme, then resets git to a fresh history so this project doesn't
 # drag the skeleton's own commit log around. Leaves GitHub itself to you
 # (gh repo create + push) — deliberately not automated, see README.
 
-old_slug="cb-js-skeleton2026"
-old_name="CB JS Skeleton 2026"
-old_prefix="cb_js_skeleton"
-old_prefix_upper="CB_JS_SKELETON"
-old_prefix_pascal="CB_JS_Skeleton"
-old_nav_walker_file="inc/class-cb-js-skeleton-nav-walker.php"
+old_slug="cb-andwisentrances2026"
+old_name="andwis entrances 2026"
+old_prefix="cb_andwisentrances2026"
+old_prefix_upper="CB_ANDWISENTRANCES2026"
+old_prefix_pascal="Andwis_Entrances_2026"
+old_nav_walker_file="inc/class-cb-andwisentrances2026-nav-walker.php"
 
 # Idempotency guard — refuse to run twice against an already-renamed project.
 if ! grep -rq "$old_slug" style.css 2>/dev/null; then
@@ -83,7 +83,7 @@ fi
 new_prefix=$(echo "$new_slug" | tr '-' '_')
 new_prefix_upper=$(echo "$new_prefix" | tr '[:lower:]' '[:upper:]')
 
-# The editor-chrome CSS classes (.cb-js-skeleton-editor-block, etc., in
+# The editor-chrome CSS classes (.cb-andwisentrances2026-editor-block, etc., in
 # css/editor.css, src/css/editor.css, and add_block.sh's generated markup)
 # use the kebab form of old_prefix directly — NOT old_slug, which has a
 # trailing "2026" these class names never carried. Needs its own rule or
@@ -91,7 +91,7 @@ new_prefix_upper=$(echo "$new_prefix" | tr '[:lower:]' '[:upper:]')
 old_prefix_kebab=$(echo "$old_prefix" | tr '_' '-')
 new_prefix_kebab=$(echo "$new_prefix" | tr '_' '-')
 
-# The one class name (CB_JS_Skeleton_Nav_Walker) uses mixed case, so it's
+# The one class name (Andwis_Entrances_2026_Nav_Walker) uses mixed case, so it's
 # derived from the name instead, word by word — already-uppercase words
 # (acronyms like "LC") are preserved as typed rather than forced to "Lc".
 new_prefix_pascal=""
@@ -271,7 +271,7 @@ git commit -q -m "Initial commit from ${old_slug} skeleton"
 
 # Rename the checkout's own directory to match the new slug — everything
 # above rewrites file contents, but the folder you `git clone`d into keeps
-# its original name (e.g. "cb-js-skeleton2026") unless done explicitly.
+# its original name (e.g. "cb-andwisentrances2026") unless done explicitly.
 # Done last, after every other file operation, since renaming the directory
 # out from under a running script is only safe once nothing after it still
 # needs to resolve paths relative to the old name.

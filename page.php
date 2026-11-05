@@ -5,7 +5,7 @@
  * Most projects build page layouts from native blocks rather than the_content()
  * directly — override this per project as needed.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 get_header();

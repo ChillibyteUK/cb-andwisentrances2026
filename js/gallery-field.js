@@ -1,7 +1,7 @@
 /**
  * Media-modal picker for `gallery`-type settings fields.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 ( function ( $ ) {
 	'use strict';
@@ -13,10 +13,10 @@
 		// list then writes every list's IDs concatenated into every input,
 		// doubling all entries on save. Each closure below sees only its
 		// own field, so drags (and picker frames) can't leak across lists.
-		$( '.cb-js-skeleton-gallery-field' ).each( function () {
+		$( '.cb-andwisentrances2026-gallery-field' ).each( function () {
 			var $field = $( this );
 			var $input = $field.find( 'input[type="hidden"]' );
-			var $preview = $field.find( '.cb-js-skeleton-gallery-field__preview' );
+			var $preview = $field.find( '.cb-andwisentrances2026-gallery-field__preview' );
 			var frame = null;
 
 		function syncInputFromPreview() {
@@ -95,7 +95,7 @@
 
 		bindDragReorder(); // wire up thumbnails already rendered server-side on page load
 
-		$field.find( '.cb-js-skeleton-gallery-field__select' ).on( 'click', function ( event ) {
+		$field.find( '.cb-andwisentrances2026-gallery-field__select' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
 			var ids = ( $input.val() || '' ).split( ',' ).filter( Boolean );
@@ -118,7 +118,7 @@
 			frame.open();
 		} );
 
-		$field.find( '.cb-js-skeleton-gallery-field__clear' ).on( 'click', function ( event ) {
+		$field.find( '.cb-andwisentrances2026-gallery-field__clear' ).on( 'click', function ( event ) {
 			event.preventDefault();
 			$input.val( '' );
 			$preview.empty();

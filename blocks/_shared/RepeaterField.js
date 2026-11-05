@@ -51,7 +51,7 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 	function removeRow( index ) {
 		// eslint-disable-next-line no-alert -- a plain confirm() is enough
 		// friction for an irreversible remove; no undo exists for this field.
-		if ( ! window.confirm( __( 'Remove this row?', 'cb-js-skeleton2026' ) ) ) {
+		if ( ! window.confirm( __( 'Remove this row?', 'cb-andwisentrances2026' ) ) ) {
 			return;
 		}
 		onChange( rows.filter( ( _row, i ) => i !== index ) );
@@ -73,33 +73,33 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 		<div
 			className={
 				isColumn
-					? 'cb-js-skeleton-repeater-field cb-js-skeleton-repeater-field--column'
-					: 'cb-js-skeleton-repeater-field'
+					? 'cb-andwisentrances2026-repeater-field cb-andwisentrances2026-repeater-field--column'
+					: 'cb-andwisentrances2026-repeater-field'
 			}
 		>
-			<label className="cb-js-skeleton-editor-field__label">{ label }</label>
+			<label className="cb-andwisentrances2026-editor-field__label">{ label }</label>
 			{ ! isColumn && rows.length > 0 && (
-				<div className="cb-js-skeleton-repeater-field__header">
-					<span className="cb-js-skeleton-repeater-field__number-spacer" />
+				<div className="cb-andwisentrances2026-repeater-field__header">
+					<span className="cb-andwisentrances2026-repeater-field__number-spacer" />
 					{ fields.map( ( field ) => (
 						<span
 							key={ field.name }
 							className={
 								'image' === field.type || 'file' === field.type
-									? 'cb-js-skeleton-repeater-field__header-cell cb-js-skeleton-repeater-field__header-cell--image'
-									: 'cb-js-skeleton-repeater-field__header-cell'
+									? 'cb-andwisentrances2026-repeater-field__header-cell cb-andwisentrances2026-repeater-field__header-cell--image'
+									: 'cb-andwisentrances2026-repeater-field__header-cell'
 							}
 						>
 							{ field.label }
 						</span>
 					) ) }
-					<span className="cb-js-skeleton-repeater-field__row-actions-spacer" />
+					<span className="cb-andwisentrances2026-repeater-field__row-actions-spacer" />
 				</div>
 			) }
-			<div className="cb-js-skeleton-repeater-field__rows">
+			<div className="cb-andwisentrances2026-repeater-field__rows">
 			{ rows.map( ( row, index ) => (
-				<div className="cb-js-skeleton-repeater-field__row" key={ index }>
-					<span className="cb-js-skeleton-repeater-field__number">{ index + 1 }</span>
+				<div className="cb-andwisentrances2026-repeater-field__row" key={ index }>
+					<span className="cb-andwisentrances2026-repeater-field__number">{ index + 1 }</span>
 					{ fields.map( ( field ) => {
 						if ( 'image' === field.type ) {
 							return (
@@ -114,14 +114,14 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 										allowedTypes={ [ 'image' ] }
 										value={ row[ field.name ] }
 										render={ ( { open } ) => (
-											<div className="cb-js-skeleton-repeater-field__image">
+											<div className="cb-andwisentrances2026-repeater-field__image">
 												{ row[ `${ field.name }Url` ] && (
 													<img src={ row[ `${ field.name }Url` ] } alt="" />
 												) }
 												<Button variant="secondary" size="small" onClick={ open }>
 													{ row[ field.name ]
-														? __( 'Replace', 'cb-js-skeleton2026' )
-														: __( 'Select', 'cb-js-skeleton2026' ) }
+														? __( 'Replace', 'cb-andwisentrances2026' )
+														: __( 'Select', 'cb-andwisentrances2026' ) }
 												</Button>
 											</div>
 										) }
@@ -132,16 +132,16 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 
 						if ( 'link' === field.type ) {
 							return (
-								<div className="cb-js-skeleton-repeater-field__link" key={ field.name }>
+								<div className="cb-andwisentrances2026-repeater-field__link" key={ field.name }>
 									<TextControl
-										label={ __( `${ field.label } Title`, 'cb-js-skeleton2026' ) }
+										label={ __( `${ field.label } Title`, 'cb-andwisentrances2026' ) }
 										hideLabelFromVision={ ! isColumn }
 										value={ row[ `${ field.name }Text` ] || '' }
 										onChange={ ( v ) => updateRow( index, { [ `${ field.name }Text` ]: v } ) }
 									/>
 									<TextControl
 										type="url"
-										label={ __( `${ field.label } URL`, 'cb-js-skeleton2026' ) }
+										label={ __( `${ field.label } URL`, 'cb-andwisentrances2026' ) }
 										hideLabelFromVision={ ! isColumn }
 										value={ row[ field.name ] || '' }
 										onChange={ ( v ) => updateRow( index, { [ field.name ]: v } ) }
@@ -149,7 +149,7 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 									/>
 									{ field.linkTarget && (
 										<ToggleControl
-											label={ __( `Open ${ field.label } in a new tab`, 'cb-js-skeleton2026' ) }
+											label={ __( `Open ${ field.label } in a new tab`, 'cb-andwisentrances2026' ) }
 											checked={ !! row[ `${ field.name }Target` ] }
 											onChange={ ( v ) => updateRow( index, { [ `${ field.name }Target` ]: v } ) }
 										/>
@@ -171,16 +171,16 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 										allowedTypes={ field.mimeTypes || [] }
 										value={ row[ field.name ] }
 										render={ ( { open } ) => (
-											<div className="cb-js-skeleton-repeater-field__image">
+											<div className="cb-andwisentrances2026-repeater-field__image">
 												{ row[ `${ field.name }Name` ] && (
-													<span className="cb-js-skeleton-repeater-field__file-name">
+													<span className="cb-andwisentrances2026-repeater-field__file-name">
 														{ row[ `${ field.name }Name` ] }
 													</span>
 												) }
 												<Button variant="secondary" size="small" onClick={ open }>
 													{ row[ field.name ]
-														? __( 'Replace', 'cb-js-skeleton2026' )
-														: __( 'Select', 'cb-js-skeleton2026' ) }
+														? __( 'Replace', 'cb-andwisentrances2026' )
+														: __( 'Select', 'cb-andwisentrances2026' ) }
 												</Button>
 											</div>
 										) }
@@ -240,10 +240,10 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 							/>
 						);
 					} ) }
-					<div className="cb-js-skeleton-repeater-field__row-actions">
+					<div className="cb-andwisentrances2026-repeater-field__row-actions">
 						<Button
 							size="small"
-							label={ __( 'Move up', 'cb-js-skeleton2026' ) }
+							label={ __( 'Move up', 'cb-andwisentrances2026' ) }
 							onClick={ () => moveRow( index, -1 ) }
 							disabled={ 0 === index }
 						>
@@ -251,7 +251,7 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 						</Button>
 						<Button
 							size="small"
-							label={ __( 'Move down', 'cb-js-skeleton2026' ) }
+							label={ __( 'Move down', 'cb-andwisentrances2026' ) }
 							onClick={ () => moveRow( index, 1 ) }
 							disabled={ index === rows.length - 1 }
 						>
@@ -260,7 +260,7 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 						<Button
 							size="small"
 							isDestructive
-							label={ __( 'Remove', 'cb-js-skeleton2026' ) }
+							label={ __( 'Remove', 'cb-andwisentrances2026' ) }
 							onClick={ () => removeRow( index ) }
 						>
 							&times;
@@ -270,7 +270,7 @@ export default function RepeaterField( { label, value, onChange, fields, emptyRo
 			) ) }
 			</div>
 			<Button variant="primary" onClick={ addRow }>
-				{ __( 'Add row', 'cb-js-skeleton2026' ) }
+				{ __( 'Add row', 'cb-andwisentrances2026' ) }
 			</Button>
 		</div>
 	);

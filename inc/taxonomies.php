@@ -5,7 +5,7 @@
  * Duplicate the register_taxonomy() call below (commented out) as a
  * starting point for a new taxonomy — nothing is registered by default.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_register_theme_taxonomies() {
+function cb_andwisentrances2026_register_theme_taxonomies() {
 
 	/*
 	register_taxonomy(
@@ -41,4 +41,4 @@ function cb_js_skeleton_register_theme_taxonomies() {
 	*/
 
 }
-add_action( 'init', 'cb_js_skeleton_register_theme_taxonomies' );
+add_action( 'init', 'cb_andwisentrances2026_register_theme_taxonomies' );

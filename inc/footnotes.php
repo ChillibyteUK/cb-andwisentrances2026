@@ -8,17 +8,17 @@
  * main-loop-only guard. The `cbp_footnotes_*` filter/helper names are
  * kept as-is so existing overrides keep firing.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'CB_JS_Skeleton_Footnotes' ) ) {
+if ( ! class_exists( 'Andwis_Entrances_2026_Footnotes' ) ) {
 
 	/**
 	 * Collects [Footnote] tags into a numbered list for the page request.
 	 */
-	class CB_JS_Skeleton_Footnotes {
+	class Andwis_Entrances_2026_Footnotes {
 
 		/**
 		 * Footnotes collected so far during the current page request.
@@ -61,7 +61,7 @@ if ( ! class_exists( 'CB_JS_Skeleton_Footnotes' ) ) {
 		 * via the [cbp_footnotes] shortcode.
 		 *
 		 * Public so blocks can run it over content that doesn't pass through
-		 * the `the_content` filter — see cb_js_skeleton_footnotes_process().
+		 * the `the_content` filter — see cb_andwisentrances2026_footnotes_process().
 		 *
 		 * @param string $content Content string, possibly containing [Footnote] tags.
 		 * @return string Content with tags replaced by footnote links.
@@ -174,7 +174,7 @@ if ( ! class_exists( 'CB_JS_Skeleton_Footnotes' ) ) {
 				<?php foreach ( $this->footnotes as $footnote ) { ?>
 					<li id="footnote-<?php echo esc_attr( $footnote->index ); ?>">
 						<?php echo wp_kses_post( $footnote->content ); ?>
-						<a href="#footnote-ref-<?php echo esc_attr( $footnote->index ); ?>" class="cbp-footnote-backlink" aria-label="<?php esc_attr_e( 'Back to content', 'cb-js-skeleton2026' ); ?>">&#8617;</a>
+						<a href="#footnote-ref-<?php echo esc_attr( $footnote->index ); ?>" class="cbp-footnote-backlink" aria-label="<?php esc_attr_e( 'Back to content', 'cb-andwisentrances2026' ); ?>">&#8617;</a>
 					</li>
 				<?php } ?>
 				</ol>
@@ -190,8 +190,8 @@ if ( ! class_exists( 'CB_JS_Skeleton_Footnotes' ) ) {
 // A bare function_exists() guard on the alias alone wouldn't be enough:
 // both copies would still hook the_content and fight over the
 // [cbp_footnotes] shortcode in the meantime.
-if ( ! class_exists( 'CBFootnotes' ) && class_exists( 'CB_JS_Skeleton_Footnotes' ) && ! isset( $GLOBALS['cb_js_skeleton_footnotes_instance'] ) ) {
-	$GLOBALS['cb_js_skeleton_footnotes_instance'] = new CB_JS_Skeleton_Footnotes();
+if ( ! class_exists( 'CBFootnotes' ) && class_exists( 'Andwis_Entrances_2026_Footnotes' ) && ! isset( $GLOBALS['cb_andwisentrances2026_footnotes_instance'] ) ) {
+	$GLOBALS['cb_andwisentrances2026_footnotes_instance'] = new Andwis_Entrances_2026_Footnotes();
 }
 
 /**
@@ -201,11 +201,11 @@ if ( ! class_exists( 'CBFootnotes' ) && class_exists( 'CB_JS_Skeleton_Footnotes'
  * @param string $content Content string, possibly containing [Footnote] tags.
  * @return string Content with tags replaced by footnote links.
  */
-function cb_js_skeleton_footnotes_process( $content ) {
-	if ( ! isset( $GLOBALS['cb_js_skeleton_footnotes_instance'] ) ) {
+function cb_andwisentrances2026_footnotes_process( $content ) {
+	if ( ! isset( $GLOBALS['cb_andwisentrances2026_footnotes_instance'] ) ) {
 		return $content;
 	}
-	return $GLOBALS['cb_js_skeleton_footnotes_instance']->process( $content );
+	return $GLOBALS['cb_andwisentrances2026_footnotes_instance']->process( $content );
 }
 
 /**
@@ -217,6 +217,6 @@ function cb_js_skeleton_footnotes_process( $content ) {
  */
 if ( ! function_exists( 'cbp_footnotes_process' ) ) {
 	function cbp_footnotes_process( $content ) {
-		return cb_js_skeleton_footnotes_process( $content );
+		return cb_andwisentrances2026_footnotes_process( $content );
 	}
 }

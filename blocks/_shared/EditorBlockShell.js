@@ -24,8 +24,8 @@ import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 export default function EditorBlockShell( {
 	blockProps,
 	clientId,
-	classPrefix = 'cb-js-skeleton',
-	textDomain = 'cb-js-skeleton2026',
+	classPrefix = 'cb-andwisentrances2026',
+	textDomain = 'cb-andwisentrances2026',
 	storageNamespace = 'block',
 	title,
 	children,

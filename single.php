@@ -2,7 +2,7 @@
 /**
  * Single post template.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 get_header();

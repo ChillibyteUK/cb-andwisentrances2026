@@ -6,7 +6,7 @@
  * img/icons/{slug}.svg, a {slug}_url field there, and an entry in
  * $platforms below.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -23,7 +23,7 @@ add_shortcode(
 
 		$links = '';
 		foreach ( $platforms as $slug => $label ) {
-			$url = cb_js_skeleton_get_setting( $slug . '_url' );
+			$url = cb_andwisentrances2026_get_setting( $slug . '_url' );
 			if ( ! $url ) {
 				continue;
 			}

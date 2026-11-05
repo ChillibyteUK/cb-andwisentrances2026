@@ -6,7 +6,7 @@
  * actually use it, so you can tell at a glance whether a block is safe to
  * remove with rm_block.sh.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return string HTML table of block usage.
  */
-function cb_js_skeleton_block_usage_table_shortcode() {
+function cb_andwisentrances2026_block_usage_table_shortcode() {
 	$blocks_dir  = get_stylesheet_directory() . '/blocks/';
 	$block_files = glob( $blocks_dir . '*/block.json' );
 
@@ -97,4 +97,4 @@ function cb_js_skeleton_block_usage_table_shortcode() {
 	<?php
 	return ob_get_clean();
 }
-add_shortcode( 'block_usage_table', 'cb_js_skeleton_block_usage_table_shortcode' );
+add_shortcode( 'block_usage_table', 'cb_andwisentrances2026_block_usage_table_shortcode' );

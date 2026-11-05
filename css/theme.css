@@ -263,7 +263,7 @@ ol {
 }
 
 /*
- * A wrapped core block (see cb_js_skeleton_wrap_block_in_container() in
+ * A wrapped core block (see cb_andwisentrances2026_wrap_block_in_container() in
  * inc/blocks.php) nested inside a Columns block would otherwise get its own
  * .container padding on top of the column's — double-inset relative to an
  * unwrapped sibling (e.g. core/image) in the same column. Reset it to 0 in

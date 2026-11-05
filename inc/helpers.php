@@ -6,7 +6,7 @@
  * inc/utilities.php, which stays project-agnostic). Add to this file rather
  * than scattering one-off functions across templates.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
  * @param int               $length Words to keep.
  * @return string Plain-text excerpt (unescaped — escape at output).
  */
-function cb_js_skeleton_content_excerpt( $post = null, $length = 30 ) {
+function cb_andwisentrances2026_content_excerpt( $post = null, $length = 30 ) {
 	$post = get_post( $post );
 
 	if ( ! $post ) {

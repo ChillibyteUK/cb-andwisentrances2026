@@ -4,7 +4,7 @@
  * covered by the lcp-blog-options plugin (which handles comments/tags/emoji
  * site-wide, but not this).
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return void
  */
-function cb_js_skeleton_add_editor_styles() {
+function cb_andwisentrances2026_add_editor_styles() {
 	add_editor_style( array( 'css/theme.min.css', 'css/editor.min.css' ) );
 }
-add_action( 'after_setup_theme', 'cb_js_skeleton_add_editor_styles' );
+add_action( 'after_setup_theme', 'cb_andwisentrances2026_add_editor_styles' );
 
 /**
  * Disable the block editor's fullscreen mode by default.
@@ -33,11 +33,11 @@ add_action( 'after_setup_theme', 'cb_js_skeleton_add_editor_styles' );
  * @return void
  */
 // phpcs:disable
-function cb_js_skeleton_disable_editor_fullscreen_by_default() {
+function cb_andwisentrances2026_disable_editor_fullscreen_by_default() {
 	$script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
 	wp_add_inline_script( 'wp-blocks', $script );
 }
-add_action( 'enqueue_block_editor_assets', 'cb_js_skeleton_disable_editor_fullscreen_by_default' );
+add_action( 'enqueue_block_editor_assets', 'cb_andwisentrances2026_disable_editor_fullscreen_by_default' );
 // phpcs:enable
 
 /**
@@ -49,12 +49,12 @@ add_action( 'enqueue_block_editor_assets', 'cb_js_skeleton_disable_editor_fullsc
  * @param array $settings Block editor settings.
  * @return array
  */
-function cb_js_skeleton_disable_openverse_media_category( $settings ) {
+function cb_andwisentrances2026_disable_openverse_media_category( $settings ) {
 	$settings['enableOpenverseMediaCategory'] = false;
 
 	return $settings;
 }
-add_filter( 'block_editor_settings_all', 'cb_js_skeleton_disable_openverse_media_category' );
+add_filter( 'block_editor_settings_all', 'cb_andwisentrances2026_disable_openverse_media_category' );
 
 /**
  * Remove the block directory upsell from the inserter.
@@ -63,10 +63,10 @@ add_filter( 'block_editor_settings_all', 'cb_js_skeleton_disable_openverse_media
  *
  * @return void
  */
-function cb_js_skeleton_disable_block_directory_inserter() {
+function cb_andwisentrances2026_disable_block_directory_inserter() {
 	remove_action( 'enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets' );
 }
-add_action( 'after_setup_theme', 'cb_js_skeleton_disable_block_directory_inserter' );
+add_action( 'after_setup_theme', 'cb_andwisentrances2026_disable_block_directory_inserter' );
 
 /**
  * Enqueue the "Lede" RichText format — a components-popover toolbar
@@ -83,8 +83,8 @@ add_action( 'after_setup_theme', 'cb_js_skeleton_disable_block_directory_inserte
  *
  * @return void
  */
-function cb_js_skeleton_enqueue_lede_format() {
-	$asset_file = CB_JS_SKELETON_DIR . '/blocks/_editor-formats/build/index.asset.php';
+function cb_andwisentrances2026_enqueue_lede_format() {
+	$asset_file = CB_ANDWISENTRANCES2026_DIR . '/blocks/_editor-formats/build/index.asset.php';
 
 	if ( ! file_exists( $asset_file ) ) {
 		return;
@@ -93,11 +93,11 @@ function cb_js_skeleton_enqueue_lede_format() {
 	$asset = require $asset_file;
 
 	wp_enqueue_script(
-		'cb-js-skeleton2026-editor-formats',
+		'cb-andwisentrances2026-editor-formats',
 		get_template_directory_uri() . '/blocks/_editor-formats/build/index.js',
 		$asset['dependencies'],
 		$asset['version'],
 		true
 	);
 }
-add_action( 'enqueue_block_editor_assets', 'cb_js_skeleton_enqueue_lede_format' );
+add_action( 'enqueue_block_editor_assets', 'cb_andwisentrances2026_enqueue_lede_format' );

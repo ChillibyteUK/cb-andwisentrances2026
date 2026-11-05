@@ -2,7 +2,7 @@
 /**
  * Fallback template.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 get_header();
@@ -22,7 +22,7 @@ get_header();
 		}
 	} else {
 		?>
-		<p><?php esc_html_e( 'Nothing found.', 'cb-js-skeleton2026' ); ?></p>
+		<p><?php esc_html_e( 'Nothing found.', 'cb-andwisentrances2026' ); ?></p>
 		<?php
 	}
 	?>

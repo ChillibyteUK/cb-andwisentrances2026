@@ -6,7 +6,7 @@
  * inc/helpers.php instead — don't create that file until something actually
  * needs it.
  *
- * @package cb-js-skeleton2026
+ * @package cb-andwisentrances2026
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -106,7 +106,7 @@ function get_icon( $name ) {
  *                    number itself).
  * @return string
  */
-function cb_js_skeleton_contact_phone_shortcode( $atts ) {
+function cb_andwisentrances2026_contact_phone_shortcode( $atts ) {
 	$atts = shortcode_atts(
 		array(
 			'class' => '',
@@ -116,7 +116,7 @@ function cb_js_skeleton_contact_phone_shortcode( $atts ) {
 		'contact_phone'
 	);
 
-	$phone = cb_js_skeleton_get_setting( 'phone' );
+	$phone = cb_andwisentrances2026_get_setting( 'phone' );
 	if ( ! $phone ) {
 		return '';
 	}
@@ -125,7 +125,7 @@ function cb_js_skeleton_contact_phone_shortcode( $atts ) {
 
 	return '<a href="tel:' . esc_attr( parse_phone( $phone ) ) . '" class="' . esc_attr( $atts['class'] ) . '">' . $anchor_text . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $anchor_text built from wp_kses_post()/esc_html().
 }
-add_shortcode( 'contact_phone', 'cb_js_skeleton_contact_phone_shortcode' );
+add_shortcode( 'contact_phone', 'cb_andwisentrances2026_contact_phone_shortcode' );
 
 /**
  * [contact_email] shortcode — mailto: link built from Site-Wide Settings'
@@ -135,7 +135,7 @@ add_shortcode( 'contact_phone', 'cb_js_skeleton_contact_phone_shortcode' );
  *                    address itself).
  * @return string
  */
-function cb_js_skeleton_contact_email_shortcode( $atts ) {
+function cb_andwisentrances2026_contact_email_shortcode( $atts ) {
 	$atts = shortcode_atts(
 		array(
 			'class' => '',
@@ -145,7 +145,7 @@ function cb_js_skeleton_contact_email_shortcode( $atts ) {
 		'contact_email'
 	);
 
-	$email = cb_js_skeleton_get_setting( 'email' );
+	$email = cb_andwisentrances2026_get_setting( 'email' );
 	if ( ! $email ) {
 		return '';
 	}
@@ -154,7 +154,7 @@ function cb_js_skeleton_contact_email_shortcode( $atts ) {
 
 	return '<a href="mailto:' . esc_attr( antispambot( $email ) ) . '" class="' . esc_attr( $atts['class'] ) . '">' . $anchor_text . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $anchor_text built from wp_kses_post()/esc_html().
 }
-add_shortcode( 'contact_email', 'cb_js_skeleton_contact_email_shortcode' );
+add_shortcode( 'contact_email', 'cb_andwisentrances2026_contact_email_shortcode' );
 
 /**
  * Queue Q&A pairs for the aggregated FAQPage JSON-LD schema, output once in
@@ -254,11 +254,11 @@ function estimate_reading_time_in_minutes( $content = '', $words_per_minute = 30
  * @param int $post_id Current post ID.
  * @return array<int, array{label: string, url: string}>
  */
-function cb_js_skeleton_get_breadcrumbs( $post_id = 0 ) {
+function cb_andwisentrances2026_get_breadcrumbs( $post_id = 0 ) {
 	$post_id     = $post_id ? (int) $post_id : get_the_ID();
 	$breadcrumbs = array(
 		array(
-			'label' => __( 'Home', 'cb-js-skeleton2026' ),
+			'label' => __( 'Home', 'cb-andwisentrances2026' ),
 			'url'   => home_url( '/' ),
 		),
 	);
@@ -307,7 +307,7 @@ function cb_js_skeleton_get_breadcrumbs( $post_id = 0 ) {
  * @param string $class_name  Wrapper class name.
  * @return void
  */
-function cb_js_skeleton_render_breadcrumbs( $breadcrumbs, $class_name = 'cb-breadcrumbs' ) {
+function cb_andwisentrances2026_render_breadcrumbs( $breadcrumbs, $class_name = 'cb-breadcrumbs' ) {
 	if ( empty( $breadcrumbs ) || ! is_array( $breadcrumbs ) || is_front_page() ) {
 		return;
 	}
@@ -345,7 +345,7 @@ function cb_js_skeleton_render_breadcrumbs( $breadcrumbs, $class_name = 'cb-brea
  * @param string $url URL as entered.
  * @return string Embed URL (autoplay + dnt), or '' if not a Vimeo video link.
  */
-function cb_js_skeleton_get_vimeo_embed_url( $url ) {
+function cb_andwisentrances2026_get_vimeo_embed_url( $url ) {
 	if ( ! is_string( $url ) || '' === trim( $url ) ) {
 		return '';
 	}
@@ -397,7 +397,7 @@ function cb_js_skeleton_get_vimeo_embed_url( $url ) {
  * @param int $bytes Byte count.
  * @return string
  */
-function cb_js_skeleton_format_file_size( $bytes ) {
+function cb_andwisentrances2026_format_file_size( $bytes ) {
 	$bytes = (int) $bytes;
 
 	if ( $bytes >= 1048576 ) {
@@ -415,7 +415,7 @@ function cb_js_skeleton_format_file_size( $bytes ) {
  * @param int $attachment_id Attachment ID.
  * @return string e.g. "PDF", "XHTML", or "" when unresolvable.
  */
-function cb_js_skeleton_get_attachment_ext( $attachment_id ) {
+function cb_andwisentrances2026_get_attachment_ext( $attachment_id ) {
 	$path = get_attached_file( (int) $attachment_id );
 
 	if ( ! $path ) {
