@@ -804,6 +804,7 @@ body.has-hero main {
 	white-space: nowrap;
 }
 
+/* Plain forest bars, no disc (Figma). The hit area stays 44px square. */
 .navbar-toggler {
 	display: inline-flex;
 	align-items: center;
@@ -812,25 +813,25 @@ body.has-hero main {
 	height: 2.75rem;
 	padding: 0;
 	border: 0;
-	border-radius: 50%;
-	background: var(--col-emerald);
-	color: var(--col-paper);
+	border-radius: var(--radius-sm);
+	background: none;
+	color: var(--col-forest);
 	cursor: pointer;
 }
-
 .navbar-toggler svg {
-		width: 1.25rem;
-		height: 1.25rem;
+		width: 1.75rem;
+		height: 1.75rem;
 	}
-
+.navbar-toggler:focus-visible {
+		outline: 2px solid var(--col-emerald);
+		outline-offset: 2px;
+	}
 .navbar-toggler .icon-close {
 		display: none;
 	}
-
 .navbar-toggler[aria-expanded="true"] .icon-open {
 		display: none;
 	}
-
 .navbar-toggler[aria-expanded="true"] .icon-close {
 		display: block;
 	}

@@ -52,11 +52,11 @@ $cbae_ctas = cbae_site_ctas();
 			<a class="btn navbar-cta" href="<?php echo esc_url( $cbae_ctas['quote']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['quote']['text'] ); ?></a>
 
 			<button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation">
-				<svg class="icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-					<path d="M2 5h16M2 10h16M2 15h16" />
+				<svg class="icon-open" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+					<path d="M3 7h22M3 14h22M3 21h22" />
 				</svg>
-				<svg class="icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-					<path d="M4 4l12 12M16 4L4 16" />
+				<svg class="icon-close" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+					<path d="M6 6l16 16M22 6L6 22" />
 				</svg>
 			</button>
 		</div>
