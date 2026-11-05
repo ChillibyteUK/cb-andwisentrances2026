@@ -78,109 +78,219 @@ function cb_andwisentrances2026_register_settings_page() {
 	register_setting( 'cb_andwisentrances2026_settings', CB_ANDWISENTRANCES2026_SETTINGS_OPTION );
 
 	add_settings_section( 'cb_andwisentrances2026_general', 'General', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_ctas', 'CTAs', '__return_false', 'theme-general-settings' );
 	add_settings_section( 'cb_andwisentrances2026_social', 'Social', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_legal', 'Legal', '__return_false', 'theme-general-settings' );
+	add_settings_section( 'cb_andwisentrances2026_forms', 'Forms', '__return_false', 'theme-general-settings' );
 	add_settings_section( 'cb_andwisentrances2026_tracking', 'Tracking & Verification', '__return_false', 'theme-general-settings' );
 	add_settings_section( 'cb_andwisentrances2026_scripts', 'Scripts', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_andwisentrances2026_gallery', 'Gallery', '__return_false', 'theme-general-settings' );
-	add_settings_section( 'cb_andwisentrances2026_repeater', 'Repeater', '__return_false', 'theme-general-settings' );
 
 	$fields = array(
-		'email'                     => array(
+		'logo'                     => array(
+			'label'       => 'Logo',
+			'type'        => 'gallery',
+			'section'     => 'cb_andwisentrances2026_general',
+			'description' => 'One image (SVG or PNG). Shown in the header; leave empty to use the built-in andwis entrances wordmark.',
+		),
+		'logo_footer'              => array(
+			'label'       => 'Footer logo',
+			'type'        => 'gallery',
+			'section'     => 'cb_andwisentrances2026_general',
+			'description' => 'Optional white-on-forest version for the footer. Falls back to the logo above.',
+		),
+		'tagline'                  => array(
+			'label'       => 'Tagline',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_general',
+			'placeholder' => 'Automatic, industrial and revolving doors - installed, serviced and maintained.',
+			'description' => 'Shown under the logo in the footer.',
+		),
+		'group_line'               => array(
+			'label'       => 'Group line',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_general',
+			'placeholder' => 'An andwis Group company',
+		),
+		'group_url'                => array(
+			'label'       => 'Group URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_general',
+			'placeholder' => 'https://www.andwis.com',
+		),
+		'email'                    => array(
 			'label'   => 'Email',
 			'type'    => 'email',
 			'section' => 'cb_andwisentrances2026_general',
 		),
-		'phone'                     => array(
+		'phone'                    => array(
 			'label'   => 'Phone',
 			'type'    => 'text',
 			'section' => 'cb_andwisentrances2026_general',
 		),
-		'facebook_url'              => array(
+		'address'                  => array(
+			'label'       => 'Address',
+			'type'        => 'textarea',
+			'section'     => 'cb_andwisentrances2026_general',
+			'description' => 'One line per line. Shown in the footer.',
+		),
+		'quote_cta_text'           => array(
+			'label'       => 'Quote button text',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_ctas',
+			'placeholder' => 'Get a Quote',
+		),
+		'quote_cta_url'            => array(
+			'label'       => 'Quote button URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_ctas',
+			'description' => 'Defaults to the page with the slug get-a-quote.',
+		),
+		'survey_cta_text'          => array(
+			'label'       => 'Survey button text',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_ctas',
+			'placeholder' => 'Book a Survey',
+		),
+		'survey_cta_url'           => array(
+			'label'       => 'Survey button URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_ctas',
+			'description' => 'Defaults to the page with the slug book-a-survey.',
+		),
+		'cta_heading'              => array(
+			'label'       => 'Site-wide band heading',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_ctas',
+			'placeholder' => 'Ready to talk about your entrance?',
+			'description' => 'The Get a Quote / Book a Survey band shown above the footer on every page.',
+		),
+		'cta_text'                 => array(
+			'label'   => 'Site-wide band text',
+			'type'    => 'textarea',
+			'section' => 'cb_andwisentrances2026_ctas',
+			'rows'    => 3,
+		),
+		'linkedin_url'             => array(
+			'label'       => 'LinkedIn URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_social',
+			'placeholder' => 'https://www.linkedin.com/company/...',
+			'description' => 'Leave blank to hide this icon.',
+		),
+		'facebook_url'             => array(
 			'label'       => 'Facebook URL',
 			'type'        => 'url',
 			'section'     => 'cb_andwisentrances2026_social',
 			'placeholder' => 'https://facebook.com/...',
-			'description' => 'Leave blank to hide this icon from [social_icons].',
 		),
-		'instagram_url'             => array(
+		'instagram_url'            => array(
 			'label'       => 'Instagram URL',
 			'type'        => 'url',
 			'section'     => 'cb_andwisentrances2026_social',
 			'placeholder' => 'https://instagram.com/...',
-			'description' => 'Leave blank to hide this icon from [social_icons].',
 		),
-		'ga_property'               => array(
+		'x_url'                    => array(
+			'label'       => 'X (Twitter) URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_social',
+			'placeholder' => 'https://x.com/...',
+		),
+		'youtube_url'              => array(
+			'label'       => 'YouTube URL',
+			'type'        => 'url',
+			'section'     => 'cb_andwisentrances2026_social',
+			'placeholder' => 'https://www.youtube.com/@...',
+		),
+		'registered_name'          => array(
+			'label'       => 'Registered company name',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_legal',
+			'placeholder' => 'e.g. andwis entrances Limited',
+		),
+		'company_number'           => array(
+			'label'   => 'Company registration number',
+			'type'    => 'text',
+			'section' => 'cb_andwisentrances2026_legal',
+		),
+		'place_of_registration'    => array(
+			'label'       => 'Place of registration',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_legal',
+			'placeholder' => 'England and Wales',
+		),
+		'vat_number'               => array(
+			'label'   => 'VAT registration number',
+			'type'    => 'text',
+			'section' => 'cb_andwisentrances2026_legal',
+		),
+		'registered_office'        => array(
+			'label'       => 'Registered office address',
+			'type'        => 'textarea',
+			'section'     => 'cb_andwisentrances2026_legal',
+			'description' => 'One line per line. Shown in the footer as a single line, separated by commas.',
+		),
+		'vacancy_form_id'          => array(
+			'label'       => 'Vacancy application form ID',
+			'type'        => 'text',
+			'section'     => 'cb_andwisentrances2026_forms',
+			'description' => 'Gravity Forms ID of the careers application form, shown beside every vacancy.',
+		),
+		'equality_statement'       => array(
+			'label'       => 'Equality & inclusion statement',
+			'type'        => 'textarea',
+			'section'     => 'cb_andwisentrances2026_forms',
+			'description' => 'Appended to every vacancy.',
+		),
+		'ga_property'              => array(
 			'label'       => 'GA Property',
 			'type'        => 'text',
 			'section'     => 'cb_andwisentrances2026_tracking',
 			'placeholder' => 'G-XXXXXXX',
 			'description' => 'Google Analytics measurement ID. Only fires for logged-out visitors.',
 		),
-		'gtm_property'              => array(
+		'gtm_property'             => array(
 			'label'       => 'GTM Property',
 			'type'        => 'text',
 			'section'     => 'cb_andwisentrances2026_tracking',
 			'placeholder' => 'GTM-XXXXXXX',
 			'description' => 'Google Tag Manager container ID. Only fires for logged-out visitors.',
 		),
-		'google_site_verification'  => array(
+		'google_site_verification' => array(
 			'label'       => 'Google Site Verification',
 			'type'        => 'text',
 			'section'     => 'cb_andwisentrances2026_tracking',
 			'description' => 'Content value of the google-site-verification meta tag.',
 		),
-		'bing_site_verification'    => array(
+		'bing_site_verification'   => array(
 			'label'       => 'Bing Site Verification',
 			'type'        => 'text',
 			'section'     => 'cb_andwisentrances2026_tracking',
 			'description' => 'Content value of the msvalidate.01 meta tag.',
 		),
-		'custom_head'               => array(
+		'custom_head'              => array(
 			'label'       => 'Head',
 			'type'        => 'code',
 			'section'     => 'cb_andwisentrances2026_scripts',
-			'description' => 'Printed in <head> after the managed GA/GTM tags. Paste vendor snippets verbatim, <script> tags and all — nothing is escaped or filtered.',
+			'description' => 'Printed in <head> after the managed GA/GTM tags. Paste vendor snippets verbatim, <script> tags and all - nothing is escaped or filtered.',
 		),
-		'custom_body_open'          => array(
+		'custom_body_open'         => array(
 			'label'       => 'Body Open',
 			'type'        => 'code',
 			'section'     => 'cb_andwisentrances2026_scripts',
-			'description' => 'Printed immediately after <body> opens, after the GTM noscript fallback. Where <noscript> tracking pixels belong.',
+			'description' => 'Printed immediately after <body> opens, after the GTM noscript fallback.',
 		),
-		'custom_body_close'         => array(
+		'custom_body_close'        => array(
 			'label'       => 'Body Close',
 			'type'        => 'code',
 			'section'     => 'cb_andwisentrances2026_scripts',
-			'description' => 'Printed just before </body>. Use for anything that must not block rendering — chat widgets, late-loading embeds.',
+			'description' => 'Printed just before </body>.',
 		),
 		'custom_scripts_logged_out_only' => array(
 			'label'       => 'Logged-Out Visitors Only',
 			'type'        => 'checkbox',
 			'section'     => 'cb_andwisentrances2026_scripts',
 			'default'     => '1',
-			'description' => 'On by default, matching GA/GTM — keeps the team\'s own traffic out of whatever these scripts measure. Untick if a slot holds something every visitor should see, e.g. a chat widget.',
-		),
-		'example_gallery'           => array(
-			'label'       => 'Example Gallery',
-			'type'        => 'gallery',
-			'section'     => 'cb_andwisentrances2026_gallery',
-			'description' => 'A fixed multi-image list — e.g. accreditation badges, a logo strip. Read with cb_andwisentrances2026_get_repeater_setting-style helper of your own, mirroring cb_andwisentrances2026_get_footer_accreditation_ids() in the cb-hts-js-2026 sibling theme.',
-		),
-		'example_repeater'          => array(
-			'label'       => 'Example Repeater',
-			'type'        => 'repeater',
-			'section'     => 'cb_andwisentrances2026_repeater',
-			'sub_fields'  => array(
-				'name' => array(
-					'label' => 'Name',
-					'type'  => 'text',
-				),
-				'logo' => array(
-					'label' => 'Logo',
-					'type'  => 'image',
-				),
-			),
-			'description' => 'Genuinely repeating structured rows — e.g. a client-logo list. Read with cb_andwisentrances2026_get_repeater_setting( \'example_repeater\' ).',
+			'description' => 'On by default, matching GA/GTM. Untick if a slot holds something every visitor should see, e.g. a chat widget.',
 		),
 	);
 

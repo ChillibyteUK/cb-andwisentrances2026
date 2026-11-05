@@ -1,24 +1,20 @@
 <?php
 /**
- * Page template.
- *
- * Most projects build page layouts from native blocks rather than the_content()
- * directly — override this per project as needed.
+ * Page template — also serves products, services and sectors (see
+ * inc/posttypes.php). Layouts are built from blocks; each block renders its
+ * own full-width <section> with its own .container, so the_content() is
+ * deliberately not wrapped here. A page that does not open with the Hero
+ * block gets the forest page head so it never starts under the fixed header.
  *
  * @package cb-andwisentrances2026
  */
 
 get_header();
-?>
 
-<div class="container">
-	<?php
-	while ( have_posts() ) {
-		the_post();
-		the_content();
-	}
-	?>
-</div>
+while ( have_posts() ) {
+	the_post();
+	cbae_page_head();
+	the_content();
+}
 
-<?php
 get_footer();

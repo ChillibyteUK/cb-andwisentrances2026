@@ -32,6 +32,7 @@ require_once CB_ANDWISENTRANCES2026_DIR . '/inc/block-usage.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/utilities.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/posttypes.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/taxonomies.php';
+require_once CB_ANDWISENTRANCES2026_DIR . '/inc/meta.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/security.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/toc.php';
 require_once CB_ANDWISENTRANCES2026_DIR . '/inc/footnotes.php';

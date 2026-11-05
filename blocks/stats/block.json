@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/stats",
+	"title": "Stats",
+	"description": "Scale and credibility numbers band: a row of big figures with short labels, e.g. 300+ engineers, 11 regional offices. Numbers count up as they scroll into view.",
+	"category": "cb-andwisentrances2026",
+	"icon": "chart-bar",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "sage" },
+		"stats": { "type": "array", "default": [] }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/cards",
+	"title": "Cards",
+	"description": "A grid of tiles listing products, services, sectors, case studies, pages or hand-written cards. Sources: a post type, the child pages of this page, chosen posts, this page's related items, or manual rows.",
+	"category": "cb-andwisentrances2026",
+	"icon": "grid-view",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"source": { "type": "string", "default": "post_type" },
+		"postType": { "type": "string", "default": "product" },
+		"topLevelOnly": { "type": "boolean", "default": true },
+		"limit": { "type": "number", "default": 0 },
+		"selected": { "type": "array", "default": [], "items": { "type": "integer" } },
+		"relatedKey": { "type": "string", "default": "related_products" },
+		"cards": { "type": "array", "default": [] },
+		"style": { "type": "string", "default": "forest" },
+		"media": { "type": "string", "default": "image" },
+		"columns": { "type": "string", "default": "3" },
+		"linkText": { "type": "string", "default": "" },
+		"viewAllText": { "type": "string", "default": "" },
+		"viewAllUrl": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

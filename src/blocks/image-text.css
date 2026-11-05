@@ -1,0 +1,141 @@
+/* Image & Text (blocks/image-text) */
+.cb-image-text {
+	/* The rotating dot ring is a square that sweeps wider than its column. */
+	overflow-x: clip;
+
+	& .cb-image-text__copy {
+		min-width: 0;
+	}
+
+	& h2 {
+		margin: 0 0 var(--space-3);
+	}
+
+	& .cb-prose {
+		margin-bottom: var(--space-4);
+	}
+
+	& .cb-image-text__list-label {
+		margin-bottom: var(--space-2);
+	}
+
+	& .cb-check-list {
+		margin-bottom: var(--space-4);
+	}
+
+	& .cb-image-text__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-4);
+	}
+
+	/* Stack: copy first, media second on small screens whatever the DOM order. */
+	& .cb-image-text__media-col {
+		order: 2;
+		min-width: 0;
+	}
+
+	/* ---------- Circle with the rotating dot ring ---------- */
+	& .cb-image-text__media--circle {
+		position: relative;
+		aspect-ratio: 1 / 1;
+		max-width: 30rem;
+		margin-inline: auto;
+
+		& .cb-image-text__dots {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			color: var(--col-emerald);
+			transform-origin: 50% 50%;
+			animation: cb-dots-spin 40s linear infinite;
+		}
+
+		& .cb-image-text__fig,
+		& .cb-image-text__placeholder {
+			position: absolute;
+			inset: 8%;
+			margin: 0;
+			border-radius: 50%;
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+		}
+
+		& img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	/* ---------- Plain rounded photo ---------- */
+	& .cb-image-text__media--photo {
+		& .cb-image-text__fig,
+		& .cb-image-text__placeholder {
+			margin: 0;
+			border-radius: var(--radius-md);
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+		}
+
+		& img {
+			display: block;
+			width: 100%;
+			aspect-ratio: 4 / 3;
+			object-fit: cover;
+		}
+
+		& .cb-image-text__placeholder {
+			aspect-ratio: 4 / 3;
+		}
+	}
+
+	& .cb-image-text__placeholder {
+		background: var(--col-sage);
+	}
+
+	/* ---------- Forest background ---------- */
+	&.bg-forest {
+		& .eyebrow {
+			color: var(--col-mint);
+		}
+
+		& .cb-check-list li {
+			color: rgb(255 255 255 / 0.85);
+		}
+
+		& .cb-check {
+			background: var(--col-mint);
+			color: var(--col-forest);
+		}
+
+		& .cb-image-text__dots {
+			color: var(--col-mint);
+		}
+	}
+
+	&.bg-sage .cb-image-text__placeholder {
+		background: var(--col-sage-tint);
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-image-text .cb-image-text__media-col {
+		order: 0;
+	}
+}
+
+@keyframes cb-dots-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-image-text .cb-image-text__dots {
+		animation: none;
+	}
+}

@@ -281,3 +281,117 @@ that `clean: false` without replacing it with something that can't do that.
   ACF instead of native blocks.
 
 - **Optional modules live in `modules/` and are installed by `setup.sh`.** Each is `module.conf` (`description=`, `js_import=fn|./file[|first]`, `css_import=`, `php_require=`) plus a `files/` overlay mirroring the theme root. `setup.sh` prompts y/N per module, copies the chosen ones in after the rename pass (so files carry the project prefix), wires imports/requires, then deletes `modules/`. Add a new opt-in feature there rather than to the core theme when not every project needs it.
+
+---
+
+# Project notes: andwis entrances
+
+Everything below is specific to this site, on top of the skeleton rules above.
+
+## What exists (Nov 2026)
+
+Scope so far is the site framework, header, footer and a sample homepage.
+The brief's full page list (products, services, sectors, case studies,
+news, about, careers, contact, legal) has its post types, templates and
+seeded placeholder pages in place, but only the homepage and the hub
+pages carry real block layouts. Content is still to come from the client.
+
+## Design language
+
+Ported by hand from `cb-andwislifts2026` (Understrap/Sass) into this
+skeleton's plain CSS: forest `#1c4220`, sage, emerald, mint `#00ff99`,
+Poppins (self-hosted in `fonts/`), pill `.btn` with the mint-to-forest
+gradient sweep, `.btn-ghost` outline, rounded radii, `--shadow-soft`, and
+the 120vw curved mask under heroes and above the footer. Tokens are in
+`src/css/tokens.css`; shared pieces (`.cb-section-head`, `.cb-prose`,
+`.cb-check-list`, `.cb-chip`, `.cb-tag`, `.bg-forest/.bg-sage/.bg-sage-tint`)
+in `typography.css`; cards (`.cb-tile`, `.cb-post-card`, `.cb-card-grid`) in
+`components.css`. House style: plain hyphens, never em or en dashes
+(`cbae_plain_hyphens()` reverts wptexturize).
+
+Logo: `cbae_logo()` renders an uploaded logo from Site-Wide Settings when
+set, else an inline SVG built from the andwis wordmark paths plus
+"entrances" as SVG text. Replace with the real artwork when supplied.
+
+## Header / footer
+
+- `#masthead` is fixed (fixed-header module). On a page whose first block
+  is the Hero (`body.has-hero`, `cbae_body_class()`), it starts transparent
+  and `src/js/header.js` adds `.is-solid` on scroll. Any other page gets the
+  forest `cbae_page_head()` band from `page.php` so nothing starts under
+  the bar.
+- Menus: `primary` (depth 2, dropdown parents are buttons that never
+  navigate), `footer`, `footer_contact` (falls back to Contact / Locations /
+  Careers / Get a Quote / Book a Survey links when unassigned).
+- Site-wide CTAs: header pill + footer band + Cards/Hero/CTA block defaults
+  all read `cbae_site_ctas()` (text/URL from Site-Wide Settings > CTAs,
+  defaulting to the `get-a-quote` and `book-a-survey` pages). The footer
+  band is skipped on those pages, on Contact, when a page ticks "Hide the
+  site-wide band" (sidebar panel), or when the page already ends on a CTA
+  or Form block.
+- Legal links are looked up by slug (`privacy-policy`, `cookie-policy`,
+  `terms-and-conditions`, `accessibility-statement`) and dropped if the page
+  is missing. Statutory company details come from Site-Wide Settings > Legal.
+
+## Content model (`inc/posttypes.php`)
+
+| Type         | URL                                     | Hub                                    |
+| ------------ | --------------------------------------- | -------------------------------------- |
+| `product`    | `/products/{hub}/{slug}/` (hierarchical) | top-level product, e.g. `/products/industrial-doors/` |
+| `service`    | `/service-maintenance/{slug}/`           | Page `service-maintenance`             |
+| `sector`     | `/sectors/{slug}/`                       | Page `sectors`                         |
+| `case_study` | `/case-studies/{slug}/`                  | Page `case-studies`                    |
+| `vacancy`    | `/careers/vacancies/{slug}/`             | Page `careers`                         |
+| `post`       | `/news/{slug}/`                          | Posts page `news` (index.php)          |
+
+Products are hierarchical on purpose: a hub is a top-level product and a
+Cards block set to "children of this page" lists its range. Gates &
+Barriers is a hub with no children. Service & Maintenance is a Page because
+services are flat. Watch slugs: a child product may legally share a slug
+with its parent (WP allows it per parent), so look hubs up with
+`post_parent => 0`.
+
+Everything except case studies and vacancies renders through `page.php`
+from blocks. `single-case_study.php` and `single-vacancy.php` have fixed
+shapes driven by post meta; `single.php`/`index.php` are news.
+
+## Post meta (`inc/meta.php`)
+
+No ACF. Fields are declared once in `cbae_meta_fields()`, registered with
+`show_in_rest`, and edited in the "Listing & details" document sidebar
+panel (`blocks/_sidebar`, enqueued per post type). Shared: `card_summary`,
+`card_icon`, `hide_global_cta`. Relationship fields (`related_products`,
+`related_sectors`) are arrays of IDs via `blocks/_shared/MultiPostPicker.js`;
+reverse lookups use `cbae_posts_referencing()` (LIKE on the serialised
+`i:ID;`). Vacancies carry the JobPosting fields ported from andwis lifts.
+SEO title/description per page is Yoast's job - do not add fields for it.
+
+## Blocks (`blocks/`)
+
+| Block             | Use                                                                 |
+| ----------------- | ------------------------------------------------------------------- |
+| `hero`            | Every page opens with one. Highlight phrase, bullets, site CTAs, curve, compact size for inner pages. |
+| `audience-router` | Home: "I need..." tiles + sector chips (auto from the sector type). |
+| `stats`           | Scale numbers; `data-count` count-up via `src/js/counter.js`.       |
+| `cards`           | The one listing block: manual / children / post type / selected / related. Renders `cbae_tile()`. |
+| `image-text`      | Copy + circular photo with the rotating dots ring (or plain photo). |
+| `logo-row`        | Accreditation/partner logos; label-only rows render as dashed placeholders. |
+| `cta`             | Closing band; defaults to the site CTAs.                            |
+
+Shared helpers every render.php uses: `cbae_section_id()`,
+`cbae_section_class()` (adds `cb-section` + `bg-*`), `cbae_button()`,
+`cbae_lines()`, `cbae_icon()`. Icons are SVG files in `img/icons/`.
+Block CSS lives in `src/blocks/{slug}.css`.
+
+Still to build when content arrives (patterns exist in andwis lifts):
+feature accordion, FAQs, case study index + summary, news index, vacancy
+index, downloads, offices/locations with maps, team, form (Gravity Forms
+wrapper - `cbae_render_form()` and the GF theming in `forms.css` are ready).
+
+## Seeding
+
+Placeholder pages, products, services, sectors and the three menus were
+created with WP-CLI; the homepage and hub layouts came from a one-off
+`wp eval-file` script (not kept). Four placeholder photos were imported
+from the andwis lifts media library - swap them when real imagery lands.
+Gravity Forms was copied from the lifts local site for development only.

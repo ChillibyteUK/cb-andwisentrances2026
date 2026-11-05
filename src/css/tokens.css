@@ -5,44 +5,77 @@
  * an @media condition, so breakpoints live in src/build/tokens.config.js instead,
  * and generate-utilities.js is what turns them into actual responsive CSS. Keep
  * that file as the only place breakpoint pixel values are written down.
+ *
+ * Palette is the andwis group brand as used on andwis lifts (cb-andwislifts2026)
+ * — forest, sage, emerald, mint — so the entrances site reads as a sibling.
+ * generate-theme-json.js lists every literal --col-* below in the editor
+ * palette; the var() aliases underneath are deliberately not listed twice.
  */
 
 :root {
-  /* Colour palette — rename/replace per project, keep the slug shape */
+  /* Brand palette */
+  --col-forest: #1c4220;
+  --col-forest-deep: #132d17;
+  --col-sage: #addfb3;
+  --col-sage-tint: #eef7ef;
+  --col-emerald: #00af66;
+  --col-mint: #00ff99;
+  --col-lime: #dbe442;
+  --col-marine: #8ce2d0;
+  --col-ink: #132018;
+  --col-ink-soft: #4b5b52;
+  --col-muted: #8a978f;
+  --col-line: #d7e2d9;
+  --col-paper: #ffffff;
   --col-white: #ffffff;
   --col-black: #000000;
   --col-grey-100: #f5f5f5;
   --col-grey-300: #d9d9d9;
   --col-grey-700: #4a4a4a;
-  --col-blue-700: #1d4ed8;
+  --col-error: #b3261e;
 
-  --col-primary: var(--col-blue-700);
-  --col-body: var(--col-black);
-  --col-body-bg: var(--col-white);
+  --col-primary: var(--col-forest);
+  --col-accent: var(--col-mint);
+  --col-body: var(--col-ink);
+  --col-body-bg: var(--col-paper);
 
   /* Type scale */
-  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --fs-base: 1rem;
-  --fs-h1: clamp(2rem, 1.6rem + 2vw, 3rem);
-  --fs-h2: clamp(1.6rem, 1.35rem + 1.25vw, 2.25rem);
-  --fs-h3: clamp(1.3rem, 1.15rem + 0.75vw, 1.75rem);
+  --font-family-base: "Poppins", Arial, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-base: 1.0625rem;
+  --fs-hero: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --fs-h1: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
   --fs-h4: 1.25rem;
-  --fs-h5: 1.1rem;
+  --fs-h5: 1.125rem;
   --fs-h6: 1rem;
+  --fs-lede: 1.25rem;
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1.0625rem;
+  --fs-body-sm: 0.9375rem;
   --fs-small: 0.875rem;
+  --fs-caption: 0.8125rem;
+  --fs-micro: 0.75rem;
+  --fs-stat: clamp(2.25rem, 1.5rem + 2.5vw, 3.25rem);
   --fw-400: 400;
+  --fw-500: 500;
   --fw-600: 600;
   --fw-700: 700;
+  --fw-800: 800;
 
   /* Semantic aliases — generate-utilities.js emits a matching .fw-* class
 	   for every custom property here, so these are free utility classes too
-	   (.fw-normal, .fw-semibold, .fw-bold), not just tokens for use in CSS. */
+	   (.fw-normal, .fw-medium, .fw-semibold, .fw-bold, .fw-heavy). */
   --fw-normal: var(--fw-400);
+  --fw-medium: var(--fw-500);
   --fw-semibold: var(--fw-600);
   --fw-bold: var(--fw-700);
+  --fw-heavy: var(--fw-800);
 
-  --line-height-base: 1.5;
-  --line-height-heading: 1.2;
+  --line-height-base: 1.65;
+  --line-height-heading: 1.15;
+  --ls-heading: -0.02em;
+  --ls-caps: 0.12em;
 
   /* Spacing scale — used by both hand-authored CSS and the utility generator */
   --space-0: 0;
@@ -53,23 +86,30 @@
   --space-5: 3rem;
   --space-6: 5rem;
 
+  /* Vertical rhythm for full-width block sections */
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+  --section-y-sm: clamp(2rem, 4vw, 3.5rem);
+
   /* Radii / shadows / motion */
-  --radius-sm: 0.25rem;
-  --radius-lg: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.125rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 9999px;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08);
   --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.12);
-  --transition: 150ms ease-in-out;
+  --shadow-soft: 0 20px 50px -25px rgb(16 66 31 / 0.35);
+  --transition: 250ms ease-out;
 
   /* Layout */
-  --container-max-width: 1320px;
-  --container-padding: var(--space-3);
+  --container-max-width: 1240px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
   --grid-columns: 12;
-  --grid-gutter: var(--space-3);
+  --grid-gutter: var(--space-4);
 
   /* Minimum item width for .grid — override per instance with an
 	   inline style (e.g. style="--grid-min: 10rem") rather than adding
 	   a new class per layout. Smaller value = more columns fit. */
   --grid-min: 16rem;
 
-  --nav-height: 4rem;
+  --nav-height: 5.5rem;
 }

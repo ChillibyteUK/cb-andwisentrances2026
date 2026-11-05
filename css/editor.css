@@ -405,4 +405,41 @@
 	margin-bottom: 1.5rem;
 }
 
+/* Ordered multi-post picker (blocks/_shared/MultiPostPicker.js). */
+.cb-andwisentrances2026-multi-post-picker__list {
+	margin: 0.5rem 0 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid #ccc;
+}
+
+.cb-andwisentrances2026-multi-post-picker__list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 0.4rem 0.5rem;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 13px;
+}
+
+.cb-andwisentrances2026-multi-post-picker__list li:last-child {
+	border-bottom: 0;
+}
+
+.cb-andwisentrances2026-multi-post-picker__actions {
+	display: inline-flex;
+	gap: 2px;
+}
+
+.cb-andwisentrances2026-multi-post-picker__actions .components-button {
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: 1px solid #ccc;
+	font-size: 10px;
+	justify-content: center;
+}
+
 /*# sourceMappingURL=editor.css.map */

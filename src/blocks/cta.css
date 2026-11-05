@@ -1,0 +1,71 @@
+/* CTA Band — blocks/cta */
+.cb-cta {
+	& .cb-cta__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4) var(--space-5);
+	}
+
+	& .cb-cta__copy {
+		flex: 1 1 24rem;
+		min-width: 0;
+	}
+
+	& h2 {
+		margin: 0;
+	}
+
+	& .cb-cta__body {
+		margin-top: var(--space-2);
+		max-width: 40rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+
+		& p {
+			margin: 0;
+		}
+	}
+
+	& .cb-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	&.bg-forest .cb-cta__body {
+		color: var(--col-sage);
+	}
+
+	&.cb-cta--centred {
+		text-align: center;
+
+		& .cb-cta__inner {
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		& .cb-cta__copy {
+			flex: 0 1 auto;
+		}
+
+		& .cb-cta__body {
+			margin-inline: auto;
+		}
+
+		& .cb-cta__actions {
+			justify-content: center;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.cb-cta .cb-cta__actions {
+		width: 100%;
+
+		& .btn {
+			flex: 1 1 auto;
+		}
+	}
+}

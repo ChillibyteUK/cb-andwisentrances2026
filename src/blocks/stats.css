@@ -1,0 +1,43 @@
+/* Stats - blocks/stats */
+.cb-stats {
+	& .cb-stats__grid {
+		display: grid;
+		gap: var(--space-4);
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	}
+
+	& .cb-stats__item {
+		display: flex;
+		flex-direction: column;
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		background: var(--col-forest);
+		box-shadow: var(--shadow-soft);
+		color: var(--col-paper);
+	}
+
+	& .cb-stats__value {
+		display: block;
+		color: var(--col-mint);
+		font-size: var(--fs-stat);
+		font-weight: var(--fw-700);
+		letter-spacing: -0.02em;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+	}
+
+	& .cb-stats__label {
+		display: block;
+		margin-top: var(--space-2);
+		font-size: var(--fs-small);
+		line-height: 1.4;
+		opacity: 0.85;
+	}
+
+	/* On forest the solid card would vanish; use a glass tile instead. */
+	&.bg-forest .cb-stats__item {
+		border: 1px solid rgb(255 255 255 / 0.12);
+		background: rgb(255 255 255 / 0.06);
+		box-shadow: none;
+	}
+}

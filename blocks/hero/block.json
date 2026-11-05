@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/hero",
+	"title": "Hero",
+	"description": "Full-bleed forest hero with a background image and dark scrim. Every page opens with one; the fixed header starts transparent over it.",
+	"category": "cb-andwisentrances2026",
+	"icon": "cover-image",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "" },
+		"heading": { "type": "string", "default": "" },
+		"highlight": { "type": "string", "default": "" },
+		"subline": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"bullets": { "type": "string", "default": "" },
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"useSiteCtas": { "type": "boolean", "default": true },
+		"primaryText": { "type": "string", "default": "" },
+		"primaryUrl": { "type": "string", "default": "" },
+		"secondaryText": { "type": "string", "default": "" },
+		"secondaryUrl": { "type": "string", "default": "" },
+		"size": { "type": "string", "default": "full" },
+		"showCurve": { "type": "boolean", "default": true },
+		"showBreadcrumbs": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,274 @@
+/*
+ * Footer: forest band with the andwis curve rising above it, brand column,
+ * footer menu, social, legal links and the statutory disclosure.
+ *
+ * The curve pseudo-element is 120vw wide and overhangs each side, so the
+ * footer carries overflow-x: clip (clip, not hidden — the curve sits above
+ * the footer's top edge and needs the vertical axis left visible).
+ */
+
+#footer {
+	position: relative;
+	margin-top: clamp(4rem, 8vw, 7rem);
+	padding-block: var(--space-5) var(--space-3);
+	background: var(--col-forest);
+	color: var(--col-paper);
+	overflow-x: clip;
+
+	/* The curve box is exactly as tall as the drawn curve (mask stretched to
+	   fill it), so it always sits fully above the footer's top edge — a
+	   bottom-aligned "100% auto" mask inside a taller box ends up hidden
+	   behind the footer on narrow screens. */
+	&::before {
+		content: "";
+		position: absolute;
+		top: calc(-1 * var(--curve-h) + 1px);
+		left: 50%;
+		width: 120vw;
+		height: var(--curve-h);
+		--curve-h: clamp(32px, 6vw, 90px);
+		background-color: var(--col-forest);
+		transform: translateX(-50%);
+		mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 66' preserveAspectRatio='none' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
+		mask-position: center bottom;
+		mask-repeat: no-repeat;
+		mask-size: 100% 100%;
+	}
+
+	& a {
+		color: var(--col-paper);
+		text-decoration: none;
+		transition: color 300ms ease;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--col-mint);
+		}
+	}
+
+	& h2,
+	& h3 {
+		color: var(--col-paper);
+	}
+}
+
+/* A page whose last block is already a CTA/form band sits straight on the
+   curve; the global CTA band (footer.php) removes the top margin itself. */
+.site-cta + #footer,
+.cb-cta + #footer,
+.cb-form + #footer {
+	margin-top: 0;
+}
+
+.site-footer__main {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	gap: var(--space-5) var(--space-4);
+	grid-template-columns: 1fr;
+}
+
+.site-footer__brand {
+	& .site-footer__logo {
+		display: inline-block;
+		line-height: 0;
+	}
+
+	& svg,
+	& img {
+		width: clamp(10rem, 16vw, 13rem);
+		height: auto;
+	}
+
+	& .logo-andwis,
+	& .logo-word {
+		fill: var(--col-paper);
+	}
+
+	& .logo-dot {
+		fill: var(--col-mint);
+	}
+
+	& .logo-word {
+		font-family: var(--font-family-base);
+		font-weight: var(--fw-700);
+	}
+
+	& p {
+		margin: var(--space-3) 0 0;
+		max-width: 22rem;
+		color: rgb(255 255 255 / 0.8);
+		font-size: var(--fs-small);
+	}
+}
+
+.site-footer__group {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: var(--space-3);
+	color: var(--col-sage);
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+}
+
+.site-footer__nav h3 {
+	margin: 0 0 var(--space-2);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-caps);
+	text-transform: uppercase;
+	color: var(--col-sage);
+}
+
+.site-footer__menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	& li {
+		padding: 0.2rem 0;
+	}
+
+	& a {
+		font-size: var(--fs-small);
+	}
+}
+
+.site-footer__contact {
+	& p {
+		margin: 0 0 var(--space-2);
+		font-size: var(--fs-small);
+		color: rgb(255 255 255 / 0.85);
+	}
+
+	& a {
+		font-weight: var(--fw-600);
+	}
+}
+
+.site-footer__social {
+	display: flex;
+	gap: var(--space-2);
+	margin-top: var(--space-3);
+
+	& a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 1px solid rgb(255 255 255 / 0.25);
+		border-radius: 50%;
+		color: var(--col-paper);
+
+		&:hover,
+		&:focus-visible {
+			border-color: var(--col-mint);
+			color: var(--col-mint);
+		}
+	}
+
+	& svg {
+		width: 1rem;
+		height: 1rem;
+		fill: currentColor;
+	}
+}
+
+#colophon {
+	position: relative;
+	z-index: 1;
+	margin-top: var(--space-5);
+	padding-top: var(--space-3);
+	border-top: 1px solid rgb(255 255 255 / 0.12);
+	color: rgb(255 255 255 / 0.75);
+	font-size: var(--fs-caption);
+
+	& .site-footer__legal-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: var(--space-2) var(--space-4);
+	}
+
+	& p {
+		margin: 0;
+	}
+}
+
+.site-footer__legal-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.site-footer__legal-details {
+	margin-top: var(--space-3) !important;
+	max-width: 62rem;
+	color: rgb(255 255 255 / 0.55);
+	font-size: var(--fs-micro);
+	line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+	.site-footer__main {
+		grid-template-columns: 1.4fr 1fr 1fr;
+	}
+}
+
+@media (min-width: 992px) {
+	.site-footer__main {
+		grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+	}
+}
+
+/* ---------- Global CTA band (footer.php, from Site-Wide Settings) ---------- */
+
+.site-cta {
+	padding-block: var(--section-y);
+	background: var(--col-sage-tint);
+
+	& .site-cta__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4) var(--space-5);
+	}
+
+	& .site-cta__copy {
+		flex: 1 1 24rem;
+		min-width: 0;
+	}
+
+	& h2 {
+		margin: 0;
+	}
+
+	& p {
+		margin: var(--space-2) 0 0;
+		max-width: 40rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+
+	& .site-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+}
+
+@media (max-width: 767px) {
+	.site-cta .site-cta__actions {
+		width: 100%;
+
+		& .btn {
+			flex: 1 1 auto;
+		}
+	}
+}

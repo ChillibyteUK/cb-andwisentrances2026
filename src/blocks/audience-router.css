@@ -1,0 +1,132 @@
+/* Audience Router - blocks/audience-router */
+.cb-router {
+	& .cb-router__groups {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-5);
+	}
+
+	& .cb-router__group h3 {
+		margin: 0 0 var(--space-3);
+		font-size: var(--fs-h5);
+	}
+
+	& .cb-router__needs {
+		display: grid;
+		gap: var(--space-3);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	& .cb-router__need {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		padding: var(--space-3) var(--space-4);
+		border: 1px solid rgb(16 66 31 / 0.12);
+		border-radius: var(--radius-md);
+		background: var(--col-paper);
+		color: var(--col-ink);
+		text-decoration: none;
+		transition:
+			transform var(--transition),
+			box-shadow var(--transition);
+
+		&:hover,
+		&:focus-visible {
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-soft);
+
+			& .cb-router__arrow {
+				transform: translateX(4px);
+			}
+		}
+	}
+
+	& .cb-router__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		background: var(--col-sage);
+		color: var(--col-forest);
+
+		& svg {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+	}
+
+	& .cb-router__need-body {
+		min-width: 0;
+
+		& strong {
+			display: block;
+			color: var(--col-forest);
+			font-size: var(--fs-body-lg);
+			font-weight: var(--fw-600);
+			line-height: 1.3;
+		}
+
+		& span {
+			display: block;
+			color: var(--col-ink-soft);
+			font-size: var(--fs-small);
+			line-height: 1.5;
+		}
+	}
+
+	& .cb-router__arrow {
+		flex: 0 0 auto;
+		width: 1.1rem;
+		height: 1.1rem;
+		margin-left: auto;
+		color: var(--col-emerald);
+		transition: transform var(--transition);
+	}
+
+	& .cb-router__sectors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	& .cb-chip {
+		display: inline-block;
+		text-decoration: none;
+	}
+
+	& .cb-chip--all {
+		border-color: var(--col-mint);
+		background: var(--col-mint);
+		color: var(--col-ink);
+
+		&:hover,
+		&:focus-visible {
+			border-color: var(--col-forest);
+			background: var(--col-forest);
+			color: var(--col-paper);
+		}
+	}
+}
+
+/* Must stay in sync with the lg breakpoint in src/build/tokens.config.js. */
+@media (min-width: 992px) {
+	.cb-router .cb-router__groups {
+		grid-template-columns: 1.2fr 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-router .cb-router__need,
+	.cb-router .cb-router__arrow {
+		transition: none;
+	}
+}

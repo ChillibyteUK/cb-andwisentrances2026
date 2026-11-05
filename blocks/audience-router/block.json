@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/audience-router",
+	"title": "Audience Router",
+	"description": "Home page \"choose your need or sector\" section: a column of I need... tiles beside a cloud of sector chips (listed automatically from the Sectors post type, or written by hand).",
+	"category": "cb-andwisentrances2026",
+	"icon": "randomize",
+	"attributes": {
+		"heading": { "type": "string", "default": "How can we help?" },
+		"intro": { "type": "string", "default": "" },
+		"needsHeading": { "type": "string", "default": "I need..." },
+		"needs": { "type": "array", "default": [] },
+		"sectorsHeading": { "type": "string", "default": "I'm looking after..." },
+		"sectorsSource": { "type": "string", "default": "auto" },
+		"sectors": { "type": "array", "default": [] },
+		"sectorsAllText": { "type": "string", "default": "All sectors" },
+		"sectorsAllUrl": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "sage-tint" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

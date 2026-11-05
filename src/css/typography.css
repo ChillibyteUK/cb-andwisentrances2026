@@ -1,0 +1,337 @@
+/*
+ * Fonts, headings and the shared prose/section-head classes every block
+ * leans on. Poppins is self-hosted in /fonts (preloaded automatically by
+ * inc/head-tags.php — no registration step).
+ */
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/poppins-400-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../fonts/poppins-500-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 600;
+	src: url("../fonts/poppins-600-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/poppins-700-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 800;
+	src: url("../fonts/poppins-800-latin.woff2") format("woff2");
+}
+
+body {
+	text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--col-forest);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-heading);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--fs-h1);
+	line-height: 1.08;
+}
+
+h2 {
+	line-height: 1.15;
+}
+
+h3 {
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+}
+
+h4,
+h5,
+h6 {
+	letter-spacing: 0;
+}
+
+/* Single-paragraph lede — also what the "Lede" RichText format applies. */
+.text-body-l-medium,
+.lede {
+	font-size: var(--fs-lede);
+	font-weight: var(--fw-500);
+	line-height: 1.5;
+}
+
+.small,
+.text-small {
+	font-size: var(--fs-small);
+}
+
+.eyebrow {
+	display: block;
+	margin: 0 0 var(--space-3);
+	color: var(--col-emerald);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-caps);
+	text-transform: uppercase;
+}
+
+/*
+ * Shared block pieces. Every section block opens with a .cb-section-head
+ * (heading + optional intro, centred by default) and uses .cb-prose for its
+ * body copy so colour, measure and spacing are consistent site-wide.
+ */
+.cb-section-head {
+	max-width: 46rem;
+	margin: 0 auto var(--space-5);
+	text-align: center;
+
+	& h2 {
+		margin: 0 0 var(--space-3);
+	}
+
+	& p {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+
+	&.cb-section-head--start {
+		margin-inline: 0;
+		text-align: left;
+	}
+}
+
+.cb-prose {
+	color: var(--col-ink-soft);
+
+	& > :first-child {
+		margin-top: 0;
+	}
+
+	& > :last-child {
+		margin-bottom: 0;
+	}
+
+	& a {
+		color: var(--col-forest);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--col-emerald);
+		}
+	}
+
+	& h2,
+	& h3,
+	& h4 {
+		margin-top: 1.5em;
+	}
+}
+
+/* Tick list — used by image-text and hero bullets. */
+.cb-check-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	& li {
+		display: flex;
+		gap: 0.875rem;
+		color: var(--col-ink-soft);
+		line-height: 1.55;
+	}
+}
+
+.cb-check {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 1.375rem;
+	height: 1.375rem;
+	margin-top: 0.2em;
+	border-radius: 50%;
+	background: var(--col-forest);
+	color: var(--col-mint);
+
+	& svg {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+}
+
+/* Filter chips — case studies, news, FAQs, downloads all share this. */
+.cb-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin: 0 0 var(--space-4);
+	padding: 0;
+	list-style: none;
+}
+
+.cb-chip {
+	padding: 0.4rem 1rem;
+	border: 1px solid rgb(16 66 31 / 0.2);
+	border-radius: var(--radius-pill);
+	background: transparent;
+	color: var(--col-forest);
+	font-family: inherit;
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+	line-height: 1.4;
+	cursor: pointer;
+	transition:
+		background-color 200ms ease,
+		color 200ms ease,
+		border-color 200ms ease;
+
+	&:hover,
+	&:focus-visible {
+		border-color: var(--col-emerald);
+	}
+
+	&.is-active,
+	&[aria-pressed="true"] {
+		border-color: var(--col-mint);
+		background: var(--col-mint);
+		color: var(--col-ink);
+	}
+}
+
+/* Small pill tag, e.g. the sector/product chips on a case study card. */
+.cb-tag {
+	display: inline-block;
+	padding: 0.2rem 0.65rem;
+	border-radius: var(--radius-pill);
+	background: var(--col-sage-tint);
+	color: var(--col-forest);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: 0.04em;
+	line-height: 1.5;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+/* Full-bleed section backgrounds — set on the <section>, never a child. */
+.bg-forest {
+	background: var(--col-forest);
+	color: var(--col-paper);
+
+	& h1,
+	& h2,
+	& h3,
+	& h4 {
+		color: var(--col-paper);
+	}
+
+	& .cb-section-head p,
+	& .cb-prose {
+		color: rgb(255 255 255 / 0.85);
+	}
+
+	& .cb-prose a {
+		color: var(--col-mint);
+	}
+}
+
+.bg-sage {
+	background: var(--col-sage);
+	color: var(--col-ink);
+}
+
+.bg-sage-tint {
+	background: var(--col-sage-tint);
+}
+
+.bg-paper {
+	background: var(--col-paper);
+}
+
+/* Breadcrumbs */
+.cb-breadcrumbs {
+	font-size: var(--fs-caption);
+
+	& .cb-breadcrumbs__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	& .cb-breadcrumbs__item + .cb-breadcrumbs__item::before {
+		content: "/";
+		margin-right: 0.5rem;
+		opacity: 0.5;
+	}
+
+	& a {
+		color: inherit;
+		opacity: 0.8;
+
+		&:hover,
+		&:focus-visible {
+			opacity: 1;
+			text-decoration: underline;
+		}
+	}
+
+	& [aria-current="page"] {
+		font-weight: var(--fw-600);
+	}
+}
+
+/* Gutenberg core blocks rendered inside page content */
+.wp-block-quote {
+	margin-block: var(--space-4);
+	padding-left: var(--space-4);
+	border-left: 4px solid var(--col-mint);
+	font-size: var(--fs-body-lg);
+
+	& cite {
+		display: block;
+		margin-top: var(--space-2);
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+	}
+}
+
+.wp-block-image img {
+	border-radius: var(--radius-md);
+}

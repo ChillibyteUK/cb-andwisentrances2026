@@ -6,6 +6,84 @@
       "defaultPalette": false,
       "palette": [
         {
+          "name": "forest",
+          "slug": "forest",
+          "color": "#1c4220",
+          "origin": "theme"
+        },
+        {
+          "name": "forest-deep",
+          "slug": "forest-deep",
+          "color": "#132d17",
+          "origin": "theme"
+        },
+        {
+          "name": "sage",
+          "slug": "sage",
+          "color": "#addfb3",
+          "origin": "theme"
+        },
+        {
+          "name": "sage-tint",
+          "slug": "sage-tint",
+          "color": "#eef7ef",
+          "origin": "theme"
+        },
+        {
+          "name": "emerald",
+          "slug": "emerald",
+          "color": "#00af66",
+          "origin": "theme"
+        },
+        {
+          "name": "mint",
+          "slug": "mint",
+          "color": "#00ff99",
+          "origin": "theme"
+        },
+        {
+          "name": "lime",
+          "slug": "lime",
+          "color": "#dbe442",
+          "origin": "theme"
+        },
+        {
+          "name": "marine",
+          "slug": "marine",
+          "color": "#8ce2d0",
+          "origin": "theme"
+        },
+        {
+          "name": "ink",
+          "slug": "ink",
+          "color": "#132018",
+          "origin": "theme"
+        },
+        {
+          "name": "ink-soft",
+          "slug": "ink-soft",
+          "color": "#4b5b52",
+          "origin": "theme"
+        },
+        {
+          "name": "muted",
+          "slug": "muted",
+          "color": "#8a978f",
+          "origin": "theme"
+        },
+        {
+          "name": "line",
+          "slug": "line",
+          "color": "#d7e2d9",
+          "origin": "theme"
+        },
+        {
+          "name": "paper",
+          "slug": "paper",
+          "color": "#ffffff",
+          "origin": "theme"
+        },
+        {
           "name": "white",
           "slug": "white",
           "color": "#ffffff",
@@ -36,9 +114,9 @@
           "origin": "theme"
         },
         {
-          "name": "blue-700",
-          "slug": "blue-700",
-          "color": "#1d4ed8",
+          "name": "error",
+          "slug": "error",
+          "color": "#b3261e",
           "origin": "theme"
         }
       ]
@@ -48,22 +126,27 @@
         {
           "name": "base",
           "slug": "base",
-          "size": "1rem"
+          "size": "1.0625rem"
+        },
+        {
+          "name": "hero",
+          "slug": "hero",
+          "size": "clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem)"
         },
         {
           "name": "h1",
           "slug": "h1",
-          "size": "clamp(2rem, 1.6rem + 2vw, 3rem)"
+          "size": "clamp(2rem, 1.4rem + 2.4vw, 3rem)"
         },
         {
           "name": "h2",
           "slug": "h2",
-          "size": "clamp(1.6rem, 1.35rem + 1.25vw, 2.25rem)"
+          "size": "clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem)"
         },
         {
           "name": "h3",
           "slug": "h3",
-          "size": "clamp(1.3rem, 1.15rem + 0.75vw, 1.75rem)"
+          "size": "clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem)"
         },
         {
           "name": "h4",
@@ -73,7 +156,7 @@
         {
           "name": "h5",
           "slug": "h5",
-          "size": "1.1rem"
+          "size": "1.125rem"
         },
         {
           "name": "h6",
@@ -81,9 +164,44 @@
           "size": "1rem"
         },
         {
+          "name": "lede",
+          "slug": "lede",
+          "size": "1.25rem"
+        },
+        {
+          "name": "body-lg",
+          "slug": "body-lg",
+          "size": "1.125rem"
+        },
+        {
+          "name": "body",
+          "slug": "body",
+          "size": "1.0625rem"
+        },
+        {
+          "name": "body-sm",
+          "slug": "body-sm",
+          "size": "0.9375rem"
+        },
+        {
           "name": "small",
           "slug": "small",
           "size": "0.875rem"
+        },
+        {
+          "name": "caption",
+          "slug": "caption",
+          "size": "0.8125rem"
+        },
+        {
+          "name": "micro",
+          "slug": "micro",
+          "size": "0.75rem"
+        },
+        {
+          "name": "stat",
+          "slug": "stat",
+          "size": "clamp(2.25rem, 1.5rem + 2.5vw, 3.25rem)"
         }
       ]
     }

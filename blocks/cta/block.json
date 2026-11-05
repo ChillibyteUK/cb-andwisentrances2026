@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/cta",
+	"title": "CTA Band",
+	"description": "A call-to-action band: heading, short line and one or two pill buttons. Buttons default to the site-wide Get a Quote / Book a Survey links.",
+	"category": "cb-andwisentrances2026",
+	"icon": "megaphone",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"body": { "type": "string", "default": "" },
+		"primaryText": { "type": "string", "default": "" },
+		"primaryUrl": { "type": "string", "default": "" },
+		"secondaryText": { "type": "string", "default": "" },
+		"secondaryUrl": { "type": "string", "default": "" },
+		"useSiteCtas": { "type": "boolean", "default": true },
+		"background": { "type": "string", "default": "forest" },
+		"layout": { "type": "string", "default": "split" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

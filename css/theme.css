@@ -5,44 +5,77 @@
  * an @media condition, so breakpoints live in src/build/tokens.config.js instead,
  * and generate-utilities.js is what turns them into actual responsive CSS. Keep
  * that file as the only place breakpoint pixel values are written down.
+ *
+ * Palette is the andwis group brand as used on andwis lifts (cb-andwislifts2026)
+ * — forest, sage, emerald, mint — so the entrances site reads as a sibling.
+ * generate-theme-json.js lists every literal --col-* below in the editor
+ * palette; the var() aliases underneath are deliberately not listed twice.
  */
 
 :root {
-  /* Colour palette — rename/replace per project, keep the slug shape */
+  /* Brand palette */
+  --col-forest: #1c4220;
+  --col-forest-deep: #132d17;
+  --col-sage: #addfb3;
+  --col-sage-tint: #eef7ef;
+  --col-emerald: #00af66;
+  --col-mint: #00ff99;
+  --col-lime: #dbe442;
+  --col-marine: #8ce2d0;
+  --col-ink: #132018;
+  --col-ink-soft: #4b5b52;
+  --col-muted: #8a978f;
+  --col-line: #d7e2d9;
+  --col-paper: #ffffff;
   --col-white: #ffffff;
   --col-black: #000000;
   --col-grey-100: #f5f5f5;
   --col-grey-300: #d9d9d9;
   --col-grey-700: #4a4a4a;
-  --col-blue-700: #1d4ed8;
+  --col-error: #b3261e;
 
-  --col-primary: var(--col-blue-700);
-  --col-body: var(--col-black);
-  --col-body-bg: var(--col-white);
+  --col-primary: var(--col-forest);
+  --col-accent: var(--col-mint);
+  --col-body: var(--col-ink);
+  --col-body-bg: var(--col-paper);
 
   /* Type scale */
-  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --fs-base: 1rem;
-  --fs-h1: clamp(2rem, 1.6rem + 2vw, 3rem);
-  --fs-h2: clamp(1.6rem, 1.35rem + 1.25vw, 2.25rem);
-  --fs-h3: clamp(1.3rem, 1.15rem + 0.75vw, 1.75rem);
+  --font-family-base: "Poppins", Arial, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-base: 1.0625rem;
+  --fs-hero: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --fs-h1: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
   --fs-h4: 1.25rem;
-  --fs-h5: 1.1rem;
+  --fs-h5: 1.125rem;
   --fs-h6: 1rem;
+  --fs-lede: 1.25rem;
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1.0625rem;
+  --fs-body-sm: 0.9375rem;
   --fs-small: 0.875rem;
+  --fs-caption: 0.8125rem;
+  --fs-micro: 0.75rem;
+  --fs-stat: clamp(2.25rem, 1.5rem + 2.5vw, 3.25rem);
   --fw-400: 400;
+  --fw-500: 500;
   --fw-600: 600;
   --fw-700: 700;
+  --fw-800: 800;
 
   /* Semantic aliases — generate-utilities.js emits a matching .fw-* class
 	   for every custom property here, so these are free utility classes too
-	   (.fw-normal, .fw-semibold, .fw-bold), not just tokens for use in CSS. */
+	   (.fw-normal, .fw-medium, .fw-semibold, .fw-bold, .fw-heavy). */
   --fw-normal: var(--fw-400);
+  --fw-medium: var(--fw-500);
   --fw-semibold: var(--fw-600);
   --fw-bold: var(--fw-700);
+  --fw-heavy: var(--fw-800);
 
-  --line-height-base: 1.5;
-  --line-height-heading: 1.2;
+  --line-height-base: 1.65;
+  --line-height-heading: 1.15;
+  --ls-heading: -0.02em;
+  --ls-caps: 0.12em;
 
   /* Spacing scale — used by both hand-authored CSS and the utility generator */
   --space-0: 0;
@@ -53,25 +86,32 @@
   --space-5: 3rem;
   --space-6: 5rem;
 
+  /* Vertical rhythm for full-width block sections */
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+  --section-y-sm: clamp(2rem, 4vw, 3.5rem);
+
   /* Radii / shadows / motion */
-  --radius-sm: 0.25rem;
-  --radius-lg: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1.125rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 9999px;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08);
   --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.12);
-  --transition: 150ms ease-in-out;
+  --shadow-soft: 0 20px 50px -25px rgb(16 66 31 / 0.35);
+  --transition: 250ms ease-out;
 
   /* Layout */
-  --container-max-width: 1320px;
-  --container-padding: var(--space-3);
+  --container-max-width: 1240px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
   --grid-columns: 12;
-  --grid-gutter: var(--space-3);
+  --grid-gutter: var(--space-4);
 
   /* Minimum item width for .grid — override per instance with an
 	   inline style (e.g. style="--grid-min: 10rem") rather than adding
 	   a new class per layout. Smaller value = more columns fit. */
   --grid-min: 16rem;
 
-  --nav-height: 4rem;
+  --nav-height: 5.5rem;
 }
 
 /* Base element reset — the "reboot" equivalent. Deliberately small. */
@@ -238,6 +278,321 @@ ol {
 }
 
 /*
+ * Fonts, headings and the shared prose/section-head classes every block
+ * leans on. Poppins is self-hosted in /fonts (preloaded automatically by
+ * inc/head-tags.php — no registration step).
+ */
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/poppins-400-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../fonts/poppins-500-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 600;
+	src: url("../fonts/poppins-600-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/poppins-700-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 800;
+	src: url("../fonts/poppins-800-latin.woff2") format("woff2");
+}
+
+body {
+	text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--col-forest);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-heading);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--fs-h1);
+	line-height: 1.08;
+}
+
+h2 {
+	line-height: 1.15;
+}
+
+h3 {
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+}
+
+h4,
+h5,
+h6 {
+	letter-spacing: 0;
+}
+
+/* Single-paragraph lede — also what the "Lede" RichText format applies. */
+.text-body-l-medium,
+.lede {
+	font-size: var(--fs-lede);
+	font-weight: var(--fw-500);
+	line-height: 1.5;
+}
+
+.small,
+.text-small {
+	font-size: var(--fs-small);
+}
+
+.eyebrow {
+	display: block;
+	margin: 0 0 var(--space-3);
+	color: var(--col-emerald);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-caps);
+	text-transform: uppercase;
+}
+
+/*
+ * Shared block pieces. Every section block opens with a .cb-section-head
+ * (heading + optional intro, centred by default) and uses .cb-prose for its
+ * body copy so colour, measure and spacing are consistent site-wide.
+ */
+.cb-section-head {
+	max-width: 46rem;
+	margin: 0 auto var(--space-5);
+	text-align: center;
+}
+.cb-section-head h2 {
+		margin: 0 0 var(--space-3);
+	}
+.cb-section-head p {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+.cb-section-head.cb-section-head--start {
+		margin-inline: 0;
+		text-align: left;
+	}
+
+.cb-prose {
+	color: var(--col-ink-soft);
+}
+
+.cb-prose > :first-child {
+		margin-top: 0;
+	}
+
+.cb-prose > :last-child {
+		margin-bottom: 0;
+	}
+
+.cb-prose a {
+		color: var(--col-forest);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+:is(.cb-prose a):hover,:is(.cb-prose a):focus-visible {
+			color: var(--col-emerald);
+		}
+
+.cb-prose h2,.cb-prose h3,.cb-prose h4 {
+		margin-top: 1.5em;
+	}
+
+/* Tick list — used by image-text and hero bullets. */
+.cb-check-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.cb-check-list li {
+		display: flex;
+		gap: 0.875rem;
+		color: var(--col-ink-soft);
+		line-height: 1.55;
+	}
+
+.cb-check {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 1.375rem;
+	height: 1.375rem;
+	margin-top: 0.2em;
+	border-radius: 50%;
+	background: var(--col-forest);
+	color: var(--col-mint);
+}
+
+.cb-check svg {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
+/* Filter chips — case studies, news, FAQs, downloads all share this. */
+.cb-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin: 0 0 var(--space-4);
+	padding: 0;
+	list-style: none;
+}
+
+.cb-chip {
+	padding: 0.4rem 1rem;
+	border: 1px solid rgb(16 66 31 / 0.2);
+	border-radius: var(--radius-pill);
+	background: transparent;
+	color: var(--col-forest);
+	font-family: inherit;
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+	line-height: 1.4;
+	cursor: pointer;
+	transition:
+		background-color 200ms ease,
+		color 200ms ease,
+		border-color 200ms ease;
+}
+
+.cb-chip:hover,.cb-chip:focus-visible {
+		border-color: var(--col-emerald);
+	}
+
+.cb-chip.is-active,.cb-chip[aria-pressed="true"] {
+		border-color: var(--col-mint);
+		background: var(--col-mint);
+		color: var(--col-ink);
+	}
+
+/* Small pill tag, e.g. the sector/product chips on a case study card. */
+.cb-tag {
+	display: inline-block;
+	padding: 0.2rem 0.65rem;
+	border-radius: var(--radius-pill);
+	background: var(--col-sage-tint);
+	color: var(--col-forest);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: 0.04em;
+	line-height: 1.5;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+/* Full-bleed section backgrounds — set on the <section>, never a child. */
+.bg-forest {
+	background: var(--col-forest);
+	color: var(--col-paper);
+}
+.bg-forest h1,.bg-forest h2,.bg-forest h3,.bg-forest h4 {
+		color: var(--col-paper);
+	}
+.bg-forest .cb-section-head p,.bg-forest .cb-prose {
+		color: rgb(255 255 255 / 0.85);
+	}
+.bg-forest .cb-prose a {
+		color: var(--col-mint);
+	}
+
+.bg-sage {
+	background: var(--col-sage);
+	color: var(--col-ink);
+}
+
+.bg-sage-tint {
+	background: var(--col-sage-tint);
+}
+
+.bg-paper {
+	background: var(--col-paper);
+}
+
+/* Breadcrumbs */
+.cb-breadcrumbs {
+	font-size: var(--fs-caption);
+}
+.cb-breadcrumbs .cb-breadcrumbs__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+.cb-breadcrumbs .cb-breadcrumbs__item + .cb-breadcrumbs__item::before {
+		content: "/";
+		margin-right: 0.5rem;
+		opacity: 0.5;
+	}
+.cb-breadcrumbs a {
+		color: inherit;
+		opacity: 0.8;
+	}
+:is(.cb-breadcrumbs a):hover,:is(.cb-breadcrumbs a):focus-visible {
+			opacity: 1;
+			text-decoration: underline;
+		}
+.cb-breadcrumbs [aria-current="page"] {
+		font-weight: var(--fw-600);
+	}
+
+/* Gutenberg core blocks rendered inside page content */
+.wp-block-quote {
+	margin-block: var(--space-4);
+	padding-left: var(--space-4);
+	border-left: 4px solid var(--col-mint);
+	font-size: var(--fs-body-lg);
+}
+.wp-block-quote cite {
+		display: block;
+		margin-top: var(--space-2);
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+	}
+
+.wp-block-image img {
+	border-radius: var(--radius-md);
+}
+
+/*
  * Structural grid container rules. The actual `.col-*` / `.col-md-*` span
  * classes are generated (see src/build/generate-utilities.js) since they're
  * parameterised across breakpoints — this file just sets up the containers
@@ -356,54 +711,152 @@ ol {
 	visibility: hidden;
 }
 /*
+ * Header + primary nav.
+ *
+ * #masthead is fixed (fixed-header.css module) and starts transparent over a
+ * page that opens with the Hero block (body.has-hero — see header.php). Once
+ * the page scrolls, or on any page without a hero, it is a white bar
+ * (.is-solid, added by src/js/header.js). Over a hero the logo and links are
+ * paper; solid, they're ink.
+ *
  * Nav breakpoint: 992px, matching the "lg" breakpoint in
  * src/build/tokens.config.js. CSS custom properties can't be read inside an
- * @media condition, so this number is hand-kept in sync with that file —
- * if you change the "lg" breakpoint there, update it here too.
+ * @media condition, so this number is hand-kept in sync with that file.
  */
+
+#masthead {
+	--nav-ink: var(--col-ink);
+	--nav-logo: var(--col-forest);
+
+	background-color: var(--col-paper);
+	border-bottom: 1px solid transparent;
+	transition:
+		background-color 400ms ease,
+		border-color 400ms ease,
+		box-shadow 400ms ease;
+}
+
+body.has-hero #masthead:not(.is-solid):not(:focus-within) {
+	--nav-ink: var(--col-paper);
+	--nav-logo: var(--col-paper);
+
+	background-color: transparent;
+}
+
+#masthead.is-solid,
+#masthead:focus-within {
+	background-color: rgb(255 255 255 / 0.94);
+	backdrop-filter: saturate(160%) blur(10px);
+	border-bottom-color: rgb(16 66 31 / 0.08);
+}
+
+/* Over a hero the page starts under the header, so main needs no offset. */
+body.has-hero main {
+	padding-top: 0;
+}
 
 .navbar {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-block: var(--space-2);
+	gap: var(--space-4);
+	padding-block: 0;
 }
 
 .navbar-brand {
-	font-weight: var(--fw-700);
+	display: block;
+	flex: 0 0 auto;
+	color: var(--nav-logo);
+	line-height: 0;
 	text-decoration: none;
-	color: var(--col-body);
+}
+
+.navbar-brand svg,.navbar-brand img {
+		display: block;
+		width: clamp(10rem, 16vw, 14rem);
+		height: auto;
+	}
+
+.navbar-brand .logo-andwis {
+		fill: var(--nav-logo);
+		transition: fill 400ms ease;
+	}
+
+.navbar-brand .logo-dot {
+		fill: var(--col-emerald);
+	}
+
+.navbar-brand .logo-word {
+		fill: var(--nav-logo);
+		font-family: var(--font-family-base);
+		font-weight: var(--fw-700);
+		transition: fill 400ms ease;
+	}
+
+.navbar-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-left: auto;
+}
+
+/* .navbar-cta is also a .btn (display: inline-flex, loaded later) — the
+   extra .navbar ancestor is what lets this hide it below lg. */
+.navbar .navbar-cta {
+	display: none;
+	min-width: 0;
+	padding: 0.6rem 1.25rem;
+	white-space: nowrap;
 }
 
 .navbar-toggler {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--space-1);
-	padding: var(--space-1) var(--space-2);
-	border: 1px solid var(--col-grey-300);
-	border-radius: var(--radius-sm);
-	background: none;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--col-emerald);
+	color: var(--col-paper);
 	cursor: pointer;
 }
+
+.navbar-toggler svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+.navbar-toggler .icon-close {
+		display: none;
+	}
+
+.navbar-toggler[aria-expanded="true"] .icon-open {
+		display: none;
+	}
+
+.navbar-toggler[aria-expanded="true"] .icon-close {
+		display: block;
+	}
 
 .navbar-collapse {
 	display: none;
 }
 
-/* Overlays the page rather than pushing content down — positioned against
-   .navbar (position: relative above), not in normal document flow. */
+/* Mobile drawer overlays the page below the header bar. */
 .navbar-collapse.is-open {
 	display: block;
 	position: absolute;
 	top: 100%;
-	left: 0;
-	right: 0;
-	background-color: var(--col-body-bg);
-	border-top: 1px solid var(--col-grey-300);
+	left: calc(-1 * var(--container-padding));
+	right: calc(-1 * var(--container-padding));
+	padding: var(--space-3) var(--container-padding) var(--space-4);
+	background-color: var(--col-paper);
+	border-top: 1px solid var(--col-sage);
 	box-shadow: var(--shadow-lg);
-	padding: var(--space-3);
-	max-height: calc(100vh - 100%);
+	max-height: calc(100vh - var(--nav-height));
 	overflow-y: auto;
 	z-index: 20;
 }
@@ -411,7 +864,7 @@ ol {
 .navbar-nav {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-2);
+	gap: 0;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -419,45 +872,77 @@ ol {
 
 .nav-link {
 	display: block;
+	padding: 0.75rem 0;
+	color: var(--col-ink);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-500);
 	text-decoration: none;
-	color: var(--col-body);
-	padding: var(--space-1) 0;
+	transition: color 300ms ease;
 }
+
+.nav-link:hover,.nav-link:focus-visible {
+		color: var(--col-emerald);
+	}
 
 .nav-link.active,.nav-link[aria-current="page"] {
 		font-weight: var(--fw-600);
 	}
 
-/* Submenus — nested, always visible on mobile; shown via click as a
-   floating panel from "lg" up. */
+/* Mobile-only CTA row inside the drawer */
+.navbar-collapse .navbar-cta-mobile {
+	margin-top: var(--space-3);
+}
+
+/* Submenus — nested and expandable on mobile; floating panel from lg up. */
 .dropdown-menu {
-	list-style: none;
-	margin: var(--space-1) 0 var(--space-1) var(--space-3);
-	padding: 0;
 	display: none;
+	margin: 0 0 var(--space-2) var(--space-3);
+	padding: 0;
+	list-style: none;
+	border-left: 2px solid var(--col-sage);
 }
 
 .dropdown-menu.is-open {
 	display: block;
 }
 
+.dropdown-menu .nav-link {
+	padding: 0.5rem var(--space-3);
+}
+
 .dropdown-toggle {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--space-1);
+	gap: var(--space-2);
 	width: 100%;
 	border: 0;
 	background: none;
 	font-family: inherit;
-	font-size: inherit;
 	line-height: inherit;
 	text-align: inherit;
 	cursor: pointer;
 }
 
+.dropdown-toggle svg {
+		flex: 0 0 auto;
+		transition: transform 200ms ease;
+	}
+
+.dropdown-toggle[aria-expanded="true"] svg {
+		transform: rotate(180deg);
+	}
+
 @media (min-width: 992px) {
 	.navbar-toggler {
+		display: none;
+	}
+
+	.navbar .navbar-cta {
+		display: inline-flex;
+	}
+
+	.navbar-collapse .navbar-cta-mobile {
 		display: none;
 	}
 
@@ -476,29 +961,420 @@ ol {
 
 	.navbar-nav {
 		flex-direction: row;
+		align-items: center;
+		gap: clamp(0.85rem, 1.6vw, 1.75rem);
 		margin: 0;
 	}
+
+	/* Six top-level items plus the CTA only just fit between lg and xl, so
+	   the brand and links run slightly smaller there and relax at xl. */
+	.navbar-brand svg,
+	.navbar-brand img {
+		width: clamp(8.5rem, 12vw, 14rem);
+	}
+
+	.navbar-nav > .nav-item > .nav-link {
+		color: var(--nav-ink);
+		padding: 0.5rem 0;
+		font-size: var(--fs-micro);
+		white-space: nowrap;
+	}
+
+		:is(.navbar-nav > .nav-item > .nav-link):hover,:is(.navbar-nav > .nav-item > .nav-link):focus-visible {
+			color: var(--nav-ink);
+			-webkit-text-stroke: 0.4px currentColor;
+		}
 
 	.dropdown {
 		position: relative;
 	}
 
+	.dropdown-toggle {
+		width: auto;
+		justify-content: flex-start;
+		gap: 0.35rem;
+	}
+
 	.dropdown-menu {
 		position: absolute;
-		top: 100%;
-		left: 0;
-		min-width: 10rem;
+		top: calc(100% + 0.5rem);
+		left: -0.75rem;
+		min-width: 15rem;
 		margin: 0;
-		padding: var(--space-2);
-		background-color: var(--col-body-bg);
-		border: 1px solid var(--col-grey-300);
-		border-radius: var(--radius-sm);
-		box-shadow: var(--shadow-lg);
+		padding: var(--space-2) 0;
+		border: 1px solid rgb(16 66 31 / 0.1);
+		border-radius: var(--radius-md);
+		background-color: var(--col-paper);
+		box-shadow: var(--shadow-soft);
 		z-index: 10;
+	}
+
+	.dropdown-menu .nav-link {
+		padding: 0.5rem 1.25rem;
+		color: var(--col-forest);
+		white-space: nowrap;
+	}
+
+		:is(.dropdown-menu .nav-link):hover,:is(.dropdown-menu .nav-link):focus-visible {
+			background: var(--col-sage-tint);
+			color: var(--col-forest);
+		}
+
+	@media (min-width: 1200px) {
+		.navbar-nav > .nav-item > .nav-link {
+			font-size: var(--fs-small);
+		}
+
+		.navbar-brand svg,
+		.navbar-brand img {
+			width: clamp(10rem, 16vw, 14rem);
+		}
+	}
+
+	/* Menu item with the CSS class "button" (Appearance > Menus) renders as a pill. */
+	.navbar-nav > .menu-item.button > .nav-link {
+		padding: 0.55rem 1.2rem;
+		border-radius: var(--radius-pill);
+		background-color: var(--col-mint);
+		color: var(--col-ink);
+	}
+
+		:is(.navbar-nav > .menu-item.button > .nav-link):hover,:is(.navbar-nav > .menu-item.button > .nav-link):focus-visible {
+			background-color: var(--col-forest);
+			color: var(--col-paper);
+			-webkit-text-stroke: 0;
+		}
+}
+
+/*
+ * Fixed header with a static offset — no JS measuring, no layout shift.
+ * .navbar is exactly --nav-height tall (content vertically centred), so
+ * plain padding-top on main always clears it. Padding, not margin: a margin
+ * would collapse with the first child's own margin-top and swallow it. The
+ * +1px covers a 1px header border-bottom, if the project adds one.
+ *
+ * --nav-height (tokens.css) is the desktop height; --nav-height-mobile
+ * replaces it below the lg breakpoint (992px — hand-kept in sync with
+ * src/build/tokens.config.js, like nav.css). Every --nav-height consumer
+ * (anchor scroll margins, footnotes, TOC, layout.css) follows automatically.
+ */
+
+:root {
+	--nav-height-mobile: 64px;
+}
+
+@media (max-width: 991px) {
+	:root {
+		--nav-height: var(--nav-height-mobile);
 	}
 }
 
-/* Minimal, deliberately unopinionated form base — expected to be overridden per project. */
+#masthead {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 50;
+	background-color: var(--col-body-bg);
+	/* Backstop: a fixed left:0/right:0 bar sizes against the scrollable
+	   overflow width (not the viewport) once the page scrolls sideways for
+	   any reason, stretching the nav with it. Viewport units are immune. */
+	max-width: 100vw;
+}
+
+body.admin-bar #masthead {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	body.admin-bar #masthead {
+		top: 46px;
+	}
+}
+
+main {
+	padding-top: calc(var(--nav-height) + 1px);
+}
+
+.navbar {
+	height: var(--nav-height);
+	padding-block: 0;
+}
+
+/* module: fixed-header */
+
+/*
+ * Footer: forest band with the andwis curve rising above it, brand column,
+ * footer menu, social, legal links and the statutory disclosure.
+ *
+ * The curve pseudo-element is 120vw wide and overhangs each side, so the
+ * footer carries overflow-x: clip (clip, not hidden — the curve sits above
+ * the footer's top edge and needs the vertical axis left visible).
+ */
+
+#footer {
+	position: relative;
+	margin-top: clamp(4rem, 8vw, 7rem);
+	padding-block: var(--space-5) var(--space-3);
+	background: var(--col-forest);
+	color: var(--col-paper);
+	overflow-x: clip;
+
+	/* The curve box is exactly as tall as the drawn curve (mask stretched to
+	   fill it), so it always sits fully above the footer's top edge — a
+	   bottom-aligned "100% auto" mask inside a taller box ends up hidden
+	   behind the footer on narrow screens. */
+}
+
+#footer::before {
+		content: "";
+		position: absolute;
+		top: calc(-1 * var(--curve-h) + 1px);
+		left: 50%;
+		width: 120vw;
+		height: var(--curve-h);
+		--curve-h: clamp(32px, 6vw, 90px);
+		background-color: var(--col-forest);
+		transform: translateX(-50%);
+		mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 66' preserveAspectRatio='none' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
+		mask-position: center bottom;
+		mask-repeat: no-repeat;
+		mask-size: 100% 100%;
+	}
+
+#footer a {
+		color: var(--col-paper);
+		text-decoration: none;
+		transition: color 300ms ease;
+	}
+
+:is(#footer a):hover,:is(#footer a):focus-visible {
+			color: var(--col-mint);
+		}
+
+#footer h2,#footer h3 {
+		color: var(--col-paper);
+	}
+
+/* A page whose last block is already a CTA/form band sits straight on the
+   curve; the global CTA band (footer.php) removes the top margin itself. */
+.site-cta + #footer,
+.cb-cta + #footer,
+.cb-form + #footer {
+	margin-top: 0;
+}
+
+.site-footer__main {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	gap: var(--space-5) var(--space-4);
+	grid-template-columns: 1fr;
+}
+
+.site-footer__brand .site-footer__logo {
+		display: inline-block;
+		line-height: 0;
+	}
+
+.site-footer__brand svg,.site-footer__brand img {
+		width: clamp(10rem, 16vw, 13rem);
+		height: auto;
+	}
+
+.site-footer__brand .logo-andwis,.site-footer__brand .logo-word {
+		fill: var(--col-paper);
+	}
+
+.site-footer__brand .logo-dot {
+		fill: var(--col-mint);
+	}
+
+.site-footer__brand .logo-word {
+		font-family: var(--font-family-base);
+		font-weight: var(--fw-700);
+	}
+
+.site-footer__brand p {
+		margin: var(--space-3) 0 0;
+		max-width: 22rem;
+		color: rgb(255 255 255 / 0.8);
+		font-size: var(--fs-small);
+	}
+
+.site-footer__group {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: var(--space-3);
+	color: var(--col-sage);
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+}
+
+.site-footer__nav h3 {
+	margin: 0 0 var(--space-2);
+	font-size: var(--fs-micro);
+	font-weight: var(--fw-600);
+	letter-spacing: var(--ls-caps);
+	text-transform: uppercase;
+	color: var(--col-sage);
+}
+
+.site-footer__menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.site-footer__menu li {
+		padding: 0.2rem 0;
+	}
+
+.site-footer__menu a {
+		font-size: var(--fs-small);
+	}
+
+.site-footer__contact p {
+		margin: 0 0 var(--space-2);
+		font-size: var(--fs-small);
+		color: rgb(255 255 255 / 0.85);
+	}
+
+.site-footer__contact a {
+		font-weight: var(--fw-600);
+	}
+
+.site-footer__social {
+	display: flex;
+	gap: var(--space-2);
+	margin-top: var(--space-3);
+}
+
+.site-footer__social a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 1px solid rgb(255 255 255 / 0.25);
+		border-radius: 50%;
+		color: var(--col-paper);
+	}
+
+:is(.site-footer__social a):hover,:is(.site-footer__social a):focus-visible {
+			border-color: var(--col-mint);
+			color: var(--col-mint);
+		}
+
+.site-footer__social svg {
+		width: 1rem;
+		height: 1rem;
+		fill: currentColor;
+	}
+
+#colophon {
+	position: relative;
+	z-index: 1;
+	margin-top: var(--space-5);
+	padding-top: var(--space-3);
+	border-top: 1px solid rgb(255 255 255 / 0.12);
+	color: rgb(255 255 255 / 0.75);
+	font-size: var(--fs-caption);
+}
+
+#colophon .site-footer__legal-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: var(--space-2) var(--space-4);
+	}
+
+#colophon p {
+		margin: 0;
+	}
+
+.site-footer__legal-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.site-footer__legal-details {
+	margin-top: var(--space-3) !important;
+	max-width: 62rem;
+	color: rgb(255 255 255 / 0.55);
+	font-size: var(--fs-micro);
+	line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+	.site-footer__main {
+		grid-template-columns: 1.4fr 1fr 1fr;
+	}
+}
+
+@media (min-width: 992px) {
+	.site-footer__main {
+		grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+	}
+}
+
+/* ---------- Global CTA band (footer.php, from Site-Wide Settings) ---------- */
+
+.site-cta {
+	padding-block: var(--section-y);
+	background: var(--col-sage-tint);
+}
+
+.site-cta .site-cta__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4) var(--space-5);
+	}
+
+.site-cta .site-cta__copy {
+		flex: 1 1 24rem;
+		min-width: 0;
+	}
+
+.site-cta h2 {
+		margin: 0;
+	}
+
+.site-cta p {
+		margin: var(--space-2) 0 0;
+		max-width: 40rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+
+.site-cta .site-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+@media (max-width: 767px) {
+	.site-cta .site-cta__actions {
+		width: 100%;
+	}
+
+		:is(.site-cta .site-cta__actions) .btn {
+			flex: 1 1 auto;
+		}
+}
+
+/*
+ * Buttons and form controls. Pill buttons with the andwis gradient sweep
+ * (mint at rest, forest sliding in on hover) — the same treatment andwis.com
+ * and andwis lifts use, so the three sites read as one family.
+ */
 
 input,
 textarea,
@@ -511,20 +1387,220 @@ button {
 label {
 	display: block;
 	margin-bottom: var(--space-1);
+	color: var(--col-forest);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-600);
 }
 
-/* Excludes button/checkbox/radio/range/color/file/image input types —
-   they're still <input> elements but this block/border/padding treatment
-   is meant for text-like fields only. Excluding them from the selector
-   entirely (rather than applying the rule then reverting it for those
-   types) means this rule never touches them in the first place — robust
-   regardless of style load order, unlike an "apply then all:revert" pass
-   which can fight with e.g. ACF's own admin CSS for its radio/checkbox UI
-   if that CSS happens to load earlier in the same document. */
-/* Gravity Forms Consent field — checkbox + its acceptance label render as
-   siblings inside .ginput_container_consent (input, space, label), not
-   wrapped together, so this overrides the global block label above to keep
-   both on one line. */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),
+textarea,
+select {
+	display: block;
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 1px solid rgb(16 66 31 / 0.2);
+	border-radius: var(--radius-md);
+	background-color: var(--col-paper);
+	color: var(--col-ink);
+	font-size: var(--fs-body-sm);
+}
+
+:is(input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),textarea,select):focus-visible {
+		border-color: var(--col-emerald);
+		outline: 2px solid rgb(0 175 102 / 0.3);
+		outline-offset: 1px;
+	}
+
+textarea {
+	min-height: 9rem;
+	resize: vertical;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn,
+.gform_button,
+.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	min-width: 8rem;
+	padding: 0.9rem 1.75rem;
+	border: 2px solid transparent;
+	border-radius: var(--radius-pill);
+	background-color: var(--col-mint);
+	background-image: linear-gradient(90deg, var(--col-forest) 50%, transparent 75%, transparent 100%);
+	background-size: 400%;
+	background-position: 100%;
+	color: var(--col-ink);
+	font-family: inherit;
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		background-position 0.5s ease-in-out,
+		color 0.5s ease-in-out,
+		border-color 0.3s ease,
+		background-color 0.3s ease;
+}
+
+:is(.btn,.gform_button,.wp-block-button__link):hover,:is(.btn,.gform_button,.wp-block-button__link):focus-visible {
+		background-position: 0%;
+		color: var(--col-paper);
+		text-decoration: none;
+	}
+
+:is(.btn,.gform_button,.wp-block-button__link):focus-visible {
+		outline: 2px solid var(--col-emerald);
+		outline-offset: 2px;
+	}
+
+:is(.btn,.gform_button,.wp-block-button__link):active {
+		transform: scale(0.97);
+	}
+
+:is(.btn,.gform_button,.wp-block-button__link) svg {
+		width: 1em;
+		height: 1em;
+		flex: 0 0 auto;
+	}
+
+.btn[disabled],
+.btn:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+/* Ghost: outline only. --btn-ghost-ink lets a dark section flip it to paper. */
+.btn-ghost {
+	--btn-ghost-ink: var(--col-forest);
+	--btn-ghost-fill-hover: var(--col-forest);
+	--btn-ghost-ink-hover: var(--col-paper);
+
+	border-color: var(--btn-ghost-ink);
+	background: transparent;
+	color: var(--btn-ghost-ink);
+}
+.btn-ghost:hover,.btn-ghost:focus-visible {
+		border-color: var(--btn-ghost-fill-hover);
+		background: var(--btn-ghost-fill-hover);
+		color: var(--btn-ghost-ink-hover);
+	}
+
+.bg-forest .btn-ghost,
+.cb-hero .btn-ghost {
+	--btn-ghost-ink: var(--col-paper);
+	--btn-ghost-fill-hover: var(--col-paper);
+	--btn-ghost-ink-hover: var(--col-forest);
+}
+
+/* Outline on dark: mint border, mint fill sweeps in. Used in heroes. */
+.btn-outline {
+	border-color: var(--col-mint);
+	background-color: transparent;
+	background-image: linear-gradient(90deg, var(--col-mint) 50%, transparent 75%, transparent 100%);
+	color: var(--col-paper);
+}
+.btn-outline:hover,.btn-outline:focus-visible {
+		color: var(--col-ink);
+	}
+
+/* Text link with a trailing arrow — card "Learn more" links etc. */
+.btn-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--col-forest);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-600);
+	text-decoration: none;
+}
+.btn-link svg {
+		width: 0.9em;
+		height: 0.9em;
+		transition: transform var(--transition);
+	}
+.btn-link:hover,.btn-link:focus-visible {
+		color: var(--col-emerald);
+	}
+:is(.btn-link:hover,.btn-link:focus-visible) svg {
+			transform: translateX(3px);
+		}
+
+.btn-sm {
+	min-width: 0;
+	padding: 0.55rem 1.25rem;
+}
+
+.btn-lg {
+	padding: 1.1rem 2.25rem;
+	font-size: var(--fs-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn,
+	.btn-link svg {
+		transition: none;
+	}
+}
+
+/* ---------- Gravity Forms ---------- */
+
+/*
+ * Scoped to the theme's own form surfaces (the Form block, the vacancy apply
+ * panel, the contact page) rather than bare .gform_wrapper, so a form
+ * embedded elsewhere keeps GF defaults. GF's orbital theme colours its button
+ * through these custom properties at a specificity our .btn rules can't beat.
+ */
+.cb-form .gform_wrapper,
+.cb-vacancy .gform_wrapper {
+	--gf-ctrl-btn-bg-color-primary: var(--col-mint);
+	--gf-ctrl-btn-bg-color-hover-primary: var(--col-forest);
+	--gf-ctrl-btn-bg-color-focus-primary: var(--col-forest);
+	--gf-ctrl-btn-color-primary: var(--col-ink);
+	--gf-ctrl-btn-color-hover-primary: var(--col-paper);
+	--gf-ctrl-btn-color-focus-primary: var(--col-paper);
+	--gf-ctrl-btn-border-color-primary: transparent;
+	--gf-ctrl-btn-border-color-hover-primary: transparent;
+	--gf-ctrl-btn-border-color-focus-primary: transparent;
+	--gf-ctrl-btn-border-width-primary: 0;
+	--gf-ctrl-btn-radius: 9999px;
+	--gf-ctrl-radius: var(--radius-md);
+	--gf-ctrl-border-color: rgb(16 66 31 / 0.2);
+	--gf-ctrl-padding-x: 1rem;
+	--gf-label-color-primary: var(--col-forest);
+	--gf-color-primary: var(--col-forest);
+}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform_required_legend {
+		display: none;
+	}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gfield_label,:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform-field-label {
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-600);
+	}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gfield_consent_label a,:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform-field-label a {
+		color: var(--col-forest);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform_footer {
+		padding-block: var(--space-3) 0;
+	}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform_footer .gform_button {
+		font-weight: var(--fw-600);
+	}
+:is(.cb-form .gform_wrapper,.cb-vacancy .gform_wrapper) .gform_confirmation_message {
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		background: var(--col-sage-tint);
+		color: var(--col-forest);
+	}
+
 .ginput_container_consent {
 	display: flex;
 	align-items: center;
@@ -535,41 +1611,6 @@ label {
 	display: inline;
 	margin-bottom: 0;
 }
-
-input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),
-textarea,
-select {
-	display: block;
-	width: 100%;
-	padding: var(--space-2);
-	border: 1px solid var(--col-grey-300);
-	border-radius: var(--radius-sm);
-	background-color: var(--col-white);
-	color: var(--col-body);
-}
-
-:is(input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),textarea,select):focus-visible {
-		outline: 2px solid var(--col-primary);
-		outline-offset: 1px;
-	}
-
-.btn,
-.gform_button,
-.wp-block-button__link {
-	display: inline-block;
-	padding: var(--space-2) var(--space-3);
-	border: 1px solid var(--col-primary);
-	border-radius: var(--radius-sm);
-	background-color: var(--col-primary);
-	color: var(--col-white);
-	text-decoration: none;
-	cursor: pointer;
-}
-
-:is(.btn,.gform_button,.wp-block-button__link):focus-visible {
-		outline: 2px solid var(--col-primary);
-		outline-offset: 2px;
-	}
 
 /* Default Gutenberg quote (core/quote) — structural reset + citation dash.
    Type comes from typography.css where a project maps it, so the editor
@@ -588,6 +1629,30 @@ select {
 .wp-block-quote cite::before {
 	content: "\2014\00a0";
 }
+
+/* Optional table styling — not imported by default (see theme.css). Uncomment
+   the @import in theme.css if a project actually needs a styled table. */
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table th,.table td {
+		padding: var(--space-2);
+		border-bottom: 1px solid var(--col-grey-300);
+		text-align: left;
+	}
+
+.table thead th {
+		border-bottom-width: 2px;
+	}
+
+.table-responsive {
+	overflow-x: auto;
+}
+
+/* product spec tables */
 
 /* Footnotes ([Footnote] tags → numbered list, see inc/footnotes.php).
    Ported verbatim from cbp-footnotes' assets/cbp-footnotes.css so existing
@@ -687,11 +1752,15 @@ article h2[id] {
 .text-center { text-align: center; }
 .text-end { text-align: right; }
 .fw-400 { font-weight: var(--fw-400); }
+.fw-500 { font-weight: var(--fw-500); }
 .fw-600 { font-weight: var(--fw-600); }
 .fw-700 { font-weight: var(--fw-700); }
+.fw-800 { font-weight: var(--fw-800); }
 .fw-normal { font-weight: var(--fw-normal); }
+.fw-medium { font-weight: var(--fw-medium); }
 .fw-semibold { font-weight: var(--fw-semibold); }
 .fw-bold { font-weight: var(--fw-bold); }
+.fw-heavy { font-weight: var(--fw-heavy); }
 .w-25 { width: 25%; }
 .w-50 { width: 50%; }
 .w-75 { width: 75%; }
@@ -1634,10 +2703,888 @@ article h2[id] {
 }
 
 /* generated — see src/build/generate-utilities.js, run `npm run css-generate` */
-/* @import "tables.css"; -- uncomment if this project actually needs styled tables */
-/* @import "accordion.css"; -- uncomment if this project actually needs styled accordions */
+
+/*
+ * Shared components used by more than one block or template: the card
+ * family (service/product cards, post cards, case study cards), the
+ * "section" wrapper rhythm, and small media helpers. Block-specific CSS
+ * lives in src/blocks/{slug}.css.
+ */
+
+/* Every block section shares this vertical rhythm. */
+.cb-section {
+	padding-block: var(--section-y);
+}
+
+.cb-section--sm {
+	padding-block: var(--section-y-sm);
+}
+
+/* Two adjacent white sections would double up; tighten the second. */
+.cb-section:not([class*="bg-"]) + .cb-section:not([class*="bg-"]) {
+	padding-top: 0;
+}
+
+/* ---------- Tile card (forest) — product/service/sector listings ---------- */
+
+.cb-tile {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--space-3);
+	border-radius: var(--radius-md);
+	background: var(--col-forest);
+	color: var(--col-paper);
+	text-decoration: none;
+	overflow: hidden;
+	transition:
+		transform var(--transition),
+		box-shadow var(--transition);
+}
+
+.cb-tile:hover,.cb-tile:focus-within {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-soft);
+	}
+
+.cb-tile .cb-tile__media {
+		margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) var(--space-3);
+		aspect-ratio: 16 / 10;
+		background: var(--col-sage);
+		overflow: hidden;
+	}
+
+:is(.cb-tile .cb-tile__media) img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 500ms ease;
+		}
+
+.cb-tile:hover .cb-tile__media img {
+		transform: scale(1.04);
+	}
+
+.cb-tile .cb-tile__icon {
+		width: 2.75rem;
+		height: 2.75rem;
+		margin-bottom: var(--space-3);
+	}
+
+:is(.cb-tile .cb-tile__icon) img,:is(.cb-tile .cb-tile__icon) svg {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+.cb-tile h3 {
+		margin: 0 0 var(--space-2);
+		color: var(--col-mint);
+		font-size: var(--fs-h5);
+	}
+
+.cb-tile p {
+		margin: 0;
+		color: rgb(255 255 255 / 0.88);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+	}
+
+.cb-tile .cb-tile__link {
+		margin-top: auto;
+		padding-top: var(--space-3);
+		color: var(--col-mint);
+		font-size: var(--fs-caption);
+		font-weight: var(--fw-600);
+	}
+
+:is(.cb-tile .cb-tile__link)::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+
+/* Light variant: paper card with a hairline, forest text. */
+.cb-tile--light {
+	border: 1px solid rgb(16 66 31 / 0.12);
+	background: var(--col-paper);
+	color: var(--col-ink);
+}
+.cb-tile--light h3 {
+		color: var(--col-forest);
+	}
+.cb-tile--light p {
+		color: var(--col-ink-soft);
+	}
+.cb-tile--light .cb-tile__link {
+		color: var(--col-forest);
+	}
+
+/* Sage variant for routing tiles. */
+.cb-tile--sage {
+	background: var(--col-sage);
+	color: var(--col-ink);
+}
+.cb-tile--sage h3 {
+		color: var(--col-forest);
+	}
+.cb-tile--sage p {
+		color: var(--col-ink-soft);
+	}
+.cb-tile--sage .cb-tile__link {
+		color: var(--col-forest);
+	}
+
+/* ---------- Post / case study card (paper) ---------- */
+
+.cb-post-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border: 1px solid rgb(16 66 31 / 0.12);
+	border-radius: var(--radius-md);
+	background: var(--col-paper);
+	color: inherit;
+	overflow: hidden;
+	text-decoration: none;
+	transition: box-shadow 300ms ease;
+}
+
+.cb-post-card:hover,.cb-post-card:focus-within {
+		box-shadow: var(--shadow-soft);
+	}
+
+:is(.cb-post-card:hover,.cb-post-card:focus-within) .cb-post-card__cta {
+			background: var(--col-forest);
+			color: var(--col-paper);
+		}
+
+:is(.cb-post-card:hover,.cb-post-card:focus-within) .cb-post-card__media img {
+			transform: scale(1.04);
+		}
+
+.cb-post-card .cb-post-card__media {
+		aspect-ratio: 16 / 9;
+		background: var(--col-sage);
+		overflow: hidden;
+	}
+
+:is(.cb-post-card .cb-post-card__media) img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 500ms ease;
+		}
+
+.cb-post-card .cb-post-card__body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: var(--space-2);
+		padding: var(--space-4);
+	}
+
+.cb-post-card .cb-post-card__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.75rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+	}
+
+.cb-post-card h3 {
+		margin: 0;
+		font-size: var(--fs-h5);
+	}
+
+.cb-post-card h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+:is(.cb-post-card h3 a)::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+
+.cb-post-card p {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+.cb-post-card .cb-post-card__cta {
+		align-self: flex-start;
+		margin-top: auto;
+		padding: 0.6rem 1.4rem;
+		border-radius: var(--radius-pill);
+		background: var(--col-mint);
+		color: var(--col-ink);
+		font-size: var(--fs-caption);
+		font-weight: var(--fw-600);
+		line-height: 1.4;
+		transition:
+			background-color 300ms ease,
+			color 300ms ease;
+	}
+
+/* Card grid: 3-up on desktop, 2 on tablet, 1 on phones. */
+.cb-card-grid {
+	display: grid;
+	gap: var(--space-4);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.cb-card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-card-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.cb-card-grid--4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.cb-card-grid--2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* ---------- "View all" row under an index ---------- */
+.cb-index__more {
+	margin: var(--space-5) 0 0;
+	text-align: center;
+}
+
+/* ---------- Empty state ---------- */
+.cb-empty {
+	padding: var(--space-4);
+	border: 1px dashed rgb(16 66 31 / 0.3);
+	border-radius: var(--radius-md);
+	color: var(--col-ink-soft);
+	text-align: center;
+}
+
+/* ---------- Page hero fallback (templates without a Hero block) ---------- */
+.cb-page-head {
+	padding-block: calc(var(--nav-height) + var(--space-5)) var(--space-5);
+	background: var(--col-forest);
+	color: var(--col-paper);
+}
+.cb-page-head h1 {
+		margin: var(--space-3) 0 0;
+		color: var(--col-paper);
+	}
+.cb-page-head p {
+		max-width: 40rem;
+		margin: var(--space-3) 0 0;
+		color: rgb(255 255 255 / 0.85);
+		font-size: var(--fs-body-lg);
+	}
+
+/* ---------- Scroll-in animation hook ---------- */
+.cb-fade {
+	opacity: 0;
+	transform: translate3d(0, 20px, 0);
+	transition:
+		opacity 600ms ease,
+		transform 600ms ease;
+}
+.cb-fade.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-fade {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* ---------- Responsive embed (maps, video) ---------- */
+.cb-embed {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	background: var(--col-sage-tint);
+}
+.cb-embed iframe,.cb-embed video {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+/* shared cards / post cards / media helpers */
 /* Generated by src/build/generate-utilities.js — do not hand-edit.
    Concatenation of src/blocks/*.css, alphabetical by filename. */
+
+/* --- src/blocks/audience-router.css --- */
+/* Audience Router - blocks/audience-router */
+.cb-router .cb-router__groups {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-5);
+	}
+.cb-router .cb-router__group h3 {
+		margin: 0 0 var(--space-3);
+		font-size: var(--fs-h5);
+	}
+.cb-router .cb-router__needs {
+		display: grid;
+		gap: var(--space-3);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+.cb-router .cb-router__need {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		padding: var(--space-3) var(--space-4);
+		border: 1px solid rgb(16 66 31 / 0.12);
+		border-radius: var(--radius-md);
+		background: var(--col-paper);
+		color: var(--col-ink);
+		text-decoration: none;
+		transition:
+			transform var(--transition),
+			box-shadow var(--transition);
+	}
+:is(.cb-router .cb-router__need):hover,:is(.cb-router .cb-router__need):focus-visible {
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-soft);
+		}
+:is(:is(.cb-router .cb-router__need):hover,:is(.cb-router .cb-router__need):focus-visible) .cb-router__arrow {
+				transform: translateX(4px);
+			}
+.cb-router .cb-router__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		background: var(--col-sage);
+		color: var(--col-forest);
+	}
+:is(.cb-router .cb-router__icon) svg {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+.cb-router .cb-router__need-body {
+		min-width: 0;
+	}
+:is(.cb-router .cb-router__need-body) strong {
+			display: block;
+			color: var(--col-forest);
+			font-size: var(--fs-body-lg);
+			font-weight: var(--fw-600);
+			line-height: 1.3;
+		}
+:is(.cb-router .cb-router__need-body) span {
+			display: block;
+			color: var(--col-ink-soft);
+			font-size: var(--fs-small);
+			line-height: 1.5;
+		}
+.cb-router .cb-router__arrow {
+		flex: 0 0 auto;
+		width: 1.1rem;
+		height: 1.1rem;
+		margin-left: auto;
+		color: var(--col-emerald);
+		transition: transform var(--transition);
+	}
+.cb-router .cb-router__sectors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+.cb-router .cb-chip {
+		display: inline-block;
+		text-decoration: none;
+	}
+.cb-router .cb-chip--all {
+		border-color: var(--col-mint);
+		background: var(--col-mint);
+		color: var(--col-ink);
+	}
+:is(.cb-router .cb-chip--all):hover,:is(.cb-router .cb-chip--all):focus-visible {
+			border-color: var(--col-forest);
+			background: var(--col-forest);
+			color: var(--col-paper);
+		}
+
+/* Must stay in sync with the lg breakpoint in src/build/tokens.config.js. */
+@media (min-width: 992px) {
+	.cb-router .cb-router__groups {
+		grid-template-columns: 1.2fr 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-router .cb-router__need,
+	.cb-router .cb-router__arrow {
+		transition: none;
+	}
+}
+
+/* --- src/blocks/cards.css --- */
+/* Cards - blocks/cards. The tiles and grid come from components.css
+   (.cb-tile, .cb-card-grid); only section-level tweaks live here. */
+/* The head's intro and ghost button need lifting on a dark band. */
+.cb-cards.bg-forest .cb-section-head h2 {
+			color: var(--col-paper);
+		}
+.cb-cards.bg-forest .cb-section-head p {
+			color: var(--col-sage);
+		}
+/* Light tiles on a sage band: a hairline alone vanishes, lift them. */
+.cb-cards.bg-sage .cb-tile--light {
+		border-color: transparent;
+		box-shadow: var(--shadow-sm);
+	}
+.cb-cards .cb-fade {
+		height: 100%;
+	}
+
+/* --- src/blocks/cta.css --- */
+/* CTA Band — blocks/cta */
+.cb-cta .cb-cta__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4) var(--space-5);
+	}
+.cb-cta .cb-cta__copy {
+		flex: 1 1 24rem;
+		min-width: 0;
+	}
+.cb-cta h2 {
+		margin: 0;
+	}
+.cb-cta .cb-cta__body {
+		margin-top: var(--space-2);
+		max-width: 40rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+:is(.cb-cta .cb-cta__body) p {
+			margin: 0;
+		}
+.cb-cta .cb-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+.cb-cta.bg-forest .cb-cta__body {
+		color: var(--col-sage);
+	}
+.cb-cta.cb-cta--centred {
+		text-align: center;
+	}
+.cb-cta.cb-cta--centred .cb-cta__inner {
+			flex-direction: column;
+			justify-content: center;
+		}
+.cb-cta.cb-cta--centred .cb-cta__copy {
+			flex: 0 1 auto;
+		}
+.cb-cta.cb-cta--centred .cb-cta__body {
+			margin-inline: auto;
+		}
+.cb-cta.cb-cta--centred .cb-cta__actions {
+			justify-content: center;
+		}
+
+@media (max-width: 767px) {
+	.cb-cta .cb-cta__actions {
+		width: 100%;
+	}
+
+		:is(.cb-cta .cb-cta__actions) .btn {
+			flex: 1 1 auto;
+		}
+}
+
+/* --- src/blocks/hero.css --- */
+/*
+ * Hero - blocks/hero (also hand-written in single-case_study.php).
+ *
+ * Forest section with an optional cover image under a dark scrim, left-aligned
+ * copy, and the house 120vw curved white "wave" along the bottom edge
+ * (.cb-hero--curve). Without an image it is a solid forest band.
+ */
+.cb-hero {
+	/* Curve height, shared with the compact padding so copy never sits under it. */
+	--hero-curve-h: clamp(65px, 10vw, 140px);
+
+	position: relative;
+	overflow: hidden;
+	background: var(--col-forest);
+	color: var(--col-paper);
+}
+.cb-hero .cb-hero__bg {
+		position: absolute;
+		inset: -60px 0;
+		background-position: center 35%;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+.cb-hero .cb-hero__scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgb(9 26 16 / 0.72) 0%, rgb(10 30 19 / 0.5) 40%, rgb(11 35 21 / 0.88) 100%);
+	}
+.cb-hero .cb-hero__inner {
+		position: relative;
+		z-index: 2;
+		padding-top: calc(var(--nav-height) + clamp(4rem, 10vw, 9rem));
+		padding-bottom: clamp(6rem, 14vw, 12rem);
+	}
+.cb-hero.cb-hero--compact .cb-hero__inner {
+		padding-top: calc(var(--nav-height) + clamp(2rem, 5vw, 4.5rem));
+		padding-bottom: calc(var(--hero-curve-h) + clamp(2rem, 4vw, 3.5rem));
+	}
+.cb-hero .cb-breadcrumbs {
+		margin-bottom: var(--space-4);
+		color: var(--col-paper);
+	}
+.cb-hero .eyebrow {
+		color: var(--col-mint);
+	}
+.cb-hero h1 {
+		max-width: 18ch;
+		margin: 0;
+		color: var(--col-paper);
+		font-size: var(--fs-hero);
+	}
+.cb-hero .cb-hero__highlight {
+		color: var(--col-mint);
+	}
+.cb-hero .cb-hero__subline {
+		margin: var(--space-3) 0 0;
+		color: var(--col-mint);
+		font-size: var(--fs-lede);
+		font-weight: var(--fw-500);
+		line-height: 1.4;
+	}
+.cb-hero .cb-hero__intro {
+		max-width: 36rem;
+		margin: var(--space-3) 0 0;
+		color: rgb(255 255 255 / 0.88);
+		font-size: var(--fs-body-lg);
+	}
+.cb-hero .cb-hero__bullets {
+		margin-top: var(--space-4);
+	}
+:is(.cb-hero .cb-hero__bullets) li {
+			color: var(--col-paper);
+		}
+:is(.cb-hero .cb-hero__bullets) .cb-check {
+			background: var(--col-mint);
+			color: var(--col-forest);
+		}
+.cb-hero .cb-hero__chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: var(--space-4) 0 0;
+		padding: 0;
+		list-style: none;
+	}
+:is(.cb-hero .cb-hero__chips) .cb-tag {
+			text-decoration: none;
+			transition: background-color var(--transition);
+		}
+:is(:is(.cb-hero .cb-hero__chips) .cb-tag):hover,:is(:is(.cb-hero .cb-hero__chips) .cb-tag):focus-visible {
+				background: var(--col-mint);
+			}
+.cb-hero .cb-hero__cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-4);
+	}
+
+/* The house curve: a 120vw paper wave masked along the bottom edge. */
+.cb-hero--curve::after {
+	content: "";
+	position: absolute;
+	bottom: -1px;
+	left: 50%;
+	z-index: 2;
+	width: 120vw;
+	height: var(--hero-curve-h);
+	background-color: var(--col-paper);
+	transform: translateX(-50%);
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
+	-webkit-mask-position: center bottom;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: 100% auto;
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
+	mask-position: center bottom;
+	mask-repeat: no-repeat;
+	mask-size: 100% auto;
+}
+
+@media (max-width: 767px) {
+	.cb-hero .cb-hero__cta .btn {
+		flex: 1 1 auto;
+	}
+}
+
+/* --- src/blocks/image-text.css --- */
+/* Image & Text (blocks/image-text) */
+.cb-image-text {
+	/* The rotating dot ring is a square that sweeps wider than its column. */
+	overflow-x: clip;
+}
+.cb-image-text .cb-image-text__copy {
+		min-width: 0;
+	}
+.cb-image-text h2 {
+		margin: 0 0 var(--space-3);
+	}
+.cb-image-text .cb-prose {
+		margin-bottom: var(--space-4);
+	}
+.cb-image-text .cb-image-text__list-label {
+		margin-bottom: var(--space-2);
+	}
+.cb-image-text .cb-check-list {
+		margin-bottom: var(--space-4);
+	}
+.cb-image-text .cb-image-text__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-4);
+	}
+/* Stack: copy first, media second on small screens whatever the DOM order. */
+.cb-image-text .cb-image-text__media-col {
+		order: 2;
+		min-width: 0;
+	}
+/* ---------- Circle with the rotating dot ring ---------- */
+.cb-image-text .cb-image-text__media--circle {
+		position: relative;
+		aspect-ratio: 1 / 1;
+		max-width: 30rem;
+		margin-inline: auto;
+	}
+:is(.cb-image-text .cb-image-text__media--circle) .cb-image-text__dots {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			color: var(--col-emerald);
+			transform-origin: 50% 50%;
+			animation: cb-dots-spin 40s linear infinite;
+		}
+:is(.cb-image-text .cb-image-text__media--circle) .cb-image-text__fig,:is(.cb-image-text .cb-image-text__media--circle) .cb-image-text__placeholder {
+			position: absolute;
+			inset: 8%;
+			margin: 0;
+			border-radius: 50%;
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+		}
+:is(.cb-image-text .cb-image-text__media--circle) img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+/* ---------- Plain rounded photo ---------- */
+:is(.cb-image-text .cb-image-text__media--photo) .cb-image-text__fig,:is(.cb-image-text .cb-image-text__media--photo) .cb-image-text__placeholder {
+			margin: 0;
+			border-radius: var(--radius-md);
+			overflow: hidden;
+			box-shadow: var(--shadow-soft);
+		}
+:is(.cb-image-text .cb-image-text__media--photo) img {
+			display: block;
+			width: 100%;
+			aspect-ratio: 4 / 3;
+			object-fit: cover;
+		}
+:is(.cb-image-text .cb-image-text__media--photo) .cb-image-text__placeholder {
+			aspect-ratio: 4 / 3;
+		}
+.cb-image-text .cb-image-text__placeholder {
+		background: var(--col-sage);
+	}
+/* ---------- Forest background ---------- */
+.cb-image-text.bg-forest .eyebrow {
+			color: var(--col-mint);
+		}
+.cb-image-text.bg-forest .cb-check-list li {
+			color: rgb(255 255 255 / 0.85);
+		}
+.cb-image-text.bg-forest .cb-check {
+			background: var(--col-mint);
+			color: var(--col-forest);
+		}
+.cb-image-text.bg-forest .cb-image-text__dots {
+			color: var(--col-mint);
+		}
+.cb-image-text.bg-sage .cb-image-text__placeholder {
+		background: var(--col-sage-tint);
+	}
+
+@media (min-width: 992px) {
+	.cb-image-text .cb-image-text__media-col {
+		order: 0;
+	}
+}
+
+@keyframes cb-dots-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-image-text .cb-image-text__dots {
+		animation: none;
+	}
+}
+
+/* --- src/blocks/logo-row.css --- */
+/* Logo Row (blocks/logo-row) */
+.cb-logo-row {
+	--logo-h: 4.5rem;
+}
+.cb-logo-row.cb-logo-row--sm {
+		--logo-h: 3rem;
+	}
+.cb-logo-row.cb-logo-row--lg {
+		--logo-h: 6.5rem;
+	}
+.cb-logo-row .cb-logo-row__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-4) var(--space-5);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+.cb-logo-row .cb-logo-row__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 0;
+	}
+.cb-logo-row .cb-logo-row__link {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+		transition: opacity var(--transition);
+	}
+.cb-logo-row a.cb-logo-row__link:hover,.cb-logo-row a.cb-logo-row__link:focus-visible {
+		opacity: 0.8;
+	}
+.cb-logo-row img {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		height: var(--logo-h);
+		object-fit: contain;
+	}
+/* Placeholder slot until the real logo arrives. */
+.cb-logo-row .cb-logo-row__fallback {
+		display: inline-block;
+		padding: 0.75rem 1.25rem;
+		border: 1px dashed rgb(16 66 31 / 0.3);
+		border-radius: var(--radius-pill);
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-500);
+		line-height: 1.4;
+		white-space: nowrap;
+	}
+.cb-logo-row .cb-logo-row__label {
+		display: block;
+		margin-top: var(--space-2);
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+		text-align: center;
+	}
+/* ---------- Forest background ---------- */
+.cb-logo-row.bg-forest img {
+			filter: brightness(0) invert(1);
+		}
+.cb-logo-row.bg-forest .cb-logo-row__fallback {
+			border-color: rgb(255 255 255 / 0.4);
+			color: rgb(255 255 255 / 0.85);
+		}
+.cb-logo-row.bg-forest .cb-logo-row__label {
+			color: rgb(255 255 255 / 0.85);
+		}
+
+/* --- src/blocks/stats.css --- */
+/* Stats - blocks/stats */
+.cb-stats .cb-stats__grid {
+		display: grid;
+		gap: var(--space-4);
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	}
+.cb-stats .cb-stats__item {
+		display: flex;
+		flex-direction: column;
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		background: var(--col-forest);
+		box-shadow: var(--shadow-soft);
+		color: var(--col-paper);
+	}
+.cb-stats .cb-stats__value {
+		display: block;
+		color: var(--col-mint);
+		font-size: var(--fs-stat);
+		font-weight: var(--fw-700);
+		letter-spacing: -0.02em;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+	}
+.cb-stats .cb-stats__label {
+		display: block;
+		margin-top: var(--space-2);
+		font-size: var(--fs-small);
+		line-height: 1.4;
+		opacity: 0.85;
+	}
+/* On forest the solid card would vanish; use a glass tile instead. */
+.cb-stats.bg-forest .cb-stats__item {
+		border: 1px solid rgb(255 255 255 / 0.12);
+		background: rgb(255 255 255 / 0.06);
+		box-shadow: none;
+	}
 /* generated — concatenation of src/blocks/*.css, see src/build/generate-utilities.js */
 
 /*# sourceMappingURL=theme.css.map */

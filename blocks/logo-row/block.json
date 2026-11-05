@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/logo-row",
+	"title": "Logo Row",
+	"description": "A strip of accreditation, partner or client logos, optionally with a heading and intro. Also used as a simple before / after pair on the rebrand page.",
+	"category": "cb-andwisentrances2026",
+	"icon": "images-alt",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"logos": { "type": "array", "default": [] },
+		"size": { "type": "string", "default": "md" },
+		"background": { "type": "string", "default": "paper" },
+		"showLabels": { "type": "boolean", "default": false }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

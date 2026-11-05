@@ -21,11 +21,15 @@
 .text-center { text-align: center; }
 .text-end { text-align: right; }
 .fw-400 { font-weight: var(--fw-400); }
+.fw-500 { font-weight: var(--fw-500); }
 .fw-600 { font-weight: var(--fw-600); }
 .fw-700 { font-weight: var(--fw-700); }
+.fw-800 { font-weight: var(--fw-800); }
 .fw-normal { font-weight: var(--fw-normal); }
+.fw-medium { font-weight: var(--fw-medium); }
 .fw-semibold { font-weight: var(--fw-semibold); }
 .fw-bold { font-weight: var(--fw-bold); }
+.fw-heavy { font-weight: var(--fw-heavy); }
 .w-25 { width: 25%; }
 .w-50 { width: 50%; }
 .w-75 { width: 75%; }

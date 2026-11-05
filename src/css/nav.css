@@ -1,52 +1,151 @@
 /*
+ * Header + primary nav.
+ *
+ * #masthead is fixed (fixed-header.css module) and starts transparent over a
+ * page that opens with the Hero block (body.has-hero — see header.php). Once
+ * the page scrolls, or on any page without a hero, it is a white bar
+ * (.is-solid, added by src/js/header.js). Over a hero the logo and links are
+ * paper; solid, they're ink.
+ *
  * Nav breakpoint: 992px, matching the "lg" breakpoint in
  * src/build/tokens.config.js. CSS custom properties can't be read inside an
- * @media condition, so this number is hand-kept in sync with that file —
- * if you change the "lg" breakpoint there, update it here too.
+ * @media condition, so this number is hand-kept in sync with that file.
  */
+
+#masthead {
+	--nav-ink: var(--col-ink);
+	--nav-logo: var(--col-forest);
+
+	background-color: var(--col-paper);
+	border-bottom: 1px solid transparent;
+	transition:
+		background-color 400ms ease,
+		border-color 400ms ease,
+		box-shadow 400ms ease;
+}
+
+body.has-hero #masthead:not(.is-solid):not(:focus-within) {
+	--nav-ink: var(--col-paper);
+	--nav-logo: var(--col-paper);
+
+	background-color: transparent;
+}
+
+#masthead.is-solid,
+#masthead:focus-within {
+	background-color: rgb(255 255 255 / 0.94);
+	backdrop-filter: saturate(160%) blur(10px);
+	border-bottom-color: rgb(16 66 31 / 0.08);
+}
+
+/* Over a hero the page starts under the header, so main needs no offset. */
+body.has-hero main {
+	padding-top: 0;
+}
 
 .navbar {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-block: var(--space-2);
+	gap: var(--space-4);
+	padding-block: 0;
 }
 
 .navbar-brand {
-	font-weight: var(--fw-700);
+	display: block;
+	flex: 0 0 auto;
+	color: var(--nav-logo);
+	line-height: 0;
 	text-decoration: none;
-	color: var(--col-body);
+
+	& svg,
+	& img {
+		display: block;
+		width: clamp(10rem, 16vw, 14rem);
+		height: auto;
+	}
+
+	& .logo-andwis {
+		fill: var(--nav-logo);
+		transition: fill 400ms ease;
+	}
+
+	& .logo-dot {
+		fill: var(--col-emerald);
+	}
+
+	& .logo-word {
+		fill: var(--nav-logo);
+		font-family: var(--font-family-base);
+		font-weight: var(--fw-700);
+		transition: fill 400ms ease;
+	}
+}
+
+.navbar-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-left: auto;
+}
+
+/* .navbar-cta is also a .btn (display: inline-flex, loaded later) — the
+   extra .navbar ancestor is what lets this hide it below lg. */
+.navbar .navbar-cta {
+	display: none;
+	min-width: 0;
+	padding: 0.6rem 1.25rem;
+	white-space: nowrap;
 }
 
 .navbar-toggler {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--space-1);
-	padding: var(--space-1) var(--space-2);
-	border: 1px solid var(--col-grey-300);
-	border-radius: var(--radius-sm);
-	background: none;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var(--col-emerald);
+	color: var(--col-paper);
 	cursor: pointer;
+
+	& svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	& .icon-close {
+		display: none;
+	}
+
+	&[aria-expanded="true"] .icon-open {
+		display: none;
+	}
+
+	&[aria-expanded="true"] .icon-close {
+		display: block;
+	}
 }
 
 .navbar-collapse {
 	display: none;
 }
 
-/* Overlays the page rather than pushing content down — positioned against
-   .navbar (position: relative above), not in normal document flow. */
+/* Mobile drawer overlays the page below the header bar. */
 .navbar-collapse.is-open {
 	display: block;
 	position: absolute;
 	top: 100%;
-	left: 0;
-	right: 0;
-	background-color: var(--col-body-bg);
-	border-top: 1px solid var(--col-grey-300);
+	left: calc(-1 * var(--container-padding));
+	right: calc(-1 * var(--container-padding));
+	padding: var(--space-3) var(--container-padding) var(--space-4);
+	background-color: var(--col-paper);
+	border-top: 1px solid var(--col-sage);
 	box-shadow: var(--shadow-lg);
-	padding: var(--space-3);
-	max-height: calc(100vh - 100%);
+	max-height: calc(100vh - var(--nav-height));
 	overflow-y: auto;
 	z-index: 20;
 }
@@ -54,7 +153,7 @@
 .navbar-nav {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-2);
+	gap: 0;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -62,9 +161,17 @@
 
 .nav-link {
 	display: block;
+	padding: 0.75rem 0;
+	color: var(--col-ink);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-500);
 	text-decoration: none;
-	color: var(--col-body);
-	padding: var(--space-1) 0;
+	transition: color 300ms ease;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--col-emerald);
+	}
 
 	&.active,
 	&[aria-current="page"] {
@@ -72,36 +179,61 @@
 	}
 }
 
-/* Submenus — nested, always visible on mobile; shown via click as a
-   floating panel from "lg" up. */
+/* Mobile-only CTA row inside the drawer */
+.navbar-collapse .navbar-cta-mobile {
+	margin-top: var(--space-3);
+}
+
+/* Submenus — nested and expandable on mobile; floating panel from lg up. */
 .dropdown-menu {
-	list-style: none;
-	margin: var(--space-1) 0 var(--space-1) var(--space-3);
-	padding: 0;
 	display: none;
+	margin: 0 0 var(--space-2) var(--space-3);
+	padding: 0;
+	list-style: none;
+	border-left: 2px solid var(--col-sage);
 }
 
 .dropdown-menu.is-open {
 	display: block;
 }
 
+.dropdown-menu .nav-link {
+	padding: 0.5rem var(--space-3);
+}
+
 .dropdown-toggle {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--space-1);
+	gap: var(--space-2);
 	width: 100%;
 	border: 0;
 	background: none;
 	font-family: inherit;
-	font-size: inherit;
 	line-height: inherit;
 	text-align: inherit;
 	cursor: pointer;
+
+	& svg {
+		flex: 0 0 auto;
+		transition: transform 200ms ease;
+	}
+
+	&[aria-expanded="true"] svg {
+		transform: rotate(180deg);
+	}
 }
 
 @media (min-width: 992px) {
 	.navbar-toggler {
+		display: none;
+	}
+
+	.navbar .navbar-cta {
+		display: inline-flex;
+	}
+
+	.navbar-collapse .navbar-cta-mobile {
 		display: none;
 	}
 
@@ -120,24 +252,90 @@
 
 	.navbar-nav {
 		flex-direction: row;
+		align-items: center;
+		gap: clamp(0.85rem, 1.6vw, 1.75rem);
 		margin: 0;
+	}
+
+	/* Six top-level items plus the CTA only just fit between lg and xl, so
+	   the brand and links run slightly smaller there and relax at xl. */
+	.navbar-brand svg,
+	.navbar-brand img {
+		width: clamp(8.5rem, 12vw, 14rem);
+	}
+
+	.navbar-nav > .nav-item > .nav-link {
+		color: var(--nav-ink);
+		padding: 0.5rem 0;
+		font-size: var(--fs-micro);
+		white-space: nowrap;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--nav-ink);
+			-webkit-text-stroke: 0.4px currentColor;
+		}
 	}
 
 	.dropdown {
 		position: relative;
 	}
 
+	.dropdown-toggle {
+		width: auto;
+		justify-content: flex-start;
+		gap: 0.35rem;
+	}
+
 	.dropdown-menu {
 		position: absolute;
-		top: 100%;
-		left: 0;
-		min-width: 10rem;
+		top: calc(100% + 0.5rem);
+		left: -0.75rem;
+		min-width: 15rem;
 		margin: 0;
-		padding: var(--space-2);
-		background-color: var(--col-body-bg);
-		border: 1px solid var(--col-grey-300);
-		border-radius: var(--radius-sm);
-		box-shadow: var(--shadow-lg);
+		padding: var(--space-2) 0;
+		border: 1px solid rgb(16 66 31 / 0.1);
+		border-radius: var(--radius-md);
+		background-color: var(--col-paper);
+		box-shadow: var(--shadow-soft);
 		z-index: 10;
+	}
+
+	.dropdown-menu .nav-link {
+		padding: 0.5rem 1.25rem;
+		color: var(--col-forest);
+		white-space: nowrap;
+
+		&:hover,
+		&:focus-visible {
+			background: var(--col-sage-tint);
+			color: var(--col-forest);
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.navbar-nav > .nav-item > .nav-link {
+			font-size: var(--fs-small);
+		}
+
+		.navbar-brand svg,
+		.navbar-brand img {
+			width: clamp(10rem, 16vw, 14rem);
+		}
+	}
+
+	/* Menu item with the CSS class "button" (Appearance > Menus) renders as a pill. */
+	.navbar-nav > .menu-item.button > .nav-link {
+		padding: 0.55rem 1.2rem;
+		border-radius: var(--radius-pill);
+		background-color: var(--col-mint);
+		color: var(--col-ink);
+
+		&:hover,
+		&:focus-visible {
+			background-color: var(--col-forest);
+			color: var(--col-paper);
+			-webkit-text-stroke: 0;
+		}
 	}
 }

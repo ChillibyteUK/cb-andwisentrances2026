@@ -26,8 +26,9 @@ function cb_andwisentrances2026_setup() {
 	// Rename/extend per project.
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary Menu', 'cb-andwisentrances2026' ),
-			'footer'  => __( 'Footer Menu', 'cb-andwisentrances2026' ),
+			'primary'        => __( 'Primary Menu', 'cb-andwisentrances2026' ),
+			'footer'         => __( 'Footer Menu', 'cb-andwisentrances2026' ),
+			'footer_contact' => __( 'Footer Contact Menu', 'cb-andwisentrances2026' ),
 		)
 	);
 }

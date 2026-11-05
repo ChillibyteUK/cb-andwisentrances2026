@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/image-text",
+	"title": "Image & Text",
+	"description": "Two-column section: eyebrow, heading, body, optional tick list and buttons on one side, a circular photo with the rotating dot ring (or a plain rounded photo) on the other.",
+	"category": "cb-andwisentrances2026",
+	"icon": "align-pull-right",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "" },
+		"heading": { "type": "string", "default": "" },
+		"body": { "type": "string", "default": "" },
+		"checklist": { "type": "string", "default": "" },
+		"checklistLabel": { "type": "string", "default": "" },
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"imageStyle": { "type": "string", "default": "circle" },
+		"imagePosition": { "type": "string", "default": "right" },
+		"primaryText": { "type": "string", "default": "" },
+		"primaryUrl": { "type": "string", "default": "" },
+		"secondaryText": { "type": "string", "default": "" },
+		"secondaryUrl": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

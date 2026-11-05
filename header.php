@@ -2,9 +2,14 @@
 /**
  * Header template.
  *
+ * Fixed header (fixed-header.css). On a page that opens with the Hero block
+ * (body.has-hero, set in inc/helpers.php) it starts transparent and goes
+ * solid white once the page scrolls — src/js/header.js toggles .is-solid.
+ *
  * @package cb-andwisentrances2026
  */
 
+$cbae_ctas = cbae_site_ctas();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -20,15 +25,9 @@
 <!-- HEADER-NAV:START -->
 <header id="masthead">
 	<nav class="navbar container" aria-label="Primary navigation">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand">
-			<?php bloginfo( 'name' ); ?>
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home">
+			<?php echo cbae_logo( 'header' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inline SVG / wp_get_attachment_image(). ?>
 		</a>
-
-		<button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation">
-			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-				<path d="M2 5h16M2 10h16M2 15h16" />
-			</svg>
-		</button>
 
 		<div class="navbar-collapse" id="primary-menu">
 			<?php
@@ -38,10 +37,28 @@
 					'menu_class'     => 'navbar-nav',
 					'container'      => false,
 					'fallback_cb'    => false,
+					'depth'          => 2,
 					'walker'         => new Andwis_Entrances_2026_Nav_Walker(),
 				)
 			);
 			?>
+			<div class="navbar-cta-mobile d-flex flex-wrap gap-2">
+				<a class="btn btn-sm" href="<?php echo esc_url( $cbae_ctas['quote']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['quote']['text'] ); ?></a>
+				<a class="btn btn-sm btn-ghost" href="<?php echo esc_url( $cbae_ctas['survey']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['survey']['text'] ); ?></a>
+			</div>
+		</div>
+
+		<div class="navbar-actions">
+			<a class="btn navbar-cta" href="<?php echo esc_url( $cbae_ctas['quote']['url'] ); ?>"><?php echo esc_html( $cbae_ctas['quote']['text'] ); ?></a>
+
+			<button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation">
+				<svg class="icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path d="M2 5h16M2 10h16M2 15h16" />
+				</svg>
+				<svg class="icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+					<path d="M4 4l12 12M16 4L4 16" />
+				</svg>
+			</button>
 		</div>
 	</nav>
 </header>

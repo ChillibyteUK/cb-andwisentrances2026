@@ -1,0 +1,341 @@
+/*
+ * Shared components used by more than one block or template: the card
+ * family (service/product cards, post cards, case study cards), the
+ * "section" wrapper rhythm, and small media helpers. Block-specific CSS
+ * lives in src/blocks/{slug}.css.
+ */
+
+/* Every block section shares this vertical rhythm. */
+.cb-section {
+	padding-block: var(--section-y);
+}
+
+.cb-section--sm {
+	padding-block: var(--section-y-sm);
+}
+
+/* Two adjacent white sections would double up; tighten the second. */
+.cb-section:not([class*="bg-"]) + .cb-section:not([class*="bg-"]) {
+	padding-top: 0;
+}
+
+/* ---------- Tile card (forest) — product/service/sector listings ---------- */
+
+.cb-tile {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--space-3);
+	border-radius: var(--radius-md);
+	background: var(--col-forest);
+	color: var(--col-paper);
+	text-decoration: none;
+	overflow: hidden;
+	transition:
+		transform var(--transition),
+		box-shadow var(--transition);
+
+	&:hover,
+	&:focus-within {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-soft);
+	}
+
+	& .cb-tile__media {
+		margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) var(--space-3);
+		aspect-ratio: 16 / 10;
+		background: var(--col-sage);
+		overflow: hidden;
+
+		& img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 500ms ease;
+		}
+	}
+
+	&:hover .cb-tile__media img {
+		transform: scale(1.04);
+	}
+
+	& .cb-tile__icon {
+		width: 2.75rem;
+		height: 2.75rem;
+		margin-bottom: var(--space-3);
+
+		& img,
+		& svg {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	& h3 {
+		margin: 0 0 var(--space-2);
+		color: var(--col-mint);
+		font-size: var(--fs-h5);
+	}
+
+	& p {
+		margin: 0;
+		color: rgb(255 255 255 / 0.88);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+	}
+
+	& .cb-tile__link {
+		margin-top: auto;
+		padding-top: var(--space-3);
+		color: var(--col-mint);
+		font-size: var(--fs-caption);
+		font-weight: var(--fw-600);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+	}
+}
+
+/* Light variant: paper card with a hairline, forest text. */
+.cb-tile--light {
+	border: 1px solid rgb(16 66 31 / 0.12);
+	background: var(--col-paper);
+	color: var(--col-ink);
+
+	& h3 {
+		color: var(--col-forest);
+	}
+
+	& p {
+		color: var(--col-ink-soft);
+	}
+
+	& .cb-tile__link {
+		color: var(--col-forest);
+	}
+}
+
+/* Sage variant for routing tiles. */
+.cb-tile--sage {
+	background: var(--col-sage);
+	color: var(--col-ink);
+
+	& h3 {
+		color: var(--col-forest);
+	}
+
+	& p {
+		color: var(--col-ink-soft);
+	}
+
+	& .cb-tile__link {
+		color: var(--col-forest);
+	}
+}
+
+/* ---------- Post / case study card (paper) ---------- */
+
+.cb-post-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border: 1px solid rgb(16 66 31 / 0.12);
+	border-radius: var(--radius-md);
+	background: var(--col-paper);
+	color: inherit;
+	overflow: hidden;
+	text-decoration: none;
+	transition: box-shadow 300ms ease;
+
+	&:hover,
+	&:focus-within {
+		box-shadow: var(--shadow-soft);
+
+		& .cb-post-card__cta {
+			background: var(--col-forest);
+			color: var(--col-paper);
+		}
+
+		& .cb-post-card__media img {
+			transform: scale(1.04);
+		}
+	}
+
+	& .cb-post-card__media {
+		aspect-ratio: 16 / 9;
+		background: var(--col-sage);
+		overflow: hidden;
+
+		& img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 500ms ease;
+		}
+	}
+
+	& .cb-post-card__body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: var(--space-2);
+		padding: var(--space-4);
+	}
+
+	& .cb-post-card__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.75rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+	}
+
+	& h3 {
+		margin: 0;
+		font-size: var(--fs-h5);
+	}
+
+	& h3 a {
+		color: inherit;
+		text-decoration: none;
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+	}
+
+	& p {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	& .cb-post-card__cta {
+		align-self: flex-start;
+		margin-top: auto;
+		padding: 0.6rem 1.4rem;
+		border-radius: var(--radius-pill);
+		background: var(--col-mint);
+		color: var(--col-ink);
+		font-size: var(--fs-caption);
+		font-weight: var(--fw-600);
+		line-height: 1.4;
+		transition:
+			background-color 300ms ease,
+			color 300ms ease;
+	}
+}
+
+/* Card grid: 3-up on desktop, 2 on tablet, 1 on phones. */
+.cb-card-grid {
+	display: grid;
+	gap: var(--space-4);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.cb-card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-card-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.cb-card-grid--4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.cb-card-grid--2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* ---------- "View all" row under an index ---------- */
+.cb-index__more {
+	margin: var(--space-5) 0 0;
+	text-align: center;
+}
+
+/* ---------- Empty state ---------- */
+.cb-empty {
+	padding: var(--space-4);
+	border: 1px dashed rgb(16 66 31 / 0.3);
+	border-radius: var(--radius-md);
+	color: var(--col-ink-soft);
+	text-align: center;
+}
+
+/* ---------- Page hero fallback (templates without a Hero block) ---------- */
+.cb-page-head {
+	padding-block: calc(var(--nav-height) + var(--space-5)) var(--space-5);
+	background: var(--col-forest);
+	color: var(--col-paper);
+
+	& h1 {
+		margin: var(--space-3) 0 0;
+		color: var(--col-paper);
+	}
+
+	& p {
+		max-width: 40rem;
+		margin: var(--space-3) 0 0;
+		color: rgb(255 255 255 / 0.85);
+		font-size: var(--fs-body-lg);
+	}
+}
+
+/* ---------- Scroll-in animation hook ---------- */
+.cb-fade {
+	opacity: 0;
+	transform: translate3d(0, 20px, 0);
+	transition:
+		opacity 600ms ease,
+		transform 600ms ease;
+
+	&.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-fade {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* ---------- Responsive embed (maps, video) ---------- */
+.cb-embed {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	background: var(--col-sage-tint);
+
+	& iframe,
+	& video {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+}

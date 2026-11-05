@@ -1,4 +1,8 @@
-/* Minimal, deliberately unopinionated form base — expected to be overridden per project. */
+/*
+ * Buttons and form controls. Pill buttons with the andwis gradient sweep
+ * (mint at rest, forest sliding in on hover) — the same treatment andwis.com
+ * and andwis lifts use, so the three sites read as one family.
+ */
 
 input,
 textarea,
@@ -11,20 +15,237 @@ button {
 label {
 	display: block;
 	margin-bottom: var(--space-1);
+	color: var(--col-forest);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-600);
 }
 
-/* Excludes button/checkbox/radio/range/color/file/image input types —
-   they're still <input> elements but this block/border/padding treatment
-   is meant for text-like fields only. Excluding them from the selector
-   entirely (rather than applying the rule then reverting it for those
-   types) means this rule never touches them in the first place — robust
-   regardless of style load order, unlike an "apply then all:revert" pass
-   which can fight with e.g. ACF's own admin CSS for its radio/checkbox UI
-   if that CSS happens to load earlier in the same document. */
-/* Gravity Forms Consent field — checkbox + its acceptance label render as
-   siblings inside .ginput_container_consent (input, space, label), not
-   wrapped together, so this overrides the global block label above to keep
-   both on one line. */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),
+textarea,
+select {
+	display: block;
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 1px solid rgb(16 66 31 / 0.2);
+	border-radius: var(--radius-md);
+	background-color: var(--col-paper);
+	color: var(--col-ink);
+	font-size: var(--fs-body-sm);
+
+	&:focus-visible {
+		border-color: var(--col-emerald);
+		outline: 2px solid rgb(0 175 102 / 0.3);
+		outline-offset: 1px;
+	}
+}
+
+textarea {
+	min-height: 9rem;
+	resize: vertical;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn,
+.gform_button,
+.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	min-width: 8rem;
+	padding: 0.9rem 1.75rem;
+	border: 2px solid transparent;
+	border-radius: var(--radius-pill);
+	background-color: var(--col-mint);
+	background-image: linear-gradient(90deg, var(--col-forest) 50%, transparent 75%, transparent 100%);
+	background-size: 400%;
+	background-position: 100%;
+	color: var(--col-ink);
+	font-family: inherit;
+	font-size: var(--fs-caption);
+	font-weight: var(--fw-600);
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		background-position 0.5s ease-in-out,
+		color 0.5s ease-in-out,
+		border-color 0.3s ease,
+		background-color 0.3s ease;
+
+	&:hover,
+	&:focus-visible {
+		background-position: 0%;
+		color: var(--col-paper);
+		text-decoration: none;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--col-emerald);
+		outline-offset: 2px;
+	}
+
+	&:active {
+		transform: scale(0.97);
+	}
+
+	& svg {
+		width: 1em;
+		height: 1em;
+		flex: 0 0 auto;
+	}
+}
+
+.btn[disabled],
+.btn:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+/* Ghost: outline only. --btn-ghost-ink lets a dark section flip it to paper. */
+.btn-ghost {
+	--btn-ghost-ink: var(--col-forest);
+	--btn-ghost-fill-hover: var(--col-forest);
+	--btn-ghost-ink-hover: var(--col-paper);
+
+	border-color: var(--btn-ghost-ink);
+	background: transparent;
+	color: var(--btn-ghost-ink);
+
+	&:hover,
+	&:focus-visible {
+		border-color: var(--btn-ghost-fill-hover);
+		background: var(--btn-ghost-fill-hover);
+		color: var(--btn-ghost-ink-hover);
+	}
+}
+
+.bg-forest .btn-ghost,
+.cb-hero .btn-ghost {
+	--btn-ghost-ink: var(--col-paper);
+	--btn-ghost-fill-hover: var(--col-paper);
+	--btn-ghost-ink-hover: var(--col-forest);
+}
+
+/* Outline on dark: mint border, mint fill sweeps in. Used in heroes. */
+.btn-outline {
+	border-color: var(--col-mint);
+	background-color: transparent;
+	background-image: linear-gradient(90deg, var(--col-mint) 50%, transparent 75%, transparent 100%);
+	color: var(--col-paper);
+
+	&:hover,
+	&:focus-visible {
+		color: var(--col-ink);
+	}
+}
+
+/* Text link with a trailing arrow — card "Learn more" links etc. */
+.btn-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--col-forest);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-600);
+	text-decoration: none;
+
+	& svg {
+		width: 0.9em;
+		height: 0.9em;
+		transition: transform var(--transition);
+	}
+
+	&:hover,
+	&:focus-visible {
+		color: var(--col-emerald);
+
+		& svg {
+			transform: translateX(3px);
+		}
+	}
+}
+
+.btn-sm {
+	min-width: 0;
+	padding: 0.55rem 1.25rem;
+}
+
+.btn-lg {
+	padding: 1.1rem 2.25rem;
+	font-size: var(--fs-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn,
+	.btn-link svg {
+		transition: none;
+	}
+}
+
+/* ---------- Gravity Forms ---------- */
+
+/*
+ * Scoped to the theme's own form surfaces (the Form block, the vacancy apply
+ * panel, the contact page) rather than bare .gform_wrapper, so a form
+ * embedded elsewhere keeps GF defaults. GF's orbital theme colours its button
+ * through these custom properties at a specificity our .btn rules can't beat.
+ */
+.cb-form .gform_wrapper,
+.cb-vacancy .gform_wrapper {
+	--gf-ctrl-btn-bg-color-primary: var(--col-mint);
+	--gf-ctrl-btn-bg-color-hover-primary: var(--col-forest);
+	--gf-ctrl-btn-bg-color-focus-primary: var(--col-forest);
+	--gf-ctrl-btn-color-primary: var(--col-ink);
+	--gf-ctrl-btn-color-hover-primary: var(--col-paper);
+	--gf-ctrl-btn-color-focus-primary: var(--col-paper);
+	--gf-ctrl-btn-border-color-primary: transparent;
+	--gf-ctrl-btn-border-color-hover-primary: transparent;
+	--gf-ctrl-btn-border-color-focus-primary: transparent;
+	--gf-ctrl-btn-border-width-primary: 0;
+	--gf-ctrl-btn-radius: 9999px;
+	--gf-ctrl-radius: var(--radius-md);
+	--gf-ctrl-border-color: rgb(16 66 31 / 0.2);
+	--gf-ctrl-padding-x: 1rem;
+	--gf-label-color-primary: var(--col-forest);
+	--gf-color-primary: var(--col-forest);
+
+	& .gform_required_legend {
+		display: none;
+	}
+
+	& .gfield_label,
+	& .gform-field-label {
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-600);
+	}
+
+	& .gfield_consent_label a,
+	& .gform-field-label a {
+		color: var(--col-forest);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	& .gform_footer {
+		padding-block: var(--space-3) 0;
+	}
+
+	& .gform_footer .gform_button {
+		font-weight: var(--fw-600);
+	}
+
+	& .gform_confirmation_message {
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		background: var(--col-sage-tint);
+		color: var(--col-forest);
+	}
+}
+
 .ginput_container_consent {
 	display: flex;
 	align-items: center;
@@ -34,39 +255,4 @@ label {
 .ginput_container_consent label {
 	display: inline;
 	margin-bottom: 0;
-}
-
-input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]),
-textarea,
-select {
-	display: block;
-	width: 100%;
-	padding: var(--space-2);
-	border: 1px solid var(--col-grey-300);
-	border-radius: var(--radius-sm);
-	background-color: var(--col-white);
-	color: var(--col-body);
-
-	&:focus-visible {
-		outline: 2px solid var(--col-primary);
-		outline-offset: 1px;
-	}
-}
-
-.btn,
-.gform_button,
-.wp-block-button__link {
-	display: inline-block;
-	padding: var(--space-2) var(--space-3);
-	border: 1px solid var(--col-primary);
-	border-radius: var(--radius-sm);
-	background-color: var(--col-primary);
-	color: var(--col-white);
-	text-decoration: none;
-	cursor: pointer;
-
-	&:focus-visible {
-		outline: 2px solid var(--col-primary);
-		outline-offset: 2px;
-	}
 }
