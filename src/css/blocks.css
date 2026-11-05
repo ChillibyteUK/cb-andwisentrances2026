@@ -245,6 +245,9 @@
 .cb-hero {
 	/* Curve height, shared with the compact padding so copy never sits under it. */
 	--hero-curve-h: clamp(65px, 10vw, 140px);
+	/* Curve colour: paper by default, but it must match whatever section
+	   follows the hero or a band of the wrong colour shows between them. */
+	--hero-curve-color: var(--col-paper);
 
 	position: relative;
 	overflow: hidden;
@@ -361,7 +364,7 @@
 	z-index: 2;
 	width: 120vw;
 	height: var(--hero-curve-h);
-	background-color: var(--col-paper);
+	background-color: var(--hero-curve-color);
 	transform: translateX(-50%);
 	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 65' xml:space='preserve'><path d='M1440 66C1283.48 26.17 1019.4 0 720 0S156.52 26.17 0 66h1440z'/></svg>");
 	-webkit-mask-position: center bottom;
@@ -371,6 +374,21 @@
 	mask-position: center bottom;
 	mask-repeat: no-repeat;
 	mask-size: 100% auto;
+}
+
+/* Pick up the next sibling section's background (page.php echoes blocks as
+   direct siblings; the global CTA band is .site-cta). */
+.cb-hero:has(+ .bg-sage-tint),
+.cb-hero:has(+ .site-cta) {
+	--hero-curve-color: var(--col-sage-tint);
+}
+
+.cb-hero:has(+ .bg-sage) {
+	--hero-curve-color: var(--col-sage);
+}
+
+.cb-hero:has(+ .bg-forest) {
+	--hero-curve-color: var(--col-forest-deep);
 }
 
 @media (max-width: 767px) {
