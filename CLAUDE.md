@@ -323,6 +323,17 @@ set, else an inline SVG built from the andwis wordmark paths plus
 - Menus: `primary` (depth 2, dropdown parents are buttons that never
   navigate), `footer`, `footer_contact` (falls back to Contact / Locations /
   Careers / Get a Quote / Book a Survey links when unassigned).
+- Primary dropdowns come in three UX shapes, chosen by a CSS class on the
+  parent item in Appearance > Menus (`inc/class-andwis-entrances-2026-nav-walker.php`,
+  styles in `nav.css`, behaviour in `src/js/nav-dropdown.js`): `mega` (emerald
+  list + "Case study examples" that swap to the case studies whose
+  `related_products` / `related_sectors` include the hovered child, falling
+  back to the latest two; the panel is dropped if no case studies exist),
+  `bar` (full-width emerald strip), or nothing (forest panel at the right).
+  The dropdown heading is the parent's Title Attribute when set ("By
+  product", "About andwis entrances"), else its title, linked to the
+  parent URL unless that is `#`. Desktop opens on hover and click; mobile
+  collapses every shape to the same nested list without the examples.
 - Site-wide CTAs: header pill + footer band + Cards/Hero/CTA block defaults
   all read `cbae_site_ctas()` (text/URL from Site-Wide Settings > CTAs,
   defaulting to the `get-a-quote` and `book-a-survey` pages). The footer

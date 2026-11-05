@@ -844,8 +844,10 @@ body.has-hero main {
 	display: block;
 	position: absolute;
 	top: 100%;
-	left: calc(-1 * var(--container-padding));
-	right: calc(-1 * var(--container-padding));
+	/* Span the viewport whatever gutter the container has: the overhang on
+	   each side is half of (viewport - navbar content width). */
+	left: calc((100% - 100vw) / 2);
+	width: 100vw;
 	padding: var(--space-3) var(--container-padding) var(--space-4);
 	background-color: var(--col-paper);
 	border-top: 1px solid var(--col-sage);
@@ -887,12 +889,14 @@ body.has-hero main {
 	margin-top: var(--space-3);
 }
 
-/* Submenus — nested and expandable on mobile; floating panel from lg up. */
+/* Submenus. On mobile every style is the same nested, expandable list
+   (the heading link first, then the children); the three desktop shapes
+   (panel / mega / bar - see inc/class-andwis-entrances-2026-nav-walker.php)
+   are built in the lg block below. */
 .dropdown-menu {
 	display: none;
 	margin: 0 0 var(--space-2) var(--space-3);
 	padding: 0;
-	list-style: none;
 	border-left: 2px solid var(--col-sage);
 }
 
@@ -900,8 +904,34 @@ body.has-hero main {
 	display: block;
 }
 
+.dropdown-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.dropdown-heading {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.5rem var(--space-3);
+	color: var(--col-forest);
+	font-size: var(--fs-small);
+	font-weight: var(--fw-600);
+	text-decoration: none;
+}
+
+.dropdown-heading svg {
+		flex: 0 0 auto;
+	}
+
 .dropdown-menu .nav-link {
 	padding: 0.5rem var(--space-3);
+}
+
+/* The examples panel is a desktop-only flourish. */
+.dropdown-mega__examples {
+	display: none;
 }
 
 .dropdown-toggle {
@@ -979,8 +1009,11 @@ body.has-hero main {
 			-webkit-text-stroke: 0.4px currentColor;
 		}
 
+	/* Every dropdown hangs from the bar itself (.navbar is the positioned
+	   ancestor), not from its own item: panels and megas align to the
+	   right edge of the container, the bar spans the viewport. */
 	.dropdown {
-		position: relative;
+		position: static;
 	}
 
 	.dropdown-toggle {
@@ -989,30 +1022,228 @@ body.has-hero main {
 		gap: 0.35rem;
 	}
 
-	.dropdown-menu {
+	.navbar-nav > .nav-item.is-open > .nav-link {
+		-webkit-text-stroke: 0.4px currentColor;
+	}
+
+	.dropdown-menu,
+	.dropdown-menu.is-open {
 		position: absolute;
-		top: calc(100% + 0.5rem);
-		left: -0.75rem;
-		min-width: 15rem;
+		top: 100%;
 		margin: 0;
-		padding: var(--space-2) 0;
-		border: 1px solid rgb(16 66 31 / 0.1);
-		border-radius: var(--radius-md);
-		background-color: var(--col-paper);
-		box-shadow: var(--shadow-soft);
+		padding: 0;
+		border: 0;
 		z-index: 10;
 	}
 
-	.dropdown-menu .nav-link {
-		padding: 0.5rem 1.25rem;
-		color: var(--col-forest);
-		white-space: nowrap;
+	.dropdown-menu {
+		display: none;
 	}
 
-		:is(.dropdown-menu .nav-link):hover,:is(.dropdown-menu .nav-link):focus-visible {
-			background: var(--col-sage-tint);
+	.dropdown-menu.is-open {
+		display: block;
+	}
+
+	.dropdown-menu .nav-link {
+		padding: 0.55rem 0;
+		white-space: normal;
+	}
+
+	/* --- Panel: forest card hanging from the right of the bar. --- */
+	.dropdown-menu--panel {
+		right: 0;
+		width: min(22rem, 100%);
+		margin-top: 1.5rem;
+		padding: var(--space-4);
+		border-radius: var(--radius-lg);
+		background-color: var(--col-forest);
+		color: var(--col-paper);
+		box-shadow: var(--shadow-lg);
+	}
+
+		.dropdown-menu--panel .dropdown-heading {
+			display: flex;
+			margin: 0 0 var(--space-3);
+			padding: 0;
+			color: var(--col-paper);
+			font-size: var(--fs-h4);
+		}
+
+		.dropdown-menu--panel .dropdown-list li {
+			border-bottom: 1px solid rgb(255 255 255 / 0.55);
+		}
+
+		.dropdown-menu--panel .nav-link {
+			color: var(--col-paper);
+		}
+
+			:is(.dropdown-menu--panel .nav-link):hover,:is(.dropdown-menu--panel .nav-link):focus-visible {
+				color: var(--col-mint);
+			}
+
+	/* --- Mega: emerald list left, case study examples right. --- */
+	.dropdown-menu--mega {
+		right: 0;
+		width: min(54rem, 100%);
+		margin-top: 1.5rem;
+		border-radius: var(--radius-lg);
+		background-color: var(--col-paper);
+		box-shadow: var(--shadow-lg);
+		overflow: hidden;
+	}
+
+		.dropdown-menu--mega.is-open {
+			display: grid;
+			grid-template-columns: 2fr 3fr;
+		}
+
+		.dropdown-menu--mega:not(:has(.dropdown-mega__examples)) {
+			width: min(24rem, 100%);
+		}
+
+			.dropdown-menu--mega.is-open:not(:has(.dropdown-mega__examples)) {
+				grid-template-columns: 1fr;
+			}
+
+		.dropdown-menu--mega .dropdown-heading {
+			display: flex;
+			margin: 0 0 var(--space-3);
+			padding: 0;
+			font-size: var(--fs-h4);
+		}
+
+	.dropdown-mega__nav {
+		padding: var(--space-4);
+		background-color: var(--col-emerald);
+		color: var(--col-paper);
+	}
+
+		.dropdown-mega__nav .dropdown-heading {
+			color: var(--col-paper);
+		}
+
+		.dropdown-mega__nav .dropdown-list li {
+			border-bottom: 1px solid rgb(255 255 255 / 0.6);
+		}
+
+		.dropdown-mega__nav .nav-link {
+			color: var(--col-paper);
+		}
+
+			:is(.dropdown-mega__nav .nav-link):hover,:is(.dropdown-mega__nav .nav-link):focus-visible {
+				color: var(--col-forest-deep);
+			}
+
+	.dropdown-mega__examples {
+		display: flex;
+		flex-direction: column;
+		padding: var(--space-4);
+		color: var(--col-forest);
+	}
+
+		.dropdown-mega__examples .dropdown-heading {
+			margin-bottom: 0.25rem;
 			color: var(--col-forest);
 		}
+
+	.dropdown-mega__for {
+		margin: 0 0 var(--space-3);
+		color: var(--col-ink);
+		font-size: var(--fs-small);
+	}
+
+	.dropdown-mega__set {
+		display: grid;
+		gap: 0.75rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+		.dropdown-mega__set[hidden] {
+			display: none;
+		}
+
+	.dropdown-mega__case {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.7rem 1rem;
+		border: 1px solid var(--col-forest);
+		border-radius: 0.75rem;
+		color: var(--col-ink);
+		text-decoration: none;
+		transition: background-color 200ms ease;
+	}
+
+		.dropdown-mega__case svg {
+			width: 1.25rem;
+			height: 1.25rem;
+			flex: 0 0 auto;
+		}
+
+		.dropdown-mega__case span {
+			display: block;
+			min-width: 0;
+		}
+
+		.dropdown-mega__case strong {
+			display: block;
+			font-size: var(--fs-caption);
+			font-weight: var(--fw-600);
+		}
+
+		.dropdown-mega__case small {
+			display: block;
+			font-size: var(--fs-micro);
+			color: var(--col-ink-soft);
+		}
+
+		.dropdown-mega__case:hover,.dropdown-mega__case:focus-visible {
+			background-color: var(--col-sage-tint);
+		}
+
+	.dropdown-mega__all {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-top: auto;
+		padding-top: var(--space-4);
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		text-decoration: none;
+	}
+
+		.dropdown-mega__all:hover,.dropdown-mega__all:focus-visible {
+			color: var(--col-emerald);
+		}
+
+	/* --- Bar: full-width emerald strip, children centred. --- */
+	.dropdown-menu--bar {
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		background-color: var(--col-emerald);
+	}
+
+		.dropdown-menu--bar .dropdown-list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0 var(--space-5);
+			padding: 0.4rem var(--container-padding);
+		}
+
+		.dropdown-menu--bar .nav-link {
+			padding: 0.9rem 0;
+			color: var(--col-paper);
+			font-weight: var(--fw-500);
+			white-space: nowrap;
+		}
+
+			:is(.dropdown-menu--bar .nav-link):hover,:is(.dropdown-menu--bar .nav-link):focus-visible {
+				color: var(--col-forest-deep);
+			}
 
 	@media (min-width: 1200px) {
 		.navbar-nav > .nav-item > .nav-link {
@@ -1074,6 +1305,9 @@ body.has-hero main {
 	   overflow width (not the viewport) once the page scrolls sideways for
 	   any reason, stretching the nav with it. Viewport units are immune. */
 	max-width: 100vw;
+	/* The full-width "bar" dropdown (nav.css) is 100vw inside the container;
+	   clip the x axis only so it can never widen the page. */
+	overflow-x: clip;
 }
 
 body.admin-bar #masthead {
