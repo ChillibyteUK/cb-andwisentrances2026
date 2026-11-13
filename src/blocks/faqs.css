@@ -1,0 +1,123 @@
+/* FAQs / accordion - blocks/faqs. Behaviour: src/js/accordion.js */
+.cb-faqs {
+	--cb-faqs-line: rgb(16 66 31 / 0.15);
+
+	& .cb-faqs__head,
+	& .cb-faqs__body {
+		min-width: 0;
+	}
+
+	/* Split: the row's own gap spaces the heading from the accordion. */
+	& .cb-faqs__row.row .cb-section-head {
+		margin-bottom: 0;
+	}
+
+	/* ---------- Stack (and any layout with no heading) ---------- */
+	&.cb-faqs--stack .cb-faqs__list,
+	&.cb-faqs--no-head .cb-faqs__list,
+	&.cb-faqs--stack .cb-empty,
+	&.cb-faqs--no-head .cb-empty {
+		max-width: 52rem;
+		margin-inline: auto;
+	}
+
+	/* ---------- Accordion ---------- */
+	& .cb-faqs__list {
+		border-top: 1px solid var(--cb-faqs-line);
+	}
+
+	& .cb-faqs__item {
+		border-bottom: 1px solid var(--cb-faqs-line);
+	}
+
+	& .cb-faqs__question {
+		margin: 0;
+		font-size: var(--fs-body-lg);
+		letter-spacing: 0;
+	}
+
+	& .cb-faqs__toggle {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-3);
+		width: 100%;
+		min-height: 4rem;
+		padding: var(--space-3) 0;
+		border: 0;
+		border-radius: var(--radius-sm);
+		background: none;
+		color: var(--col-forest);
+		font-size: var(--fs-body-lg);
+		font-weight: var(--fw-600);
+		line-height: 1.35;
+		text-align: left;
+		cursor: pointer;
+
+		&:focus-visible {
+			outline: 2px solid var(--col-emerald);
+			outline-offset: 2px;
+		}
+
+		&:hover .cb-faqs__icon {
+			border-color: var(--col-emerald);
+		}
+	}
+
+	& .cb-faqs__label {
+		min-width: 0;
+	}
+
+	& .cb-faqs__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid rgb(16 66 31 / 0.25);
+		border-radius: 50%;
+		color: var(--col-forest);
+		transition:
+			transform var(--transition),
+			background-color var(--transition),
+			border-color var(--transition),
+			color var(--transition);
+
+		& svg {
+			display: block;
+			width: 0.875rem;
+			height: 0.875rem;
+		}
+	}
+
+	/* Open: accordion.js sets aria-expanded="true" on the toggle and .is-open
+	   on the item. The plus turns 45deg into a cross. */
+	& .cb-faqs__item.is-open .cb-faqs__icon,
+	& .cb-faqs__toggle[aria-expanded="true"] .cb-faqs__icon {
+		border-color: var(--col-forest);
+		background: var(--col-forest);
+		color: var(--col-mint);
+		transform: rotate(45deg);
+	}
+
+	/* No display here: the panel is closed with the [hidden] attribute. */
+	& .cb-faqs__panel {
+		padding: 0 var(--space-5) var(--space-4) 0;
+	}
+
+	&.bg-sage {
+		--cb-faqs-line: rgb(16 66 31 / 0.3);
+
+		& .cb-section-head p,
+		& .cb-prose {
+			color: var(--col-ink);
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-faqs .cb-faqs__icon {
+		transition: none;
+	}
+}

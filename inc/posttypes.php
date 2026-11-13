@@ -2,22 +2,27 @@
 /**
  * Custom Post Types Registration
  *
- * Content model for andwis entrances:
+ * Content model for andwis entrances (URLs follow the client's copy deck):
  *
  * | Post type    | URL                                   | Hub                                   |
  * | ------------ | ------------------------------------- | ------------------------------------- |
- * | product      | /products/{hub}/{slug}/ (hierarchical) | Top-level product = hub (e.g. /products/industrial-doors/) |
- * | service      | /service-maintenance/{slug}/           | Page at /service-maintenance/         |
+ * | product      | /services/{hub}/{slug}/ (hierarchical) | Top-level product = hub (e.g. /services/industrial-doors/) |
  * | sector       | /sectors/{slug}/                       | Page at /sectors/                     |
  * | case_study   | /case-studies/{slug}/                  | Page at /case-studies/                |
- * | vacancy      | /careers/vacancies/{slug}/             | Page at /careers/                     |
+ * | vacancy      | /careers/{slug}/                       | Page at /careers/                     |
  * | post (news)  | /news/{slug}/                          | Posts page at /news/ (index.php)      |
  *
- * Products are hierarchical so the four product hubs and their product pages
- * live in one post type: a hub is simply a top-level product, and the Cards
- * block's "children of this page" source lists its products. Everything is
- * built from blocks and rendered through page.php, except case studies and
- * vacancies which have fixed-shape single templates.
+ * "product" is hierarchical and holds all four hubs and everything under
+ * them: the three product hubs with their product pages, and the Service &
+ * Maintenance hub with its three service pages. A hub is simply a top-level
+ * product, and the Cards block's "children of this page" source lists what
+ * sits under it. Everything is built from blocks and rendered through
+ * page.php, except case studies and vacancies which have fixed-shape single
+ * templates.
+ *
+ * Vacancies share the /careers/ prefix with the Careers page. That works
+ * because the page itself is /careers/ and the rule below only claims
+ * /careers/{something}/ - so do not give the Careers page child pages.
  *
  * @package cb-andwisentrances2026
  */
@@ -76,33 +81,15 @@ function cb_andwisentrances2026_register_post_types() {
 		'product',
 		cbae_post_type_args(
 			array(
-				'name'          => 'Products',
-				'singular_name' => 'Product',
+				'name'          => 'Products & Services',
+				'singular_name' => 'Product / Service',
 			),
 			array(
 				'hierarchical'  => true,
 				'menu_position' => 21,
 				'menu_icon'     => 'dashicons-align-wide',
 				'rewrite'       => array(
-					'slug'       => 'products',
-					'with_front' => false,
-				),
-			)
-		)
-	);
-
-	register_post_type(
-		'service',
-		cbae_post_type_args(
-			array(
-				'name'          => 'Services',
-				'singular_name' => 'Service',
-			),
-			array(
-				'menu_position' => 22,
-				'menu_icon'     => 'dashicons-admin-tools',
-				'rewrite'       => array(
-					'slug'       => 'service-maintenance',
+					'slug'       => 'services',
 					'with_front' => false,
 				),
 			)
@@ -156,7 +143,7 @@ function cb_andwisentrances2026_register_post_types() {
 				'menu_position' => 25,
 				'menu_icon'     => 'dashicons-groups',
 				'rewrite'       => array(
-					'slug'       => 'careers/vacancies',
+					'slug'       => 'careers',
 					'with_front' => false,
 				),
 			)

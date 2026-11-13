@@ -61,10 +61,11 @@ foreach ( array(
 
 $legal_pages = array();
 foreach ( array(
-	'privacy-policy'          => __( 'Privacy policy', 'cb-andwisentrances2026' ),
-	'cookie-policy'           => __( 'Cookie policy', 'cb-andwisentrances2026' ),
-	'terms-and-conditions'    => __( 'Terms & conditions', 'cb-andwisentrances2026' ),
-	'accessibility-statement' => __( 'Accessibility', 'cb-andwisentrances2026' ),
+	'privacy-policy'           => __( 'Privacy policy', 'cb-andwisentrances2026' ),
+	'cookie-policy'            => __( 'Cookie policy', 'cb-andwisentrances2026' ),
+	'terms'                    => __( 'Terms & conditions', 'cb-andwisentrances2026' ),
+	'modern-slavery-statement' => __( 'Modern slavery statement', 'cb-andwisentrances2026' ),
+	'accessibility-statement'  => __( 'Accessibility', 'cb-andwisentrances2026' ),
 ) as $slug => $label ) {
 	$legal_page = get_page_by_path( $slug );
 	if ( $legal_page && 'publish' === $legal_page->post_status ) {
@@ -79,10 +80,16 @@ $legal_vat    = trim( cbae_setting( 'vat_number' ) );
 $legal_office = trim( cbae_setting( 'registered_office' ) );
 $legal_lines  = array();
 
+// When the registered company name differs from the site name the site is a
+// trading name ("andwis entrances is a trading name of Etron UK Ltd,
+// registered in ..."), and the copyright line carries the trading name.
+$site_name    = get_bloginfo( 'name' );
+$is_trading   = $legal_name && 0 !== strcasecmp( $legal_name, $site_name );
+
 if ( $legal_name ) {
-	$registration = $legal_name;
+	$registration = $is_trading ? $site_name . ' is a trading name of ' . $legal_name : $legal_name;
 	if ( $legal_place ) {
-		$registration .= ' is registered in ' . $legal_place;
+		$registration .= ( $is_trading ? ', registered in ' : ' is registered in ' ) . $legal_place;
 	}
 	if ( $legal_number ) {
 		$registration .= ( $legal_place ? ', ' : ' ' ) . 'company number ' . $legal_number;
@@ -229,7 +236,7 @@ if ( $show_band ) {
 	<div id="colophon">
 		<div class="container">
 			<div class="site-footer__legal-row">
-				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $legal_name ? $legal_name : get_bloginfo( 'name' ) ); ?></p>
+				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $legal_name && ! $is_trading ? $legal_name : $site_name ); ?></p>
 				<?php
 				if ( $legal_pages ) {
 					?>

@@ -341,30 +341,40 @@ set, else an inline SVG built from the andwis wordmark paths plus
   site-wide band" (sidebar panel), or when the page already ends on a CTA
   or Form block.
 - Legal links are looked up by slug (`privacy-policy`, `cookie-policy`,
-  `terms-and-conditions`, `accessibility-statement`) and dropped if the page
-  is missing. Statutory company details come from Site-Wide Settings > Legal.
+  `terms`, `modern-slavery-statement`, `accessibility-statement`) and dropped
+  if the page is missing. Statutory company details come from Site-Wide
+  Settings > Legal; when the registered company name differs from the site
+  name the footer reads "{site} is a trading name of {company}, registered
+  in ..." and the copyright line carries the site name.
 
 ## Content model (`inc/posttypes.php`)
 
-| Type         | URL                                     | Hub                                    |
-| ------------ | --------------------------------------- | -------------------------------------- |
-| `product`    | `/products/{hub}/{slug}/` (hierarchical) | top-level product, e.g. `/products/industrial-doors/` |
-| `service`    | `/service-maintenance/{slug}/`           | Page `service-maintenance`             |
+URLs follow the client's copy deck (Nov 2026), which also carries the SEO
+titles and the redirect targets for the old Etron site.
+
+| Type         | URL                                      | Hub                                    |
+| ------------ | ---------------------------------------- | -------------------------------------- |
+| `product`    | `/services/{hub}/{slug}/` (hierarchical) | top-level product, e.g. `/services/industrial-doors/` |
 | `sector`     | `/sectors/{slug}/`                       | Page `sectors`                         |
 | `case_study` | `/case-studies/{slug}/`                  | Page `case-studies`                    |
-| `vacancy`    | `/careers/vacancies/{slug}/`             | Page `careers`                         |
+| `vacancy`    | `/careers/{slug}/`                       | Page `careers`                         |
 | `post`       | `/news/{slug}/`                          | Posts page `news` (index.php)          |
 
-Products are hierarchical on purpose: a hub is a top-level product and a
-Cards block set to "children of this page" lists its range. Gates &
-Barriers is a hub with no children. Service & Maintenance is a Page because
-services are flat. Watch slugs: a child product may legally share a slug
-with its parent (WP allows it per parent), so look hubs up with
-`post_parent => 0`.
+`product` ("Products & Services" in wp-admin) holds all four hubs and what
+sits under them: Automatic & Revolving Doors, Industrial Doors and Gates &
+Barriers with their product pages, and Service & Maintenance with its three
+service pages. A hub is a top-level product and a Cards block set to
+"children of this page" lists its range. Gates & Barriers is a hub with no
+children. There is no separate service post type and no page at `/services/`
+itself. Watch slugs: a child may legally share a slug with its parent (WP
+allows it per parent - Automatic revolving doors does), so look hubs up with
+`post_parent => 0`. Vacancies share the `/careers/` prefix with the Careers
+page, so that page must not be given child pages.
 
 Everything except case studies and vacancies renders through `page.php`
 from blocks. `single-case_study.php` and `single-vacancy.php` have fixed
-shapes driven by post meta; `single.php`/`index.php` are news.
+shapes driven by post meta; `single.php`/`index.php` are news (articles are
+plain core blocks). The About page is the "Our story" page (`/about/`).
 
 ## Post meta (`inc/meta.php`)
 
@@ -372,7 +382,8 @@ No ACF. Fields are declared once in `cbae_meta_fields()`, registered with
 `show_in_rest`, and edited in the "Listing & details" document sidebar
 panel (`blocks/_sidebar`, enqueued per post type). Shared: `card_summary`,
 `card_icon`, `hide_global_cta`. Relationship fields (`related_products`,
-`related_sectors`) are arrays of IDs via `blocks/_shared/MultiPostPicker.js`;
+`related_sectors`) are arrays of IDs via `blocks/_shared/MultiPostPicker.js`
+(a hub's `related_sectors` drives its "Where you'll find our doors" tiles);
 reverse lookups use `cbae_posts_referencing()` (LIKE on the serialised
 `i:ID;`). Vacancies carry the JobPosting fields ported from andwis lifts.
 SEO title/description per page is Yoast's job - do not add fields for it.
@@ -384,7 +395,11 @@ SEO title/description per page is Yoast's job - do not add fields for it.
 | `hero`            | Every page opens with one. Highlight phrase, bullets, site CTAs, curve, compact size for inner pages. |
 | `audience-router` | Home: "I need..." tiles + sector chips (auto from the sector type). |
 | `stats`           | Scale numbers; `data-count` count-up via `src/js/counter.js`.       |
-| `cards`           | The one listing block: manual / children / post type / selected / related. Renders `cbae_tile()`. |
+| `cards`           | The one listing block: manual / children / post type / selected / related / case studies about this page (reverse lookup, hides when none). Renders `cbae_tile()`. |
+| `content`         | Text section: H2, body, optional tick / numbered / plain list, buttons. Split (heading left) or stacked; paper, sage, forest or mint. |
+| `table`           | Heading + data table (2 or 3 columns) that stacks to cards on mobile: product specs, accreditations, offices. |
+| `form`            | Gravity Forms wrapper. Presets `need` / `product` / `building` pre-select the matching dropdowns via GF dynamic population. |
+| `faqs`            | Accordion (`src/js/accordion.js`) with optional FAQPage schema; turn schema off when it is just a click-to-expand list. |
 | `image-text`      | Copy + circular photo with the rotating dots ring (or plain photo). |
 | `logo-row`        | Accreditation/partner logos; label-only rows render as dashed placeholders. |
 | `cta`             | Closing band; defaults to the site CTAs.                            |
@@ -394,15 +409,30 @@ Shared helpers every render.php uses: `cbae_section_id()`,
 `cbae_lines()`, `cbae_icon()`. Icons are SVG files in `img/icons/`.
 Block CSS lives in `src/blocks/{slug}.css`.
 
-Still to build when content arrives (patterns exist in andwis lifts):
-feature accordion, FAQs, case study index + summary, news index, vacancy
-index, downloads, offices/locations with maps, team, form (Gravity Forms
-wrapper - `cbae_render_form()` and the GF theming in `forms.css` are ready).
+Still to build (patterns exist in andwis lifts): case study index with
+sector / product / service filters, case study summary, vacancy index,
+downloads with real files, offices with map and postcode search ("find your
+local team"), team grid with photos, and the group cross-sell module. The
+deck refers to a "Global components" section (Ready to talk block,
+cross-sell module, multi-site accordion) that was not in the copy supplied.
+
+## Forms
+
+Three Gravity Forms were created from the deck: Main enquiry (1), Book a
+survey (2) and Job application (3, set as the vacancy form in Site-Wide
+Settings). The enquiry dropdowns are populated dynamically by parameter
+name (`need`, `product`, `building`), which is how each page's Form block
+presets them; the vacancy form takes `role`.
 
 ## Seeding
 
-Placeholder pages, products, services, sectors and the three menus were
-created with WP-CLI; the homepage and hub layouts came from a one-off
-`wp eval-file` script (not kept). Four placeholder photos were imported
-from the andwis lifts media library - swap them when real imagery lands.
-Gravity Forms was copied from the lifts local site for development only.
+Placeholder pages, products, sectors and the three menus were created with
+WP-CLI. In Nov 2026 the client's draft copy deck was loaded into every page
+(blocks, card summaries, relationships, Yoast titles and descriptions) with
+one-off `wp eval-file` scripts that are deliberately not in this repo.
+Square-bracketed text in the content, such as `[X]` or `[TBC]`, is the
+deck's own list of open items and is left visible until the client confirms
+each one. Four fictional case studies exist only so listings and the mega
+menu have something to show; replace them when real ones are approved.
+Placeholder photos came from the andwis lifts media library. Gravity Forms
+was copied from the lifts local site for development only.

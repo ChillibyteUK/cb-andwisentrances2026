@@ -3,7 +3,7 @@
  * Block template for Cards.
  *
  * Every source (manual rows, child pages, a post type, chosen posts, this
- * page's related items) is resolved into the row shape cbae_posts_to_cards()
+ * page's related items, case studies that reference this page) is resolved into the row shape cbae_posts_to_cards()
  * returns, so one loop renders all of them through cbae_tile().
  *
  * @package cb-andwisentrances2026
@@ -28,8 +28,8 @@ $view_all_text = $attributes['viewAllText'] ?? '';
 $view_all_url  = $attributes['viewAllUrl'] ?? '';
 $background    = $attributes['background'] ?? 'paper';
 
-$allowed_types = array( 'product', 'service', 'sector', 'case_study', 'page', 'post' );
-$pick_types    = array( 'product', 'service', 'sector', 'case_study', 'page' );
+$allowed_types = array( 'product', 'sector', 'case_study', 'vacancy', 'page', 'post' );
+$pick_types    = array( 'product', 'sector', 'case_study', 'page' );
 $per_page      = $limit > 0 ? $limit : -1;
 $cards         = array();
 
@@ -103,6 +103,17 @@ switch ( $source ) {
 					)
 				)
 			);
+		}
+		break;
+
+	case 'case_studies':
+		// Case studies that reference this page in their sectors / products
+		// field - the reverse of 'related'. Nothing renders when none do.
+		$current_id = get_the_ID();
+
+		if ( $current_id ) {
+			$reverse_key = 'sector' === get_post_type( $current_id ) ? 'related_sectors' : 'related_products';
+			$cards       = cbae_posts_to_cards( cbae_posts_referencing( 'case_study', $reverse_key, $current_id, $limit > 0 ? $limit : 3 ) );
 		}
 		break;
 

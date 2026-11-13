@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/form",
+	"title": "Form",
+	"description": "Gravity Forms section: heading, intro and a short reassurance note beside (or above) the form in a white card. Can pre-select the form's need, product and building dropdowns.",
+	"category": "cb-andwisentrances2026",
+	"icon": "feedback",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"formId": { "type": "number", "default": 0 },
+		"need": { "type": "string", "default": "" },
+		"product": { "type": "string", "default": "" },
+		"building": { "type": "string", "default": "" },
+		"note": { "type": "string", "default": "" },
+		"layout": { "type": "string", "default": "split" },
+		"background": { "type": "string", "default": "sage-tint" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

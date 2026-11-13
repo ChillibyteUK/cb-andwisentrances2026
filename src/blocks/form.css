@@ -1,0 +1,138 @@
+/* Form - blocks/form (Gravity Forms wrapper) */
+.cb-form {
+	& .cb-form__copy,
+	& .cb-form__main {
+		min-width: 0;
+	}
+
+	& .cb-form__copy {
+		max-width: 46rem;
+
+		& h2 {
+			margin: 0 0 var(--space-3);
+		}
+	}
+
+	& .cb-form__intro {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+
+	& .cb-form__note {
+		margin: var(--space-3) 0 0;
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-500);
+	}
+
+	/* Copy sits above the card whenever the two are not side by side. */
+	& .cb-form__row:not(.row) .cb-form__copy + .cb-form__main {
+		margin-top: var(--space-5);
+	}
+
+	/* ---------- Stack: centred copy above a centred card ---------- */
+	&.cb-form--stack .cb-form__copy {
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	&.cb-form--stack .cb-form__card,
+	&.cb-form--no-copy .cb-form__card {
+		max-width: 46rem;
+		margin-inline: auto;
+	}
+
+	/* ---------- The card ---------- */
+	& .cb-form__card {
+		padding: clamp(1.25rem, 3vw, 2.5rem);
+		border-radius: var(--radius-lg);
+		background: var(--col-paper);
+		box-shadow: var(--shadow-soft);
+		text-align: left;
+
+		& .cb-empty {
+			margin: 0;
+		}
+
+		/*
+		 * Gravity Forms. Colours, labels, the submit button and the
+		 * confirmation message are themed in src/css/forms.css
+		 * (.cb-form .gform_wrapper); this only adds layout that is missing
+		 * there. Real properties rather than --gf-* variables where it matters,
+		 * so it holds for both the orbital and the legacy GF theme.
+		 */
+		& .gform_wrapper {
+			margin: 0;
+
+			& form {
+				margin: 0;
+			}
+
+			& .gform_heading:empty {
+				display: none;
+			}
+
+			& .gform_fields {
+				--gf-form-gap-y: var(--space-4);
+
+				row-gap: var(--space-4);
+			}
+
+			/* GF's small/medium sizes are half width; the card is narrow enough. */
+			& .gfield :is(input, select, textarea):is(.small, .medium, .large),
+			& .gfield .ginput_container > :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			& .gfield textarea {
+				min-height: 8rem;
+			}
+
+			/* The theme's block-level label rule is wrong for inline choices. */
+			& .gchoice label,
+			& .ginput_container_consent label {
+				display: inline;
+				margin-bottom: 0;
+				color: var(--col-ink);
+				font-weight: var(--fw-400);
+			}
+
+			& .gfield_required {
+				color: var(--col-error);
+			}
+
+			& .gfield_description {
+				color: var(--col-ink-soft);
+				font-size: var(--fs-caption);
+				line-height: 1.5;
+			}
+
+			& .gfield_description:not(.validation_message) {
+				padding-top: var(--space-1);
+			}
+
+			& .validation_message,
+			& .gfield_validation_message {
+				color: var(--col-error);
+				font-size: var(--fs-caption);
+			}
+
+			& .gform_footer,
+			& .gform_page_footer {
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
+	}
+
+	/* White card on a white section needs an edge. */
+	&:not([class*="bg-"]) .cb-form__card {
+		border: 1px solid var(--col-line);
+	}
+
+	&.bg-sage .cb-form__intro {
+		color: var(--col-ink);
+	}
+}

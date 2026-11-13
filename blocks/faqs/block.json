@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/faqs",
+	"title": "FAQs / accordion",
+	"description": "Heading, intro and an accordion of question and answer pairs, with optional FAQPage structured data. Also works as a generic click-to-expand list.",
+	"category": "cb-andwisentrances2026",
+	"icon": "editor-help",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"items": { "type": "array", "default": [] },
+		"schema": { "type": "boolean", "default": true },
+		"layout": { "type": "string", "default": "split" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

@@ -50,21 +50,14 @@ function cbae_meta_fields() {
 				'label'     => 'Related sectors',
 				'type'      => 'ids',
 				'post_type' => 'sector',
-				'help'      => 'Sectors this product is most relevant to. Shown as "Where it is used" on the product page.',
-			),
-		),
-		'service'    => array(
-			'related_sectors' => array(
-				'label'     => 'Related sectors',
-				'type'      => 'ids',
-				'post_type' => 'sector',
+				'help'      => 'Sectors this product or service is most relevant to. Listed by a Cards block set to "Related to this page".',
 			),
 		),
 		'sector'     => array(
 			'related_products' => array(
 				'label'     => 'Relevant products & services',
 				'type'      => 'ids',
-				'post_type' => array( 'product', 'service' ),
+				'post_type' => 'product',
 				'help'      => 'Listed by a Cards block set to "Related to this page", in this order.',
 			),
 		),
@@ -92,7 +85,7 @@ function cbae_meta_fields() {
 			'related_products' => array(
 				'label'     => 'Products & services',
 				'type'      => 'ids',
-				'post_type' => array( 'product', 'service' ),
+				'post_type' => 'product',
 				'help'      => 'Drives the product filter and the related case studies on each product page.',
 			),
 		),
@@ -188,7 +181,7 @@ function cbae_meta_fields() {
  * @return string[]
  */
 function cbae_meta_post_types() {
-	return array( 'page', 'product', 'service', 'sector', 'case_study', 'vacancy', 'post' );
+	return array( 'page', 'product', 'sector', 'case_study', 'vacancy', 'post' );
 }
 
 /**

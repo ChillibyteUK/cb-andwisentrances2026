@@ -5,7 +5,7 @@ import EditorBlockShell from '../../_shared/EditorBlockShell';
 import RepeaterField from '../../_shared/RepeaterField';
 import MultiPostPicker from '../../_shared/MultiPostPicker';
 
-const SELECTABLE_TYPES = [ 'product', 'service', 'sector', 'case_study', 'page' ];
+const SELECTABLE_TYPES = [ 'product', 'sector', 'case_study', 'page' ];
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -49,6 +49,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					{ label: 'Child pages of this page', value: 'children' },
 					{ label: 'Chosen posts', value: 'selected' },
 					{ label: 'Related to this page', value: 'related' },
+					{ label: 'Case studies about this page', value: 'case_studies' },
 					{ label: 'Manual cards', value: 'manual' },
 				] }
 				onChange={ ( value ) => setAttributes( { source: value } ) }
@@ -60,12 +61,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							label={ __( 'Post type', 'cb-andwisentrances2026' ) }
 							value={ postType }
 							options={ [
-								{ label: 'Products', value: 'product' },
-								{ label: 'Services', value: 'service' },
+								{ label: 'Products & services', value: 'product' },
 								{ label: 'Sectors', value: 'sector' },
 								{ label: 'Case studies', value: 'case_study' },
 								{ label: 'Pages', value: 'page' },
 								{ label: 'News posts', value: 'post' },
+								{ label: 'Vacancies', value: 'vacancy' },
 							] }
 							onChange={ ( value ) => setAttributes( { postType: value } ) }
 						/>
@@ -90,6 +91,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			{ 'children' === source && (
 				<p className="cb-andwisentrances2026-editor-field__help">
 					{ __( 'Lists the published child pages of the page this block sits on, in menu order.', 'cb-andwisentrances2026' ) }
+				</p>
+			) }
+			{ 'case_studies' === source && (
+				<p className="cb-andwisentrances2026-editor-field__help">
+					{ __( 'Lists up to three case studies (or the limit set above) whose Sectors or Products & services field includes the page this block sits on. The section hides itself when there are none.', 'cb-andwisentrances2026' ) }
 				</p>
 			) }
 			{ 'selected' === source && (

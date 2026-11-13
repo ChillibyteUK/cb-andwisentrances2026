@@ -1,0 +1,204 @@
+/* Content section - blocks/content */
+.cb-content {
+	& .cb-content__inner {
+		display: grid;
+		gap: var(--space-4);
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	& .cb-content__head,
+	& .cb-content__body {
+		min-width: 0;
+	}
+
+	& h2 {
+		margin: 0;
+	}
+
+	& .cb-content__body > * + * {
+		margin-top: var(--space-4);
+	}
+
+	& .cb-content__body > :first-child {
+		margin-top: 0;
+	}
+
+	& .cb-content__list-label {
+		margin-bottom: var(--space-2);
+	}
+
+	& .cb-content__list-label + * {
+		margin-top: 0;
+	}
+
+	& .cb-content__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	/* ---------- Numbered steps ---------- */
+	& .cb-steps {
+		display: grid;
+		gap: var(--space-3);
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
+		counter-reset: cb-step;
+
+		& li {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			align-items: start;
+			gap: var(--space-3);
+			color: var(--col-ink-soft);
+			line-height: 1.55;
+			counter-increment: cb-step;
+
+			&::before {
+				content: counter(cb-step);
+				display: grid;
+				place-items: center;
+				width: 2rem;
+				height: 2rem;
+				border-radius: 50%;
+				background: var(--col-forest);
+				color: var(--col-paper);
+				font-size: var(--fs-small);
+				font-weight: var(--fw-600);
+				line-height: 1;
+				font-variant-numeric: tabular-nums;
+			}
+
+			/* Sit the first text line level with the centre of the disc. */
+			& > span {
+				padding-top: 0.2rem;
+			}
+		}
+	}
+
+	/* ---------- Plain list with hairline dividers ---------- */
+	& .cb-plain-list {
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
+
+		& li {
+			padding-block: var(--space-3);
+			color: var(--col-ink-soft);
+			line-height: 1.55;
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+
+			& + li {
+				border-top: 1px solid rgb(16 66 31 / 0.12);
+			}
+		}
+	}
+
+	/* ---------- Stack: one measure-width column ---------- */
+	&.cb-content--stack {
+		& .cb-content__inner {
+			max-width: 48rem;
+		}
+
+		&.cb-content--align-center {
+			text-align: center;
+
+			& .cb-content__inner {
+				margin-inline: auto;
+			}
+
+			/* Ticks and step numbers stay hard against their text, so the list
+			   is centred as a block rather than line by line. */
+			& .cb-check-list,
+			& .cb-steps {
+				width: fit-content;
+				margin-inline: auto;
+				text-align: left;
+			}
+
+			& .cb-content__actions {
+				justify-content: center;
+			}
+		}
+	}
+
+	/* ---------- Sage: emerald small caps are too faint on it ---------- */
+	&.bg-sage .eyebrow {
+		color: var(--col-forest);
+	}
+
+	/* ---------- Forest ---------- */
+	&.bg-forest {
+		& .eyebrow {
+			color: var(--col-mint);
+		}
+
+		& .cb-check-list li,
+		& .cb-steps li,
+		& .cb-plain-list li {
+			color: rgb(255 255 255 / 0.85);
+		}
+
+		& .cb-check,
+		& .cb-steps li::before {
+			background: var(--col-mint);
+			color: var(--col-forest);
+		}
+
+		& .cb-plain-list li + li {
+			border-top-color: rgb(255 255 255 / 0.18);
+		}
+	}
+
+	/* ---------- Mint ---------- */
+	&.bg-mint {
+		background: var(--col-mint);
+		color: var(--col-forest-deep);
+
+		& h2,
+		& .eyebrow,
+		& .cb-prose,
+		& .cb-check-list li,
+		& .cb-steps li,
+		& .cb-plain-list li {
+			color: var(--col-forest-deep);
+		}
+
+		& .cb-prose a {
+			color: var(--col-forest-deep);
+
+			&:hover,
+			&:focus-visible {
+				color: var(--col-forest);
+			}
+		}
+
+		& .cb-plain-list li + li {
+			border-top-color: rgb(19 45 23 / 0.2);
+		}
+
+		& .btn-ghost {
+			--btn-ghost-ink: var(--col-forest-deep);
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-content.cb-content--split .cb-content__inner {
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+		gap: var(--space-5);
+
+		/* No heading or eyebrow: let the copy use the full width. */
+		& > :only-child {
+			grid-column: 1 / -1;
+		}
+	}
+}

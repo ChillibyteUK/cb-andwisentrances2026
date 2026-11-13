@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/content",
+	"title": "Content section",
+	"description": "Text-only section: optional eyebrow, heading, body copy, an optional tick list, numbered steps or plain list, and buttons. Heading beside the copy (split) or a single column (stack).",
+	"category": "cb-andwisentrances2026",
+	"icon": "text",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "" },
+		"heading": { "type": "string", "default": "" },
+		"body": { "type": "string", "default": "" },
+		"list": { "type": "string", "default": "" },
+		"listStyle": { "type": "string", "default": "check" },
+		"listLabel": { "type": "string", "default": "" },
+		"primaryText": { "type": "string", "default": "" },
+		"primaryUrl": { "type": "string", "default": "" },
+		"secondaryText": { "type": "string", "default": "" },
+		"secondaryUrl": { "type": "string", "default": "" },
+		"layout": { "type": "string", "default": "split" },
+		"align": { "type": "string", "default": "start" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

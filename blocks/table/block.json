@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/table",
+	"title": "Table",
+	"description": "Heading, intro and a simple two or three column data table, e.g. product specifications, accreditations or offices. Rows stack as cards on small screens.",
+	"category": "cb-andwisentrances2026",
+	"icon": "editor-table",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"head1": { "type": "string", "default": "" },
+		"head2": { "type": "string", "default": "" },
+		"head3": { "type": "string", "default": "" },
+		"rows": { "type": "array", "default": [] },
+		"firstColHeader": { "type": "boolean", "default": true },
+		"note": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

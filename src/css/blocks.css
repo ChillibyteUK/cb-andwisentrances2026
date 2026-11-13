@@ -161,6 +161,212 @@
 	}
 }
 
+/* --- src/blocks/content.css --- */
+/* Content section - blocks/content */
+.cb-content {
+	& .cb-content__inner {
+		display: grid;
+		gap: var(--space-4);
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	& .cb-content__head,
+	& .cb-content__body {
+		min-width: 0;
+	}
+
+	& h2 {
+		margin: 0;
+	}
+
+	& .cb-content__body > * + * {
+		margin-top: var(--space-4);
+	}
+
+	& .cb-content__body > :first-child {
+		margin-top: 0;
+	}
+
+	& .cb-content__list-label {
+		margin-bottom: var(--space-2);
+	}
+
+	& .cb-content__list-label + * {
+		margin-top: 0;
+	}
+
+	& .cb-content__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	/* ---------- Numbered steps ---------- */
+	& .cb-steps {
+		display: grid;
+		gap: var(--space-3);
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
+		counter-reset: cb-step;
+
+		& li {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			align-items: start;
+			gap: var(--space-3);
+			color: var(--col-ink-soft);
+			line-height: 1.55;
+			counter-increment: cb-step;
+
+			&::before {
+				content: counter(cb-step);
+				display: grid;
+				place-items: center;
+				width: 2rem;
+				height: 2rem;
+				border-radius: 50%;
+				background: var(--col-forest);
+				color: var(--col-paper);
+				font-size: var(--fs-small);
+				font-weight: var(--fw-600);
+				line-height: 1;
+				font-variant-numeric: tabular-nums;
+			}
+
+			/* Sit the first text line level with the centre of the disc. */
+			& > span {
+				padding-top: 0.2rem;
+			}
+		}
+	}
+
+	/* ---------- Plain list with hairline dividers ---------- */
+	& .cb-plain-list {
+		margin-bottom: 0;
+		padding: 0;
+		list-style: none;
+
+		& li {
+			padding-block: var(--space-3);
+			color: var(--col-ink-soft);
+			line-height: 1.55;
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+
+			& + li {
+				border-top: 1px solid rgb(16 66 31 / 0.12);
+			}
+		}
+	}
+
+	/* ---------- Stack: one measure-width column ---------- */
+	&.cb-content--stack {
+		& .cb-content__inner {
+			max-width: 48rem;
+		}
+
+		&.cb-content--align-center {
+			text-align: center;
+
+			& .cb-content__inner {
+				margin-inline: auto;
+			}
+
+			/* Ticks and step numbers stay hard against their text, so the list
+			   is centred as a block rather than line by line. */
+			& .cb-check-list,
+			& .cb-steps {
+				width: fit-content;
+				margin-inline: auto;
+				text-align: left;
+			}
+
+			& .cb-content__actions {
+				justify-content: center;
+			}
+		}
+	}
+
+	/* ---------- Sage: emerald small caps are too faint on it ---------- */
+	&.bg-sage .eyebrow {
+		color: var(--col-forest);
+	}
+
+	/* ---------- Forest ---------- */
+	&.bg-forest {
+		& .eyebrow {
+			color: var(--col-mint);
+		}
+
+		& .cb-check-list li,
+		& .cb-steps li,
+		& .cb-plain-list li {
+			color: rgb(255 255 255 / 0.85);
+		}
+
+		& .cb-check,
+		& .cb-steps li::before {
+			background: var(--col-mint);
+			color: var(--col-forest);
+		}
+
+		& .cb-plain-list li + li {
+			border-top-color: rgb(255 255 255 / 0.18);
+		}
+	}
+
+	/* ---------- Mint ---------- */
+	&.bg-mint {
+		background: var(--col-mint);
+		color: var(--col-forest-deep);
+
+		& h2,
+		& .eyebrow,
+		& .cb-prose,
+		& .cb-check-list li,
+		& .cb-steps li,
+		& .cb-plain-list li {
+			color: var(--col-forest-deep);
+		}
+
+		& .cb-prose a {
+			color: var(--col-forest-deep);
+
+			&:hover,
+			&:focus-visible {
+				color: var(--col-forest);
+			}
+		}
+
+		& .cb-plain-list li + li {
+			border-top-color: rgb(19 45 23 / 0.2);
+		}
+
+		& .btn-ghost {
+			--btn-ghost-ink: var(--col-forest-deep);
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-content.cb-content--split .cb-content__inner {
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+		gap: var(--space-5);
+
+		/* No heading or eyebrow: let the copy use the full width. */
+		& > :only-child {
+			grid-column: 1 / -1;
+		}
+	}
+}
+
 /* --- src/blocks/cta.css --- */
 /* CTA Band — blocks/cta */
 .cb-cta {
@@ -231,6 +437,271 @@
 		& .btn {
 			flex: 1 1 auto;
 		}
+	}
+}
+
+/* --- src/blocks/faqs.css --- */
+/* FAQs / accordion - blocks/faqs. Behaviour: src/js/accordion.js */
+.cb-faqs {
+	--cb-faqs-line: rgb(16 66 31 / 0.15);
+
+	& .cb-faqs__head,
+	& .cb-faqs__body {
+		min-width: 0;
+	}
+
+	/* Split: the row's own gap spaces the heading from the accordion. */
+	& .cb-faqs__row.row .cb-section-head {
+		margin-bottom: 0;
+	}
+
+	/* ---------- Stack (and any layout with no heading) ---------- */
+	&.cb-faqs--stack .cb-faqs__list,
+	&.cb-faqs--no-head .cb-faqs__list,
+	&.cb-faqs--stack .cb-empty,
+	&.cb-faqs--no-head .cb-empty {
+		max-width: 52rem;
+		margin-inline: auto;
+	}
+
+	/* ---------- Accordion ---------- */
+	& .cb-faqs__list {
+		border-top: 1px solid var(--cb-faqs-line);
+	}
+
+	& .cb-faqs__item {
+		border-bottom: 1px solid var(--cb-faqs-line);
+	}
+
+	& .cb-faqs__question {
+		margin: 0;
+		font-size: var(--fs-body-lg);
+		letter-spacing: 0;
+	}
+
+	& .cb-faqs__toggle {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-3);
+		width: 100%;
+		min-height: 4rem;
+		padding: var(--space-3) 0;
+		border: 0;
+		border-radius: var(--radius-sm);
+		background: none;
+		color: var(--col-forest);
+		font-size: var(--fs-body-lg);
+		font-weight: var(--fw-600);
+		line-height: 1.35;
+		text-align: left;
+		cursor: pointer;
+
+		&:focus-visible {
+			outline: 2px solid var(--col-emerald);
+			outline-offset: 2px;
+		}
+
+		&:hover .cb-faqs__icon {
+			border-color: var(--col-emerald);
+		}
+	}
+
+	& .cb-faqs__label {
+		min-width: 0;
+	}
+
+	& .cb-faqs__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid rgb(16 66 31 / 0.25);
+		border-radius: 50%;
+		color: var(--col-forest);
+		transition:
+			transform var(--transition),
+			background-color var(--transition),
+			border-color var(--transition),
+			color var(--transition);
+
+		& svg {
+			display: block;
+			width: 0.875rem;
+			height: 0.875rem;
+		}
+	}
+
+	/* Open: accordion.js sets aria-expanded="true" on the toggle and .is-open
+	   on the item. The plus turns 45deg into a cross. */
+	& .cb-faqs__item.is-open .cb-faqs__icon,
+	& .cb-faqs__toggle[aria-expanded="true"] .cb-faqs__icon {
+		border-color: var(--col-forest);
+		background: var(--col-forest);
+		color: var(--col-mint);
+		transform: rotate(45deg);
+	}
+
+	/* No display here: the panel is closed with the [hidden] attribute. */
+	& .cb-faqs__panel {
+		padding: 0 var(--space-5) var(--space-4) 0;
+	}
+
+	&.bg-sage {
+		--cb-faqs-line: rgb(16 66 31 / 0.3);
+
+		& .cb-section-head p,
+		& .cb-prose {
+			color: var(--col-ink);
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cb-faqs .cb-faqs__icon {
+		transition: none;
+	}
+}
+
+/* --- src/blocks/form.css --- */
+/* Form - blocks/form (Gravity Forms wrapper) */
+.cb-form {
+	& .cb-form__copy,
+	& .cb-form__main {
+		min-width: 0;
+	}
+
+	& .cb-form__copy {
+		max-width: 46rem;
+
+		& h2 {
+			margin: 0 0 var(--space-3);
+		}
+	}
+
+	& .cb-form__intro {
+		margin: 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-body-lg);
+	}
+
+	& .cb-form__note {
+		margin: var(--space-3) 0 0;
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-500);
+	}
+
+	/* Copy sits above the card whenever the two are not side by side. */
+	& .cb-form__row:not(.row) .cb-form__copy + .cb-form__main {
+		margin-top: var(--space-5);
+	}
+
+	/* ---------- Stack: centred copy above a centred card ---------- */
+	&.cb-form--stack .cb-form__copy {
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	&.cb-form--stack .cb-form__card,
+	&.cb-form--no-copy .cb-form__card {
+		max-width: 46rem;
+		margin-inline: auto;
+	}
+
+	/* ---------- The card ---------- */
+	& .cb-form__card {
+		padding: clamp(1.25rem, 3vw, 2.5rem);
+		border-radius: var(--radius-lg);
+		background: var(--col-paper);
+		box-shadow: var(--shadow-soft);
+		text-align: left;
+
+		& .cb-empty {
+			margin: 0;
+		}
+
+		/*
+		 * Gravity Forms. Colours, labels, the submit button and the
+		 * confirmation message are themed in src/css/forms.css
+		 * (.cb-form .gform_wrapper); this only adds layout that is missing
+		 * there. Real properties rather than --gf-* variables where it matters,
+		 * so it holds for both the orbital and the legacy GF theme.
+		 */
+		& .gform_wrapper {
+			margin: 0;
+
+			& form {
+				margin: 0;
+			}
+
+			& .gform_heading:empty {
+				display: none;
+			}
+
+			& .gform_fields {
+				--gf-form-gap-y: var(--space-4);
+
+				row-gap: var(--space-4);
+			}
+
+			/* GF's small/medium sizes are half width; the card is narrow enough. */
+			& .gfield :is(input, select, textarea):is(.small, .medium, .large),
+			& .gfield .ginput_container > :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			& .gfield textarea {
+				min-height: 8rem;
+			}
+
+			/* The theme's block-level label rule is wrong for inline choices. */
+			& .gchoice label,
+			& .ginput_container_consent label {
+				display: inline;
+				margin-bottom: 0;
+				color: var(--col-ink);
+				font-weight: var(--fw-400);
+			}
+
+			& .gfield_required {
+				color: var(--col-error);
+			}
+
+			& .gfield_description {
+				color: var(--col-ink-soft);
+				font-size: var(--fs-caption);
+				line-height: 1.5;
+			}
+
+			& .gfield_description:not(.validation_message) {
+				padding-top: var(--space-1);
+			}
+
+			& .validation_message,
+			& .gfield_validation_message {
+				color: var(--col-error);
+				font-size: var(--fs-caption);
+			}
+
+			& .gform_footer,
+			& .gform_page_footer {
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+		}
+	}
+
+	/* White card on a white section needs an edge. */
+	&:not([class*="bg-"]) .cb-form__card {
+		border: 1px solid var(--col-line);
+	}
+
+	&.bg-sage .cb-form__intro {
+		color: var(--col-ink);
 	}
 }
 
@@ -670,6 +1141,139 @@
 		border: 1px solid rgb(255 255 255 / 0.12);
 		background: rgb(255 255 255 / 0.06);
 		box-shadow: none;
+	}
+}
+
+/* --- src/blocks/table.css --- */
+/* Table - blocks/table */
+.cb-table-block {
+	--cb-table-line: rgb(16 66 31 / 0.12);
+
+	& .cb-section-head {
+		margin-bottom: var(--space-4);
+	}
+
+	& .cb-table-wrap {
+		overflow-x: auto;
+		border: 1px solid var(--cb-table-line);
+		border-radius: var(--radius-md);
+		background: var(--col-paper);
+	}
+
+	& .cb-table {
+		width: 100%;
+		border-collapse: collapse;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+		text-align: left;
+
+		& th,
+		& td {
+			padding: var(--space-3) var(--space-4);
+			vertical-align: top;
+			text-align: left;
+		}
+
+		& thead th {
+			background: var(--col-forest);
+			color: var(--col-paper);
+			font-weight: var(--fw-600);
+		}
+
+		& tbody th,
+		& tbody td {
+			border-top: 1px solid var(--cb-table-line);
+			font-weight: var(--fw-400);
+		}
+
+		& tbody tr:first-child > * {
+			border-top: 0;
+		}
+
+		/* Row heading (first column). */
+		& tbody th {
+			color: var(--col-forest);
+			font-weight: var(--fw-600);
+		}
+
+		&.cb-table--cols-2 :is(th, td):first-child {
+			width: 34%;
+		}
+
+		&.cb-table--cols-3 :is(th, td):first-child {
+			width: 26%;
+		}
+	}
+
+	& .cb-table-block__note {
+		margin: var(--space-3) 0 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+	}
+}
+
+/* Below md each row becomes a card: column heading above its value. */
+@media (max-width: 767px) {
+	.cb-table-block .cb-table {
+		display: block;
+
+		& thead {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+		}
+
+		& tbody,
+		& tr,
+		& th,
+		& td {
+			display: block;
+		}
+
+		& tr {
+			padding: var(--space-3) var(--space-4);
+		}
+
+		& tr + tr {
+			border-top: 1px solid var(--cb-table-line);
+		}
+
+		& tbody th,
+		& tbody td {
+			width: auto;
+			padding: 0;
+			border-top: 0;
+		}
+
+		& tbody :is(th, td) + :is(th, td) {
+			margin-top: var(--space-2);
+		}
+
+		&.cb-table--cols-2 :is(th, td):first-child,
+		&.cb-table--cols-3 :is(th, td):first-child {
+			width: auto;
+		}
+
+		& tbody [data-label]:not([data-label=""])::before {
+			content: attr(data-label);
+			display: block;
+			color: var(--col-ink-soft);
+			font-size: var(--fs-micro);
+			font-weight: var(--fw-600);
+			letter-spacing: var(--ls-caps);
+			line-height: 1.6;
+			text-transform: uppercase;
+		}
+
+		/* The row heading reads as the card's title, a size up from the values. */
+		& tbody th {
+			font-size: var(--fs-body-sm);
+		}
 	}
 }
 

@@ -5,7 +5,7 @@
  *
  * Takes its title and intro from the posts page itself (title + excerpt),
  * lists posts as cards with a client-side category filter, then points to
- * the Downloads page.
+ * the Resources page.
  *
  * @package cb-andwisentrances2026
  */
@@ -16,7 +16,7 @@ $news_page = is_home() ? get_post( (int) get_option( 'page_for_posts' ) ) : null
 $title     = $news_page ? get_the_title( $news_page ) : get_the_archive_title();
 $intro     = $news_page ? $news_page->post_excerpt : get_the_archive_description();
 $cats      = get_categories( array( 'hide_empty' => true ) );
-$downloads = get_page_by_path( 'downloads' );
+$downloads = get_page_by_path( 'resources' );
 ?>
 <section class="cb-page-head">
 	<div class="container">
@@ -113,7 +113,7 @@ if ( $downloads && 'publish' === $downloads->post_status ) {
 				<?php
 			}
 			?>
-			<p class="mt-4"><a class="btn" href="<?php echo esc_url( get_permalink( $downloads ) ); ?>"><?php esc_html_e( 'Browse downloads', 'cb-andwisentrances2026' ); ?></a></p>
+			<p class="mt-4"><a class="btn" href="<?php echo esc_url( get_permalink( $downloads ) ); ?>"><?php esc_html_e( 'Browse resources', 'cb-andwisentrances2026' ); ?></a></p>
 		</div>
 	</div>
 </section>

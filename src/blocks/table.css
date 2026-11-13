@@ -1,0 +1,131 @@
+/* Table - blocks/table */
+.cb-table-block {
+	--cb-table-line: rgb(16 66 31 / 0.12);
+
+	& .cb-section-head {
+		margin-bottom: var(--space-4);
+	}
+
+	& .cb-table-wrap {
+		overflow-x: auto;
+		border: 1px solid var(--cb-table-line);
+		border-radius: var(--radius-md);
+		background: var(--col-paper);
+	}
+
+	& .cb-table {
+		width: 100%;
+		border-collapse: collapse;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.55;
+		text-align: left;
+
+		& th,
+		& td {
+			padding: var(--space-3) var(--space-4);
+			vertical-align: top;
+			text-align: left;
+		}
+
+		& thead th {
+			background: var(--col-forest);
+			color: var(--col-paper);
+			font-weight: var(--fw-600);
+		}
+
+		& tbody th,
+		& tbody td {
+			border-top: 1px solid var(--cb-table-line);
+			font-weight: var(--fw-400);
+		}
+
+		& tbody tr:first-child > * {
+			border-top: 0;
+		}
+
+		/* Row heading (first column). */
+		& tbody th {
+			color: var(--col-forest);
+			font-weight: var(--fw-600);
+		}
+
+		&.cb-table--cols-2 :is(th, td):first-child {
+			width: 34%;
+		}
+
+		&.cb-table--cols-3 :is(th, td):first-child {
+			width: 26%;
+		}
+	}
+
+	& .cb-table-block__note {
+		margin: var(--space-3) 0 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+	}
+}
+
+/* Below md each row becomes a card: column heading above its value. */
+@media (max-width: 767px) {
+	.cb-table-block .cb-table {
+		display: block;
+
+		& thead {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+		}
+
+		& tbody,
+		& tr,
+		& th,
+		& td {
+			display: block;
+		}
+
+		& tr {
+			padding: var(--space-3) var(--space-4);
+		}
+
+		& tr + tr {
+			border-top: 1px solid var(--cb-table-line);
+		}
+
+		& tbody th,
+		& tbody td {
+			width: auto;
+			padding: 0;
+			border-top: 0;
+		}
+
+		& tbody :is(th, td) + :is(th, td) {
+			margin-top: var(--space-2);
+		}
+
+		&.cb-table--cols-2 :is(th, td):first-child,
+		&.cb-table--cols-3 :is(th, td):first-child {
+			width: auto;
+		}
+
+		& tbody [data-label]:not([data-label=""])::before {
+			content: attr(data-label);
+			display: block;
+			color: var(--col-ink-soft);
+			font-size: var(--fs-micro);
+			font-weight: var(--fw-600);
+			letter-spacing: var(--ls-caps);
+			line-height: 1.6;
+			text-transform: uppercase;
+		}
+
+		/* The row heading reads as the card's title, a size up from the values. */
+		& tbody th {
+			font-size: var(--fs-body-sm);
+		}
+	}
+}
