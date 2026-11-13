@@ -300,6 +300,219 @@
 	}
 }
 
+/* ---------- Article (single.php) ---------- */
+
+/* Hero meta row: category tag, date, reading time. */
+.cb-post__head {
+	& .cb-post__meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem 0.75rem;
+		margin: 0 0 var(--space-3);
+		color: rgb(255 255 255 / 0.85);
+		font-size: var(--fs-small);
+
+		& .cb-tag {
+			background: var(--col-mint);
+			color: var(--col-forest-deep);
+		}
+
+		/* Dot between the date and the reading time. */
+		& time + span::before {
+			content: "";
+			display: inline-block;
+			width: 0.3rem;
+			height: 0.3rem;
+			margin-right: 0.75rem;
+			border-radius: 50%;
+			background: currentColor;
+			vertical-align: middle;
+			opacity: 0.6;
+		}
+	}
+
+	/* Headlines run long, so the article H1 is a step down from a page H1. */
+	& h1 {
+		max-width: 26ch;
+		font-size: var(--fs-h1);
+	}
+
+	& .cb-hero__intro {
+		max-width: 42rem;
+	}
+}
+
+/* The article: a reading column down the left of the container, matching
+   andwis lifts. Core blocks only (headings, paragraphs, lists, images,
+   quotes, buttons), so everything is styled from here. */
+.cb-post {
+	padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section-y);
+}
+
+.cb-post__body {
+	max-width: 48rem;
+	color: var(--col-ink);
+	font-size: var(--fs-body-lg);
+	line-height: 1.7;
+
+	& p,
+	& ul,
+	& ol {
+		margin: 0 0 1.1em;
+	}
+
+	& ul,
+	& ol {
+		padding-left: 1.25em;
+	}
+
+	& li + li {
+		margin-top: 0.5em;
+	}
+
+	& li::marker {
+		color: var(--col-emerald);
+	}
+
+	& strong {
+		color: var(--col-forest);
+		font-weight: var(--fw-600);
+	}
+
+	/* A heading sits tight on the text it introduces. */
+	& h2,
+	& h3,
+	& h4 {
+		margin: 1.8em 0 0.4em;
+		color: var(--col-forest);
+		line-height: 1.3;
+	}
+
+	& h2 {
+		font-size: var(--fs-h3);
+	}
+
+	& h3 {
+		font-size: var(--fs-h4);
+	}
+
+	& h4 {
+		font-size: var(--fs-h5);
+	}
+
+	& blockquote {
+		margin: 1.5em 0;
+		padding: 0 0 0 1.25rem;
+		border-left: 4px solid var(--col-emerald);
+		color: var(--col-forest);
+		font-weight: var(--fw-600);
+	}
+
+	& figure {
+		margin: 1.75em 0;
+	}
+
+	& img {
+		max-width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+	}
+
+	& figcaption {
+		margin-top: 0.5rem;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-caption);
+	}
+
+	& .wp-block-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		margin-top: var(--space-4);
+	}
+
+	& .wp-block-button__link {
+		color: var(--col-ink);
+		text-decoration: none;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--col-paper);
+		}
+	}
+}
+
+/* ---------- Case study facts strip (single-case_study.php) ---------- */
+.cb-section--sm {
+	padding-block: var(--section-y-sm);
+}
+
+.cb-facts {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+	gap: var(--space-4);
+	margin: 0;
+	padding: clamp(1.25rem, 3vw, 2rem);
+	border-radius: var(--radius-md);
+	background: var(--col-sage-tint);
+
+	& .cb-facts__item {
+		min-width: 0;
+	}
+
+	& dt {
+		color: var(--col-ink-soft);
+		font-size: var(--fs-micro);
+		font-weight: var(--fw-600);
+		letter-spacing: var(--ls-caps);
+		text-transform: uppercase;
+	}
+
+	& dd {
+		margin: 0.3rem 0 0;
+		color: var(--col-forest);
+		font-weight: var(--fw-600);
+		line-height: 1.4;
+	}
+}
+
+/* ---------- Vacancy (single-vacancy.php) ---------- */
+.cb-vacancy__badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	margin: var(--space-3) 0 0;
+	padding: 0;
+	list-style: none;
+	color: rgb(255 255 255 / 0.85);
+	font-size: var(--fs-small);
+}
+
+.cb-vacancy__aside {
+	padding: clamp(1.25rem, 3vw, 2rem);
+	border-radius: var(--radius-lg);
+	background: var(--col-sage-tint);
+
+	& h2 {
+		margin-top: 0;
+		font-size: var(--fs-h3);
+	}
+}
+
+.cb-vacancy__equality {
+	margin-top: var(--space-4);
+	color: var(--col-ink-soft);
+	font-size: var(--fs-caption);
+}
+
+@media (min-width: 992px) {
+	.cb-vacancy__aside {
+		position: sticky;
+		top: calc(var(--nav-height) + var(--space-4));
+	}
+}
+
 /* ---------- Scroll-in animation hook ---------- */
 .cb-fade {
 	opacity: 0;

@@ -341,6 +341,11 @@ function cbae_starts_with_hero() {
 		return false;
 	}
 
+	// News articles and case studies draw the hero from their own templates.
+	if ( is_singular( array( 'post', 'case_study' ) ) ) {
+		return true;
+	}
+
 	return 'cb-andwisentrances2026/hero' === cbae_first_block_name();
 }
 

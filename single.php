@@ -2,8 +2,11 @@
 /**
  * Single news post.
  *
- * Forest head with the category, date and title; featured image; the
- * article in a reading measure; then the three latest other posts.
+ * The same frame as every other page: the compact hero (featured image
+ * behind it when there is one) with the category, date, reading time, title
+ * and the hand-written excerpt as a standfirst; the article in a reading
+ * column down the left, as on andwis lifts; then the three latest other
+ * posts. Article styles are in src/css/components.css (.cb-post).
  *
  * @package cb-andwisentrances2026
  */
@@ -16,8 +19,16 @@ while ( have_posts() ) {
 	$cats    = get_the_category();
 	$news_id = (int) get_option( 'page_for_posts' );
 	?>
-	<section class="cb-page-head cb-post__head">
-		<div class="container">
+	<section class="cb-hero cb-hero--compact cb-hero--curve cb-post__head">
+		<?php
+		if ( has_post_thumbnail() ) {
+			?>
+		<div class="cb-hero__bg" style="background-image:url('<?php echo esc_url( get_the_post_thumbnail_url( null, 'full' ) ); ?>');" role="presentation"></div>
+			<?php
+		}
+		?>
+		<div class="cb-hero__scrim"></div>
+		<div class="container cb-hero__inner">
 			<?php cb_andwisentrances2026_render_breadcrumbs( cb_andwisentrances2026_get_breadcrumbs(), 'cb-breadcrumbs' ); ?>
 			<p class="cb-post__meta">
 				<?php
@@ -27,25 +38,27 @@ while ( have_posts() ) {
 					<?php
 				}
 				?>
-				<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+				<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'j F Y' ) ); ?></time>
 				<span><?php echo esc_html( estimate_reading_time_in_minutes( get_the_content(), 250, true ) ); ?> <?php esc_html_e( 'min read', 'cb-andwisentrances2026' ); ?></span>
 			</p>
 			<h1><?php the_title(); ?></h1>
+			<?php
+			// Only a hand-written excerpt: an automatic one would repeat the
+			// opening of the article underneath it.
+			if ( has_excerpt() ) {
+				?>
+			<p class="cb-hero__intro"><?php echo esc_html( wp_strip_all_tags( get_the_excerpt() ) ); ?></p>
+				<?php
+			}
+			?>
 		</div>
 	</section>
 
 	<article <?php post_class( 'cb-post' ); ?>>
-		<?php
-		if ( has_post_thumbnail() ) {
-			?>
-		<div class="container cb-post__hero">
-			<?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?>
-		</div>
-			<?php
-		}
-		?>
-		<div class="cb-post__body">
-			<?php the_content(); ?>
+		<div class="container">
+			<div class="cb-post__body cb-prose">
+				<?php the_content(); ?>
+			</div>
 		</div>
 	</article>
 	<?php
