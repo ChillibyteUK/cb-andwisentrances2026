@@ -315,11 +315,15 @@ set, else an inline SVG built from the andwis wordmark paths plus
 
 ## Header / footer
 
-- `#masthead` is fixed (fixed-header module). On a page whose first block
-  is the Hero (`body.has-hero`, `cbae_body_class()`), it starts transparent
-  and `src/js/header.js` adds `.is-solid` on scroll. Any other page gets the
-  forest `cbae_page_head()` band from `page.php` so nothing starts under
-  the bar.
+- `#masthead` is fixed (fixed-header module) and a solid light strip on
+  every page; `src/js/header.js` adds `.is-solid` on scroll, which only adds
+  a hairline. A page whose first block is the Hero (`body.has-hero`,
+  `cbae_body_class()`) runs the hero up under it; any other page gets the
+  forest `cbae_page_head()` band from `page.php`. Do not add overflow
+  clipping (not even `overflow-x: clip`) or `backdrop-filter` to
+  `#masthead`: Safari then clips the bar's layer to its own box and the
+  dropdowns and mobile drawer below it are never painted, while Chrome
+  shows them fine.
 - Menus: `primary` (depth 2, dropdown parents are buttons that never
   navigate), `footer`, `footer_contact` (falls back to Contact / Locations /
   Careers / Get a Quote / Book a Survey links when unassigned).
