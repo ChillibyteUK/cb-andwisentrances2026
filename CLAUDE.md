@@ -332,8 +332,12 @@ set, else an inline SVG built from the andwis wordmark paths plus
   `bar` (full-width emerald strip), or nothing (forest panel at the right).
   The dropdown heading is the parent's Title Attribute when set ("By
   product", "About andwis entrances"), else its title, linked to the
-  parent URL unless that is `#`. Desktop opens on hover and click; mobile
-  collapses every shape to the same nested list without the examples.
+  parent URL unless that is `#`. Mobile collapses every shape to the same
+  nested list without the examples. On desktop a real mouse opens on hover
+  (`pointerenter` with `pointerType === 'mouse'`); a click pins the menu open
+  and a second click closes it. Keep those two apart: a tap, or a click into
+  a Safari window that was in the background, delivers hover and click
+  together, and a plain toggle opens then instantly closes the menu.
 - Site-wide CTAs: header pill + footer band + Cards/Hero/CTA block defaults
   all read `cbae_site_ctas()` (text/URL from Site-Wide Settings > CTAs,
   defaulting to the `get-a-quote` and `book-a-survey` pages). The footer
