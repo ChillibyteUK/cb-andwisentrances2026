@@ -444,3 +444,11 @@ each one. Four fictional case studies exist only so listings and the mega
 menu have something to show; replace them when real ones are approved.
 Placeholder photos came from the andwis lifts media library. Gravity Forms
 was copied from the lifts local site for development only.
+
+The old Etron site's whole media library (157 items) was imported with
+`dev/etron-media-import.php`, which reads etron.co.uk's public REST API.
+Originals only, in their original year/month folders, with title, caption,
+alt text and upload date kept. Each attachment records its origin in
+`_etron_source_url` / `_etron_source_id`, so the script can be re-run to
+pick up anything new without duplicating, and old upload URLs map straight
+onto the new ones for redirects. None of it is placed on a page yet.
