@@ -111,5 +111,5 @@
 	   a new class per layout. Smaller value = more columns fit. */
   --grid-min: 16rem;
 
-  --nav-height: 5.5rem;
+  --nav-height: 5.625rem;
 }

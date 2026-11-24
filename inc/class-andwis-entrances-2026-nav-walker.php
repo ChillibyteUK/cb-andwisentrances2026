@@ -130,7 +130,7 @@ if ( ! class_exists( 'Andwis_Entrances_2026_Nav_Walker' ) ) {
 				if ( $has_children ) {
 					$output .= '<button type="button" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-' . esc_attr( $item->ID ) . '">';
 					$output .= '<span>' . esc_html( $item->title ) . '</span>';
-					$output .= '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" /></svg>';
+					$output .= '<svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.25 9 12.25l6-6" /></svg>';
 					$output .= '</button>';
 					return;
 				}

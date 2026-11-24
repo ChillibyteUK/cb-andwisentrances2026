@@ -324,6 +324,14 @@ set, else an inline SVG built from the andwis wordmark paths plus
   `#masthead`: Safari then clips the bar's layer to its own box and the
   dropdowns and mobile drawer below it are never painted, while Chrome
   shows them fine.
+- Desktop row follows the andwis lifts header (its staging site, Nov 2026):
+  logo left, then the links and the CTA pill together on the right, one
+  `--nav-gap` apart, 90px tall, lifts' chevrons. Lifts' sizes (16px links,
+  36px gaps, 31px-tall logo) do not fit: six longer labels plus a longer
+  wordmark need about 1310px and the row is 1176px. Links stay 14px (12px
+  from lg to xl). The container stops growing at about 1240px, so the
+  `vw` clamps in `nav.css` are capped at what fits; raising any of them
+  pushes the CTA out of the container on wide screens.
 - Menus: `primary` (depth 2, dropdown parents are buttons that never
   navigate), `footer`, `footer_contact` (falls back to Contact / Locations /
   Careers / Get a Quote / Book a Survey links when unassigned).
