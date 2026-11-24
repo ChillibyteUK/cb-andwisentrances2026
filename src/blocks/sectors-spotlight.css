@@ -1,0 +1,159 @@
+/*
+ * Sectors Spotlight (ported from the andwis lifts "CB Sectors" block).
+ *
+ * The right-hand column is the same list twice. .cb-spotlight__base is the
+ * faint text and carries the real links; .cb-spotlight__glow is a mint copy
+ * laid exactly over it and masked to a circle at --x / --y, which
+ * src/js/sectors-spotlight.js moves with the pointer. Anything that changes
+ * the text metrics must apply to both lists or the two slide out of register.
+ *
+ * The column is taller than the band on purpose: it bleeds off the bottom
+ * (negative margin + the section's overflow clip) and drifts slightly on
+ * scroll, so names are cut by the top and bottom edges as on lifts.
+ */
+.cb-spotlight {
+	position: relative;
+	overflow: hidden;
+	padding-block: 0;
+}
+
+.cb-spotlight__inner {
+	display: grid;
+	gap: var(--space-5);
+	padding-block: var(--space-6) 0;
+}
+
+.cb-spotlight__copy {
+	position: relative;
+	z-index: 2;
+
+	& h2 {
+		margin: 0 0 var(--space-3);
+		color: var(--col-paper);
+	}
+}
+
+.cb-spotlight__body {
+	color: var(--col-sage);
+	font-size: var(--fs-body-lg);
+
+	& > :last-child {
+		margin-bottom: 0;
+	}
+}
+
+.cb-spotlight__panel {
+	--x: 180px;
+	--y: 350px;
+	--spot: clamp(7rem, 11vw, 10rem);
+
+	position: relative;
+	min-width: 0;
+	padding-bottom: var(--space-6);
+
+	& ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: clamp(2rem, 9vw, 3.5rem);
+		font-weight: var(--fw-600);
+		line-height: 1.08;
+		letter-spacing: -0.025em;
+	}
+
+	& a,
+	& a:hover,
+	& a:focus,
+	& span {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	& a:focus-visible {
+		outline: 2px solid var(--col-mint);
+		outline-offset: 4px;
+	}
+}
+
+/* Small screens and touch: no pointer to follow, so the names are simply a
+   legible list of links at a size that keeps most of them on one line, and
+   the padding repeats are dropped. */
+.cb-spotlight__base {
+	color: rgb(255 255 255 / 0.45);
+
+	& a:hover,
+	& a:focus-visible {
+		color: var(--col-mint);
+	}
+
+	& .is-padding {
+		display: none;
+	}
+}
+
+.cb-spotlight__glow {
+	display: none;
+}
+
+@media (min-width: 992px) {
+	.cb-spotlight__inner {
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-5);
+		padding-block: 0;
+	}
+
+	.cb-spotlight__copy {
+		align-self: center;
+		padding-block: var(--space-6);
+	}
+
+	/* Touch screens at this width get the plain list beside the copy. */
+	.cb-spotlight__panel {
+		padding-block: var(--space-6);
+
+		& ul {
+			font-size: clamp(3rem, 5vw, 4.125rem);
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		/* The spotlight replaces the cursor on this panel, so the pointer on
+		   a link is the only sign that a name is clickable. */
+		.cb-spotlight__panel {
+			margin-bottom: -8rem;
+			padding-block: 0;
+			cursor: none;
+
+			& a {
+				cursor: pointer;
+			}
+		}
+
+		.cb-spotlight__base {
+			color: rgb(255 255 255 / 0.1);
+
+			/* Only the base layer takes clicks. Hovering warms the name so it
+			   reads as a link even where the spotlight has not reached. */
+			& a:hover,
+			& a:focus-visible {
+				color: rgb(255 255 255 / 0.28);
+			}
+
+			& .is-padding {
+				display: list-item;
+			}
+		}
+
+		.cb-spotlight__glow {
+			--mask: radial-gradient(circle var(--spot) at var(--x) var(--y), #000 99%, transparent 100%);
+
+			display: block;
+			position: absolute;
+			inset: 0 0 auto;
+			color: var(--col-mint);
+			-webkit-mask-image: var(--mask);
+			mask-image: var(--mask);
+			pointer-events: none;
+		}
+	}
+}

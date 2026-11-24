@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/sectors-spotlight",
+	"title": "Sectors Spotlight",
+	"description": "Forest band with a heading and copy on the left and a tall column of sector names on the right; a mint spotlight follows the pointer over the names. Sectors are listed automatically from the Sectors post type, or written by hand.",
+	"category": "cb-andwisentrances2026",
+	"icon": "visibility",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"body": { "type": "string", "default": "" },
+		"sectorsSource": { "type": "string", "default": "auto" },
+		"sectors": { "type": "array", "default": [] }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}
