@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "cb-andwisentrances2026/image-text",
 	"title": "Image & Text",
-	"description": "Two-column section: eyebrow, heading, body, optional tick list and buttons on one side, a circular photo with the rotating dot ring (or a plain rounded photo) on the other.",
+	"description": "Two-column section: eyebrow, heading, body, optional tick list and buttons on one side, a circular photo with the rotating dot ring, a rounded photo, or a whole unframed graphic (such as the coverage map) on the other.",
 	"category": "cb-andwisentrances2026",
 	"icon": "align-pull-right",
 	"attributes": {

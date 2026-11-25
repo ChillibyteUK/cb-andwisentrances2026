@@ -417,8 +417,9 @@ SEO title/description per page is Yoast's job - do not add fields for it.
 | `table`           | Heading + data table (2 or 3 columns) that stacks to cards on mobile: product specs, accreditations, offices. |
 | `form`            | Gravity Forms wrapper. Presets `need` / `product` / `building` pre-select the matching dropdowns via GF dynamic population. |
 | `faqs`            | Accordion (`src/js/accordion.js`) with optional FAQPage schema; turn schema off when it is just a click-to-expand list. |
-| `image-text`      | Copy + circular photo with the rotating dots ring (or plain photo). |
-| `logo-row`        | Accreditation/partner logos; label-only rows render as dashed placeholders. |
+| `image-text`      | Copy + image: circular photo with the rotating dots ring, 4:3 rounded photo, or whole unframed graphic (`plain`, for the coverage map). |
+| `logo-row`        | Accreditation/partner logos; label-only rows render as dashed placeholders. Forest background puts logos in white tiles; optional side image gives the lifts compliance layout (copy + logos left, photo right behind a curve). |
+| `logo-flow`       | Ported from the lifts `cb-logo-flow` block: boxed legacy logos, an arrow, then the brand they became (an uploaded logo, else the site logo). `src/js/logo-flow.js` arms and plays the entrance sequence; the timing is CSS (0.55s per box, then the result lands with a bounce standing in for lifts' GSAP). The boxes shrink from 230px to 152px before the row wraps, and the arrow wraps with the result. |
 | `cta`             | Closing band; defaults to the site CTAs.                            |
 
 Shared helpers every render.php uses: `cbae_section_id()`,

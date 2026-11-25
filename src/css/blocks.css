@@ -963,6 +963,27 @@
 		}
 	}
 
+	/* ---------- Whole image, unframed (maps, graphics) ---------- */
+	& .cb-image-text__media--plain {
+		& .cb-image-text__fig {
+			margin: 0;
+			text-align: center;
+		}
+
+		& img {
+			display: inline-block;
+			width: auto;
+			max-width: 100%;
+			height: auto;
+			max-height: 30rem;
+		}
+
+		& .cb-image-text__placeholder {
+			aspect-ratio: 4 / 3;
+			border-radius: var(--radius-md);
+		}
+	}
+
 	& .cb-image-text__placeholder {
 		background: var(--col-sage);
 	}
@@ -996,6 +1017,10 @@
 	.cb-image-text .cb-image-text__media-col {
 		order: 0;
 	}
+
+	.cb-image-text .cb-image-text__media--plain img {
+		max-height: 47.5rem;
+	}
 }
 
 @keyframes cb-dots-spin {
@@ -1007,6 +1032,194 @@
 @media (prefers-reduced-motion: reduce) {
 	.cb-image-text .cb-image-text__dots {
 		animation: none;
+	}
+}
+
+/* --- src/blocks/logo-flow.css --- */
+/*
+ * Logo Flow (ported from the andwis lifts "CB Logo Flow" block).
+ *
+ * Boxed legacy logos, an arrow, then the brand they became. The sequence is
+ * only armed by src/js/logo-flow.js (.is-ready hides, .is-in plays), so with
+ * no JavaScript, or with reduced motion, everything is simply there.
+ */
+.cb-logo-flow__flow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 1.375rem;
+}
+
+/* Arrow + result: one unit, so a wrap never strands the arrow. */
+.cb-logo-flow__to {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 1.375rem;
+	max-width: 100%;
+}
+
+.cb-logo-flow__legacy,
+.cb-logo-flow__result {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 6rem;
+	padding: 0 1.25rem;
+	border: 1px solid var(--col-sage);
+	border-radius: var(--radius-md);
+	background: var(--col-paper);
+
+	& img,
+	& svg {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 3.5rem;
+		object-fit: contain;
+	}
+}
+
+/* 230px boxes as on lifts, which give a little (down to 152px) before the
+   row wraps: four of them and the result still fit this site's container. */
+.cb-logo-flow__legacy {
+	flex: 1 1 9.5rem;
+	max-width: 14.375rem;
+}
+
+.cb-logo-flow__result {
+	min-width: 0;
+}
+
+/* The result box is as wide as its logo. The site logo fallback is the
+   header's inline SVG, which is only coloured inside .navbar-brand. */
+.cb-logo-flow__result {
+	& svg.logo-svg {
+		width: clamp(12rem, 22vw, 17rem);
+		max-height: none;
+	}
+
+	& .logo-andwis {
+		fill: var(--col-forest);
+	}
+
+	& .logo-dot,
+	& .logo-word {
+		fill: var(--col-emerald);
+	}
+
+	& .logo-word {
+		font-family: var(--font-family-base);
+		font-weight: var(--fw-700);
+	}
+}
+
+/* No logo yet: the name stands in for it. */
+.cb-logo-flow__fallback {
+	color: var(--col-forest);
+	font-weight: var(--fw-600);
+	line-height: 1.2;
+	text-align: center;
+}
+
+.cb-logo-flow__arrow {
+	flex: 0 0 auto;
+	color: var(--col-emerald);
+	font-size: 2rem;
+}
+
+/* Stacked on a phone, so the arrow points down the stack. */
+@media (max-width: 560px) {
+	.cb-logo-flow__flow,
+	.cb-logo-flow__to {
+		flex-direction: column;
+	}
+
+	.cb-logo-flow__legacy {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 13.75rem;
+	}
+
+	.cb-logo-flow__arrow {
+		transform: rotate(90deg);
+	}
+}
+
+/* Sequence: each legacy box rises in turn (0.55s apart, as on lifts), then
+   the arrow, then the result lands with a small bounce. */
+@media (prefers-reduced-motion: no-preference) {
+	.cb-logo-flow__flow.is-ready {
+		& .cb-logo-flow__legacy,
+		& .cb-logo-flow__arrow,
+		& .cb-logo-flow__result {
+			opacity: 0;
+		}
+
+		& .cb-logo-flow__legacy {
+			transform: translateY(24px);
+		}
+	}
+
+	.cb-logo-flow__flow.is-ready.is-in {
+		& .cb-logo-flow__legacy {
+			opacity: 1;
+			transform: none;
+			transition:
+				opacity 550ms ease-out,
+				transform 550ms ease-out;
+			transition-delay: calc(var(--i, 0) * 550ms);
+		}
+
+		& .cb-logo-flow__arrow {
+			opacity: 1;
+			transition: opacity 300ms ease-out;
+			transition-delay: calc(var(--n, 0) * 550ms - 150ms);
+		}
+
+		& .cb-logo-flow__result {
+			animation: cb-logo-flow-land 900ms both;
+			animation-delay: calc(var(--n, 0) * 550ms);
+		}
+	}
+}
+
+/* Stands in for GSAP's bounce.out on lifts: up to full size, then two
+   smaller settles. */
+@keyframes cb-logo-flow-land {
+	0% {
+		opacity: 0;
+		transform: translateY(12px) scale(0.7);
+		animation-timing-function: ease-in;
+	}
+
+	36% {
+		opacity: 1;
+		transform: scale(1);
+		animation-timing-function: ease-out;
+	}
+
+	54% {
+		transform: scale(0.925);
+		animation-timing-function: ease-in;
+	}
+
+	72% {
+		transform: scale(1);
+		animation-timing-function: ease-out;
+	}
+
+	81% {
+		transform: scale(0.98);
+		animation-timing-function: ease-in;
+	}
+
+	90%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
 	}
 }
 
@@ -1053,7 +1266,7 @@
 		opacity: 0.8;
 	}
 
-	& img {
+	& .cb-logo-row__list img {
 		display: block;
 		width: auto;
 		max-width: 100%;
@@ -1082,19 +1295,139 @@
 		text-align: center;
 	}
 
-	/* ---------- Forest background ---------- */
+	/*
+	 * ---------- Forest background: logos in white tiles ----------
+	 * As the andwis lifts compliance block. Full-colour logos keep their
+	 * colours on a white tile, so no white versions are needed (the old
+	 * invert filter turned any logo with a solid background into a white box).
+	 */
 	&.bg-forest {
-		& img {
-			filter: brightness(0) invert(1);
+		--tile-h: 3.75rem;
+
+		&.cb-logo-row--sm {
+			--tile-h: 2.75rem;
+		}
+
+		&.cb-logo-row--lg {
+			--tile-h: 5rem;
+		}
+
+		& .cb-logo-row__list {
+			align-items: stretch;
+			gap: 0.75rem;
+		}
+
+		& .cb-logo-row__link {
+			display: flex;
+			flex: 1 0 auto;
+			align-items: center;
+			justify-content: center;
+			min-width: 6.875rem;
+			min-height: calc(var(--tile-h) + 1.875rem);
+			padding: 0.875rem 1.125rem;
+			border-radius: var(--radius-sm);
+			background: var(--col-paper);
+		}
+
+		& .cb-logo-row__list img {
+			max-width: min(100%, 11rem);
+			height: auto;
+			max-height: var(--tile-h);
+		}
+
+		/* An empty slot keeps the dashed outline, inside its tile. */
+		& .cb-logo-row__link:has(.cb-logo-row__fallback) {
+			border: 1px dashed var(--col-sage);
 		}
 
 		& .cb-logo-row__fallback {
-			border-color: rgb(255 255 255 / 0.4);
-			color: rgb(255 255 255 / 0.85);
+			padding: 0;
+			border: 0;
+			border-radius: 0;
+			color: var(--col-ink-soft);
 		}
 
 		& .cb-logo-row__label {
 			color: rgb(255 255 255 / 0.85);
+		}
+	}
+
+	/*
+	 * ---------- Side image (compliance layout) ----------
+	 * Phones and tablets: the photo is a strip above the copy. From lg it
+	 * fills the right half of the band and the band's colour bulges into it.
+	 */
+	&.cb-logo-row--has-image {
+		--band: var(--col-paper);
+
+		position: relative;
+		overflow: hidden;
+		padding-block: 0;
+
+		&.bg-forest {
+			--band: var(--col-forest);
+		}
+
+		&.bg-sage {
+			--band: var(--col-sage);
+		}
+
+		&.bg-sage-tint {
+			--band: var(--col-sage-tint);
+		}
+
+		& .cb-logo-row__media {
+			position: relative;
+			height: clamp(14rem, 50vw, 22rem);
+		}
+
+		& .cb-logo-row__media img {
+			position: absolute;
+			inset: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		& .cb-logo-row__curve {
+			display: none;
+			color: var(--band);
+		}
+
+		& .cb-logo-row__copy {
+			padding-block: var(--section-y);
+		}
+
+		& .cb-section-head {
+			margin-bottom: var(--space-4);
+		}
+
+		& .cb-logo-row__list {
+			justify-content: flex-start;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-logo-row.cb-logo-row--has-image {
+		& .cb-logo-row__media {
+			position: absolute;
+			inset: 0 0 0 50%;
+			height: auto;
+		}
+
+		& .cb-logo-row__curve {
+			position: absolute;
+			inset: 0 auto 0 -1px;
+			display: block;
+			width: clamp(2.5rem, 4.6vw, 4.125rem);
+			height: 100%;
+		}
+
+		& .cb-logo-row__copy {
+			width: calc(50% - clamp(2rem, 4vw, 4rem));
+			padding-block: calc(var(--section-y) * 1.5);
 		}
 	}
 }

@@ -3,13 +3,16 @@
 	"apiVersion": 3,
 	"name": "cb-andwisentrances2026/logo-row",
 	"title": "Logo Row",
-	"description": "A strip of accreditation, partner or client logos, optionally with a heading and intro. Also used as a simple before / after pair on the rebrand page.",
+	"description": "A strip of accreditation, partner or client logos, optionally with a heading and intro. On the forest background the logos sit in white tiles; add a side image for the compliance layout (copy and logos left, photo right behind a curved edge).",
 	"category": "cb-andwisentrances2026",
 	"icon": "images-alt",
 	"attributes": {
 		"heading": { "type": "string", "default": "" },
 		"intro": { "type": "string", "default": "" },
 		"logos": { "type": "array", "default": [] },
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
 		"size": { "type": "string", "default": "md" },
 		"background": { "type": "string", "default": "paper" },
 		"showLabels": { "type": "boolean", "default": false }

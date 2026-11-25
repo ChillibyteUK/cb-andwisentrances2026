@@ -13,7 +13,7 @@ $body            = $attributes['body'] ?? '';
 $checklist       = cbae_lines( $attributes['checklist'] ?? '' );
 $checklist_label = $attributes['checklistLabel'] ?? '';
 $image_id        = absint( $attributes['imageId'] ?? 0 );
-$image_style     = in_array( $attributes['imageStyle'] ?? '', array( 'circle', 'photo' ), true ) ? $attributes['imageStyle'] : 'circle';
+$image_style     = in_array( $attributes['imageStyle'] ?? '', array( 'circle', 'photo', 'plain' ), true ) ? $attributes['imageStyle'] : 'circle';
 $image_position  = 'left' === ( $attributes['imagePosition'] ?? '' ) ? 'left' : 'right';
 $primary_text    = $attributes['primaryText'] ?? '';
 $primary_url     = $attributes['primaryUrl'] ?? '';

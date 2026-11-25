@@ -11,6 +11,7 @@ $heading     = $attributes['heading'] ?? '';
 $intro       = $attributes['intro'] ?? '';
 $size        = in_array( $attributes['size'] ?? '', array( 'sm', 'md', 'lg' ), true ) ? $attributes['size'] : 'md';
 $show_labels = ! empty( $attributes['showLabels'] );
+$image_id    = absint( $attributes['imageId'] ?? 0 );
 $rows        = array();
 
 foreach ( (array) ( $attributes['logos'] ?? array() ) as $row ) {
@@ -36,15 +37,43 @@ if ( ! $rows ) {
 	return;
 }
 
+// Side image: the compliance layout from andwis lifts - copy and logos on the
+// left, the photo filling the right half of the band behind a curved edge.
+$image_html = $image_id ? wp_get_attachment_image(
+	$image_id,
+	'full',
+	false,
+	array(
+		'loading' => 'lazy',
+		'sizes'   => '(min-width: 992px) 50vw, 100vw',
+	)
+) : '';
+
+$extra_classes = array( 'cb-logo-row--' . $size );
+if ( $image_html ) {
+	$extra_classes[] = 'cb-logo-row--has-image';
+}
+
 $section_id = cbae_section_id( $attributes, 'cb-logo-row' );
-$classes    = cbae_section_class( $attributes, 'cb-logo-row', array( 'cb-logo-row--' . $size ) );
+$classes    = cbae_section_class( $attributes, 'cb-logo-row', $extra_classes );
 ?>
 <section class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $section_id ); ?>">
+	<?php
+	if ( $image_html ) {
+		?>
+	<div class="cb-logo-row__media">
+		<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
+		<svg class="cb-logo-row__curve" viewBox="0 0 66 1440" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 1440C39.83 1283.48 66 1019.4 66 720S39.83 156.52 0 0z" fill="currentColor" /></svg>
+	</div>
+		<?php
+	}
+	?>
 	<div class="container">
+		<div class="cb-logo-row__copy">
 		<?php
 		if ( $heading || $intro ) {
 			?>
-		<div class="cb-section-head">
+		<div class="cb-section-head<?php echo $image_html ? ' cb-section-head--start' : ''; ?>">
 			<?php
 			if ( $heading ) {
 				?>
@@ -106,5 +135,6 @@ $classes    = cbae_section_class( $attributes, 'cb-logo-row', array( 'cb-logo-ro
 			}
 			?>
 		</ul>
+		</div>
 	</div>
 </section>

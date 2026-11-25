@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/logo-flow",
+	"title": "Logo Flow",
+	"description": "\"These brands are now this one\": a row of boxed legacy logos, an arrow, then the brand they have become. The logos arrive one after another as the block scrolls into view.",
+	"category": "cb-andwisentrances2026",
+	"icon": "arrow-right-alt",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"logos": { "type": "array", "default": [] },
+		"showResult": { "type": "boolean", "default": true },
+		"resultId": { "type": "number", "default": 0 },
+		"resultUrl": { "type": "string", "default": "" },
+		"resultAlt": { "type": "string", "default": "" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

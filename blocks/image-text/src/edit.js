@@ -106,7 +106,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						value={ imageStyle }
 						options={ [
 							{ label: 'Circle with rotating dots', value: 'circle' },
-							{ label: 'Rounded photo', value: 'photo' },
+							{ label: 'Photo: cropped 4:3, rounded corners', value: 'photo' },
+							{ label: 'Whole image, no frame (maps, graphics)', value: 'plain' },
 						] }
 						onChange={ ( value ) => setAttributes( { imageStyle: value } ) }
 					/>

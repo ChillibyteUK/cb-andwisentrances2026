@@ -40,7 +40,7 @@
 		opacity: 0.8;
 	}
 
-	& img {
+	& .cb-logo-row__list img {
 		display: block;
 		width: auto;
 		max-width: 100%;
@@ -69,19 +69,139 @@
 		text-align: center;
 	}
 
-	/* ---------- Forest background ---------- */
+	/*
+	 * ---------- Forest background: logos in white tiles ----------
+	 * As the andwis lifts compliance block. Full-colour logos keep their
+	 * colours on a white tile, so no white versions are needed (the old
+	 * invert filter turned any logo with a solid background into a white box).
+	 */
 	&.bg-forest {
-		& img {
-			filter: brightness(0) invert(1);
+		--tile-h: 3.75rem;
+
+		&.cb-logo-row--sm {
+			--tile-h: 2.75rem;
+		}
+
+		&.cb-logo-row--lg {
+			--tile-h: 5rem;
+		}
+
+		& .cb-logo-row__list {
+			align-items: stretch;
+			gap: 0.75rem;
+		}
+
+		& .cb-logo-row__link {
+			display: flex;
+			flex: 1 0 auto;
+			align-items: center;
+			justify-content: center;
+			min-width: 6.875rem;
+			min-height: calc(var(--tile-h) + 1.875rem);
+			padding: 0.875rem 1.125rem;
+			border-radius: var(--radius-sm);
+			background: var(--col-paper);
+		}
+
+		& .cb-logo-row__list img {
+			max-width: min(100%, 11rem);
+			height: auto;
+			max-height: var(--tile-h);
+		}
+
+		/* An empty slot keeps the dashed outline, inside its tile. */
+		& .cb-logo-row__link:has(.cb-logo-row__fallback) {
+			border: 1px dashed var(--col-sage);
 		}
 
 		& .cb-logo-row__fallback {
-			border-color: rgb(255 255 255 / 0.4);
-			color: rgb(255 255 255 / 0.85);
+			padding: 0;
+			border: 0;
+			border-radius: 0;
+			color: var(--col-ink-soft);
 		}
 
 		& .cb-logo-row__label {
 			color: rgb(255 255 255 / 0.85);
+		}
+	}
+
+	/*
+	 * ---------- Side image (compliance layout) ----------
+	 * Phones and tablets: the photo is a strip above the copy. From lg it
+	 * fills the right half of the band and the band's colour bulges into it.
+	 */
+	&.cb-logo-row--has-image {
+		--band: var(--col-paper);
+
+		position: relative;
+		overflow: hidden;
+		padding-block: 0;
+
+		&.bg-forest {
+			--band: var(--col-forest);
+		}
+
+		&.bg-sage {
+			--band: var(--col-sage);
+		}
+
+		&.bg-sage-tint {
+			--band: var(--col-sage-tint);
+		}
+
+		& .cb-logo-row__media {
+			position: relative;
+			height: clamp(14rem, 50vw, 22rem);
+		}
+
+		& .cb-logo-row__media img {
+			position: absolute;
+			inset: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		& .cb-logo-row__curve {
+			display: none;
+			color: var(--band);
+		}
+
+		& .cb-logo-row__copy {
+			padding-block: var(--section-y);
+		}
+
+		& .cb-section-head {
+			margin-bottom: var(--space-4);
+		}
+
+		& .cb-logo-row__list {
+			justify-content: flex-start;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-logo-row.cb-logo-row--has-image {
+		& .cb-logo-row__media {
+			position: absolute;
+			inset: 0 0 0 50%;
+			height: auto;
+		}
+
+		& .cb-logo-row__curve {
+			position: absolute;
+			inset: 0 auto 0 -1px;
+			display: block;
+			width: clamp(2.5rem, 4.6vw, 4.125rem);
+			height: 100%;
+		}
+
+		& .cb-logo-row__copy {
+			width: calc(50% - clamp(2rem, 4vw, 4rem));
+			padding-block: calc(var(--section-y) * 1.5);
 		}
 	}
 }

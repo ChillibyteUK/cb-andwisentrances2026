@@ -93,6 +93,27 @@
 		}
 	}
 
+	/* ---------- Whole image, unframed (maps, graphics) ---------- */
+	& .cb-image-text__media--plain {
+		& .cb-image-text__fig {
+			margin: 0;
+			text-align: center;
+		}
+
+		& img {
+			display: inline-block;
+			width: auto;
+			max-width: 100%;
+			height: auto;
+			max-height: 30rem;
+		}
+
+		& .cb-image-text__placeholder {
+			aspect-ratio: 4 / 3;
+			border-radius: var(--radius-md);
+		}
+	}
+
 	& .cb-image-text__placeholder {
 		background: var(--col-sage);
 	}
@@ -125,6 +146,10 @@
 @media (min-width: 992px) {
 	.cb-image-text .cb-image-text__media-col {
 		order: 0;
+	}
+
+	.cb-image-text .cb-image-text__media--plain img {
+		max-height: 47.5rem;
 	}
 }
 
