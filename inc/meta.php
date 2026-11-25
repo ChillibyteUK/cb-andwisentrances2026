@@ -38,7 +38,7 @@ function cbae_meta_fields() {
 			'card_icon'       => array(
 				'label' => 'Card icon / image',
 				'type'  => 'image',
-				'help'  => 'Optional. Falls back to the featured image.',
+				'help'  => 'Optional. The small icon shown above the title when a Cards block is set to Media: Icon (a placeholder tick shows until one is chosen). Use a transparent PNG, about 200px square. On Cards blocks set to Media: Image it is used in place of the featured image.',
 			),
 			'hide_global_cta' => array(
 				'label' => 'Hide the site-wide "Get a Quote / Book a Survey" band above the footer',

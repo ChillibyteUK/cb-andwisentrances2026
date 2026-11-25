@@ -129,7 +129,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						{ name: 'title', label: __( 'Title', 'cb-andwisentrances2026' ), type: 'text' },
 						{ name: 'text', label: __( 'Text', 'cb-andwisentrances2026' ), type: 'textarea' },
 						{ name: 'link', label: __( 'Link', 'cb-andwisentrances2026' ), type: 'link' },
-						{ name: 'image', label: __( 'Image', 'cb-andwisentrances2026' ), type: 'image' },
+						{ name: 'image', label: __( 'Image / icon', 'cb-andwisentrances2026' ), type: 'image' },
 					] }
 					emptyRow={ { title: '', text: '', link: '', linkText: '', image: 0, imageUrl: '' } }
 				/>
@@ -157,6 +157,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							{ label: 'None', value: 'none' },
 						] }
 						onChange={ ( value ) => setAttributes( { media: value } ) }
+						help={
+							'icon' === media
+								? __( 'Each card shows its page\'s "Card icon / image". Set it on that page: sidebar, Listing & details. A placeholder tick shows until one is chosen.', 'cb-andwisentrances2026' )
+								: undefined
+						}
 					/>
 				</div>
 				<div style={ { flex: '25 1 0%' } }>

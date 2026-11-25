@@ -64,6 +64,7 @@
 		width: 2.75rem;
 		height: 2.75rem;
 		margin-bottom: var(--space-3);
+		color: var(--col-emerald);
 
 		& img,
 		& svg {

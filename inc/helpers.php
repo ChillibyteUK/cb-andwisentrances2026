@@ -90,6 +90,36 @@ function cbae_card_image_id( $post ) {
 }
 
 /**
+ * Attachment ID of a post's Card icon meta field alone (0 if unset). Cards
+ * set to Media: Icon use this, not the featured image - a photo shrunk to an
+ * icon reads as a mistake - and show cbae_tile_icon_placeholder() when unset.
+ *
+ * @param int|WP_Post $post Post.
+ * @return int
+ */
+function cbae_card_icon_id( $post ) {
+	$post = get_post( $post );
+
+	if ( ! $post ) {
+		return 0;
+	}
+
+	$icon = absint( get_post_meta( $post->ID, 'card_icon', true ) );
+
+	return $icon && wp_attachment_is_image( $icon ) ? $icon : 0;
+}
+
+/**
+ * Stand-in mark for a card with no icon yet: a ticked circle in the brand
+ * emerald, neutral enough to stay if no bespoke icon is ever supplied.
+ *
+ * @return string
+ */
+function cbae_tile_icon_placeholder() {
+	return '<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="22" cy="22" r="19" /><path d="m13.5 22.5 6 6L31 16" /></svg>';
+}
+
+/**
  * Array of post IDs from a relationship meta field.
  *
  * @param int    $post_id Post ID.
@@ -169,6 +199,7 @@ function cbae_posts_to_cards( $posts ) {
 			'text'      => cbae_card_summary( $item ),
 			'url'       => get_permalink( $item ),
 			'image_id'  => cbae_card_image_id( $item ),
+			'icon_id'   => cbae_card_icon_id( $item ),
 			'link_text' => 'case_study' === $item->post_type ? __( 'Read the case study', 'cb-andwisentrances2026' ) : __( 'Find out more', 'cb-andwisentrances2026' ),
 			'post_type' => $item->post_type,
 		);
@@ -529,6 +560,9 @@ function cbae_tile( $card, $variant = 'forest', $media = 'image' ) {
 
 	$image_id = (int) ( $card['image_id'] ?? 0 );
 	$url      = $card['url'] ?? '';
+
+	// Post cards carry their Card icon separately; a manual row's image is its icon.
+	$icon_id = (int) ( array_key_exists( 'icon_id', $card ) ? $card['icon_id'] : $image_id );
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 		<?php
@@ -536,9 +570,13 @@ function cbae_tile( $card, $variant = 'forest', $media = 'image' ) {
 			?>
 		<div class="cb-tile__media"><?php echo wp_get_attachment_image( $image_id, 'medium_large', false, array( 'loading' => 'lazy' ) ); ?></div>
 			<?php
-		} elseif ( $image_id && 'icon' === $media ) {
+		} elseif ( 'icon' === $media && $icon_id ) {
 			?>
-		<div class="cb-tile__icon"><?php echo wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'loading' => 'lazy' ) ); ?></div>
+		<div class="cb-tile__icon"><?php echo wp_get_attachment_image( $icon_id, 'thumbnail', false, array( 'loading' => 'lazy' ) ); ?></div>
+			<?php
+		} elseif ( 'icon' === $media ) {
+			?>
+		<div class="cb-tile__icon cb-tile__icon--placeholder"><?php echo cbae_tile_icon_placeholder(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static theme SVG. ?></div>
 			<?php
 		}
 		if ( ! empty( $card['title'] ) ) {

@@ -3143,6 +3143,7 @@ article h2[id] {
 		width: 2.75rem;
 		height: 2.75rem;
 		margin-bottom: var(--space-3);
+		color: var(--col-emerald);
 	}
 
 :is(.cb-tile .cb-tile__icon) img,:is(.cb-tile .cb-tile__icon) svg {
