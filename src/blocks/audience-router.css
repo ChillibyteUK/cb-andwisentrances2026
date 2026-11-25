@@ -22,6 +22,7 @@
 	& .cb-router__need {
 		display: flex;
 		align-items: center;
+		height: 100%;
 		gap: var(--space-3);
 		padding: var(--space-3) var(--space-4);
 		border: 1px solid rgb(16 66 31 / 0.12);
@@ -121,6 +122,21 @@
 @media (min-width: 992px) {
 	.cb-router .cb-router__groups {
 		grid-template-columns: 1.2fr 1fr;
+	}
+}
+
+/*
+ * One group only (the sectors, or the needs, were left out): it takes the
+ * full width, and the need tiles pair up in two columns from tablet width
+ * instead of running down the left half of an otherwise empty row.
+ */
+.cb-router .cb-router__groups:has(> .cb-router__group:only-child) {
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+	.cb-router .cb-router__group:only-child .cb-router__needs {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
