@@ -415,6 +415,7 @@ SEO title/description per page is Yoast's job - do not add fields for it.
 | `cards`           | The one listing block: manual / children / post type / selected / related / case studies about this page (reverse lookup, hides when none). Renders `cbae_tile()`. Media: Icon shows each post's `card_icon` meta (sidebar, Listing & details), else the placeholder tick from `cbae_tile_icon_placeholder()` - never the featured image. |
 | `content`         | Text section: H2, body, optional tick / numbered / plain / pills list, buttons. Split (heading left) or stacked; paper, sage, forest or mint. |
 | `table`           | Heading + data table (2 or 3 columns) that stacks to cards on mobile: product specs, accreditations, offices. |
+| `team`            | Grid of people: round portrait (silhouette placeholder until a photo is chosen), name, role, optional bio, LinkedIn link. Names and photos live in page content only, never in the theme. |
 | `form`            | Gravity Forms wrapper. Presets `need` / `product` / `building` pre-select the matching dropdowns via GF dynamic population. |
 | `faqs`            | Accordion (`src/js/accordion.js`) with optional FAQPage schema; turn schema off when it is just a click-to-expand list. |
 | `image-text`      | Copy + image: circular photo with the rotating dots ring, 4:3 rounded photo, or whole unframed graphic (`plain`, for the coverage map). |

@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cb-andwisentrances2026/team",
+	"title": "Team",
+	"description": "A grid of people: round portrait (or a placeholder until the photo arrives), name, role, an optional short bio and a LinkedIn link. For the leadership team and similar.",
+	"category": "cb-andwisentrances2026",
+	"icon": "groups",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"people": { "type": "array", "default": [] },
+		"columns": { "type": "string", "default": "3" },
+		"background": { "type": "string", "default": "paper" }
+	},
+	"supports": {
+		"anchor": true,
+		"className": true,
+		"align": false
+	},
+	"editorScript": "file:./build/index.js",
+	"render": "file:./render.php"
+}

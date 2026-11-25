@@ -5139,6 +5139,118 @@ article h2[id] {
 			font-size: var(--fs-body-sm);
 		}
 }
+
+/* --- src/blocks/team.css --- */
+/* Team (blocks/team) */
+.cb-team .cb-team__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--space-5) var(--space-4);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+.cb-team .cb-team__person {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 0;
+		text-align: center;
+	}
+/* Round portrait, the same motif as the Image & Text circle. */
+.cb-team .cb-team__photo {
+		width: 11rem;
+		max-width: 100%;
+		aspect-ratio: 1 / 1;
+		margin-bottom: var(--space-4);
+		border-radius: 50%;
+		background: var(--col-sage-tint);
+		box-shadow: var(--shadow-soft);
+		overflow: hidden;
+	}
+:is(.cb-team .cb-team__photo) img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+/* No photo yet: a silhouette on sage, sitting on the circle's lower edge. */
+.cb-team .cb-team__photo--placeholder {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		background: var(--col-sage);
+		box-shadow: none;
+		color: rgb(255 255 255 / 0.75);
+	}
+:is(.cb-team .cb-team__photo--placeholder) svg {
+			display: block;
+			width: 82%;
+			height: 82%;
+		}
+.cb-team .cb-team__name {
+		margin: 0;
+		font-size: var(--fs-body-lg);
+	}
+.cb-team .cb-team__role {
+		max-width: 18rem;
+		margin: var(--space-1) 0 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.45;
+	}
+.cb-team .cb-team__bio {
+		max-width: 22rem;
+		margin: var(--space-3) 0 0;
+		color: var(--col-ink-soft);
+		font-size: var(--fs-small);
+		line-height: 1.6;
+	}
+.cb-team .cb-team__link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin-top: var(--space-3);
+		color: var(--col-forest);
+		font-size: var(--fs-small);
+		font-weight: var(--fw-600);
+		text-decoration: none;
+		transition: color var(--transition);
+	}
+:is(.cb-team .cb-team__link) svg {
+			width: 1.125rem;
+			height: 1.125rem;
+			color: var(--col-emerald);
+		}
+:is(.cb-team .cb-team__link):hover,:is(.cb-team .cb-team__link):focus-visible {
+			color: var(--col-emerald);
+			text-decoration: underline;
+		}
+/* A sage placeholder vanishes on the sage band: flip it to white. */
+.cb-team.bg-sage .cb-team__photo--placeholder {
+			background: var(--col-paper);
+			color: var(--col-sage);
+		}
+.cb-team.bg-sage .cb-team__role,.cb-team.bg-sage .cb-team__bio {
+			color: var(--col-ink);
+		}
+
+@media (min-width: 576px) {
+	.cb-team .cb-team__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 992px) {
+	.cb-team .cb-team__grid--3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.cb-team .cb-team__grid--4 {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
 /* generated — concatenation of src/blocks/*.css, see src/build/generate-utilities.js */
 
 /*# sourceMappingURL=theme.css.map */
