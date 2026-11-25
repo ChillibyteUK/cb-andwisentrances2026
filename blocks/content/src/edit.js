@@ -62,6 +62,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							{ label: 'Tick list', value: 'check' },
 							{ label: 'Numbered steps', value: 'number' },
 							{ label: 'Plain list with dividers', value: 'plain' },
+							{ label: 'Pills (short items, e.g. standards)', value: 'pills' },
 						] }
 						onChange={ ( value ) => setAttributes( { listStyle: value } ) }
 					/>

@@ -266,6 +266,26 @@
 		}
 	}
 
+	/* ---------- Pills: short items in outlined capsules (standards) ---------- */
+	& .cb-pill-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.625rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		& li {
+			padding: 0.5rem 1rem;
+			border: 1px solid var(--col-line);
+			border-radius: var(--radius-pill);
+			background: var(--col-paper);
+			color: var(--col-ink-soft);
+			font-size: var(--fs-small);
+			line-height: 1.4;
+		}
+	}
+
 	/* ---------- Stack: one measure-width column ---------- */
 	&.cb-content--stack {
 		& .cb-content__inner {
@@ -286,6 +306,10 @@
 				width: fit-content;
 				margin-inline: auto;
 				text-align: left;
+			}
+
+			& .cb-pill-list {
+				justify-content: center;
 			}
 
 			& .cb-content__actions {
@@ -309,6 +333,12 @@
 		& .cb-steps li,
 		& .cb-plain-list li {
 			color: rgb(255 255 255 / 0.85);
+		}
+
+		& .cb-pill-list li {
+			border-color: rgb(255 255 255 / 0.3);
+			background: transparent;
+			color: rgb(255 255 255 / 0.9);
 		}
 
 		& .cb-check,

@@ -15,7 +15,7 @@ $eyebrow        = $attributes['eyebrow'] ?? '';
 $heading        = $attributes['heading'] ?? '';
 $body           = $attributes['body'] ?? '';
 $items          = cbae_lines( $attributes['list'] ?? '' );
-$list_style     = in_array( $attributes['listStyle'] ?? '', array( 'check', 'number', 'plain' ), true ) ? $attributes['listStyle'] : 'check';
+$list_style     = in_array( $attributes['listStyle'] ?? '', array( 'check', 'number', 'plain', 'pills' ), true ) ? $attributes['listStyle'] : 'check';
 $list_label     = $attributes['listLabel'] ?? '';
 $primary_text   = $attributes['primaryText'] ?? '';
 $primary_url    = $attributes['primaryUrl'] ?? '';
@@ -98,6 +98,18 @@ $has_actions   = $primary_url || $secondary_url;
 						}
 						?>
 				</ol>
+						<?php
+					} elseif ( 'pills' === $list_style ) {
+						?>
+				<ul class="cb-pill-list">
+						<?php
+						foreach ( $items as $item ) {
+							?>
+					<li><?php echo esc_html( $item ); ?></li>
+							<?php
+						}
+						?>
+				</ul>
 						<?php
 					} elseif ( 'plain' === $list_style ) {
 						?>

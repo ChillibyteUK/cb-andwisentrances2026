@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "cb-andwisentrances2026/content",
 	"title": "Content section",
-	"description": "Text-only section: optional eyebrow, heading, body copy, an optional tick list, numbered steps or plain list, and buttons. Heading beside the copy (split) or a single column (stack).",
+	"description": "Text-only section: optional eyebrow, heading, body copy, an optional tick list, numbered steps, plain list or row of pills, and buttons. Heading beside the copy (split) or a single column (stack).",
 	"category": "cb-andwisentrances2026",
 	"icon": "text",
 	"attributes": {

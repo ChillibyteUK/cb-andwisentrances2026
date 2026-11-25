@@ -413,7 +413,7 @@ SEO title/description per page is Yoast's job - do not add fields for it.
 | `stats`           | Scale numbers; `data-count` count-up via `src/js/counter.js`.       |
 | `sectors-spotlight` | Forest band ported from the lifts `cb-sectors` block: copy left, a tall column of sector names right (auto from the sector type, or manual), with a mint circle that follows the pointer (`src/js/sectors-spotlight.js` sets `--x` / `--y` for a CSS mask). The names are printed twice, base and mint, so both lists must keep identical metrics. Below lg, or without a fine pointer, it is a plain list of links. |
 | `cards`           | The one listing block: manual / children / post type / selected / related / case studies about this page (reverse lookup, hides when none). Renders `cbae_tile()`. Media: Icon shows each post's `card_icon` meta (sidebar, Listing & details), else the placeholder tick from `cbae_tile_icon_placeholder()` - never the featured image. |
-| `content`         | Text section: H2, body, optional tick / numbered / plain list, buttons. Split (heading left) or stacked; paper, sage, forest or mint. |
+| `content`         | Text section: H2, body, optional tick / numbered / plain / pills list, buttons. Split (heading left) or stacked; paper, sage, forest or mint. |
 | `table`           | Heading + data table (2 or 3 columns) that stacks to cards on mobile: product specs, accreditations, offices. |
 | `form`            | Gravity Forms wrapper. Presets `need` / `product` / `building` pre-select the matching dropdowns via GF dynamic population. |
 | `faqs`            | Accordion (`src/js/accordion.js`) with optional FAQPage schema; turn schema off when it is just a click-to-expand list. |
