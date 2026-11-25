@@ -1451,6 +1451,18 @@ main:has(> .bg-forest:last-child) + #footer {
 	--footer-curve-color: var(--col-forest-deep);
 }
 
+/* A forest block that ends the page would run straight into the forest
+   footer: the curve above was a dark strip with a hard top edge between two
+   bands of the same green. The closing block takes the deeper green itself,
+   so it and the curve are one shape resting on the footer. */
+main > .bg-forest:last-child {
+	background-color: var(--col-forest-deep);
+}
+
+main > .cb-logo-row--has-image.bg-forest:last-child {
+	--band: var(--col-forest-deep);
+}
+
 .site-cta + #footer,
 main:has(> .bg-sage-tint:last-child) + #footer,
 main:has(> .bg-sage:last-child) + #footer,
