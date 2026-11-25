@@ -28,7 +28,7 @@
 	& .cb-hero__scrim {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(180deg, rgb(9 26 16 / 0.72) 0%, rgb(10 30 19 / 0.5) 40%, rgb(11 35 21 / 0.88) 100%);
+		background: linear-gradient(180deg, rgb(9 26 16 / 0.72) 0%, rgb(10 30 19 / 0.55) 38%, rgb(11 35 21 / 0.88) 100%);
 	}
 
 	& .cb-hero__inner {
@@ -41,6 +41,31 @@
 	&.cb-hero--compact .cb-hero__inner {
 		padding-top: calc(var(--nav-height) + clamp(2rem, 5vw, 4.5rem));
 		padding-bottom: calc(var(--hero-curve-h) + clamp(2rem, 4vw, 3.5rem));
+	}
+
+	/*
+	 * Full: matched to the andwislifts.com hero (measured at 1440px: heading
+	 * 78px bold starting 160px below the header and running the width of the
+	 * container, about 890px of photo). The heading scales with the viewport
+	 * exactly as theirs does (5.4vw).
+	 */
+	&.cb-hero--full {
+		& .cb-hero__inner {
+			padding-top: calc(var(--nav-height) + clamp(4rem, 11vw, 10rem));
+			padding-bottom: clamp(7rem, 17vw, 16rem);
+		}
+
+		& h1 {
+			max-width: none;
+			font-size: clamp(2.375rem, 5.4vw, 4.875rem);
+			font-weight: var(--fw-700);
+			letter-spacing: -0.01em;
+			text-wrap: balance;
+		}
+
+		& .cb-hero__cta {
+			margin-top: 2.5rem;
+		}
 	}
 
 	& .cb-breadcrumbs {
