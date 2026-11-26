@@ -105,6 +105,13 @@ if ( $legal_vat ) {
 	$legal_lines[] = 'VAT registration number ' . $legal_vat . '.';
 }
 
+// "Footer company details (own wording)" replaces the built lines outright,
+// for disclosures the fields above cannot express (two company numbers, say).
+$legal_custom = cbae_lines( cbae_setting( 'legal_text' ) );
+if ( $legal_custom ) {
+	$legal_lines = $legal_custom;
+}
+
 $phone   = cbae_setting( 'phone' );
 $email   = cbae_setting( 'email' );
 $address = cbae_setting( 'address' );

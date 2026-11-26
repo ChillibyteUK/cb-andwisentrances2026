@@ -229,6 +229,13 @@ function cb_andwisentrances2026_register_settings_page() {
 			'section'     => 'cb_andwisentrances2026_legal',
 			'description' => 'One line per line. Shown in the footer as a single line, separated by commas.',
 		),
+		'legal_text'               => array(
+			'label'       => 'Footer company details (own wording)',
+			'type'        => 'textarea',
+			'section'     => 'cb_andwisentrances2026_legal',
+			'rows'        => 5,
+			'description' => 'Optional. One line per line. When filled in, the footer shows exactly this text instead of the wording it builds from the fields above.',
+		),
 		'vacancy_form_id'          => array(
 			'label'       => 'Vacancy application form ID',
 			'type'        => 'text',
