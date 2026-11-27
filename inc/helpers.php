@@ -753,6 +753,28 @@ function cbae_button( $text, $url, $class = 'btn', $target = false ) {
 }
 
 /**
+ * Escape plain text and turn the UK phone numbers in it into tel: links.
+ *
+ * header.php switches off the browser's own phone detection (iOS Safari was
+ * making call links out of company numbers), so a number meant to be dialled
+ * needs a real link. Only a 10 or 11 digit number starting 0, or a +44
+ * number, counts: an 8-digit company number or a standard such as
+ * "BS EN 13241" is left alone.
+ *
+ * @param string $text Plain text, e.g. a table cell.
+ * @return string Escaped HTML.
+ */
+function cbae_link_phone_numbers( $text ) {
+	return preg_replace_callback(
+		'/(?<![\d+#])(?:\+44 ?|0)\d(?: ?\d){8,9}(?!\d)/',
+		static function ( $match ) {
+			return '<a href="tel:' . esc_attr( parse_phone( $match[0] ) ) . '">' . $match[0] . '</a>';
+		},
+		esc_html( (string) $text )
+	);
+}
+
+/**
  * Lines from a textarea attribute, trimmed and with blanks removed.
  *
  * @param string $text Multi-line text.

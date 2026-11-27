@@ -15,6 +15,8 @@ $cbae_ctas = cbae_site_ctas();
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php // iOS Safari otherwise turns any phone-shaped number into a call link, company numbers included. Real phone numbers are tel: links already. ?>
+	<meta name="format-detection" content="telephone=no">
 	<?php wp_head(); ?>
 </head>
 

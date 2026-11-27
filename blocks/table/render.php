@@ -112,7 +112,7 @@ $classes    = cbae_section_class( $attributes, 'cb-table-block' );
 							$cell_tag = ( 0 === $i && $first_col_header ) ? 'th' : 'td';
 							$scope    = 'th' === $cell_tag ? ' scope="row"' : '';
 							?>
-						<<?php echo $cell_tag . $scope; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed strings set above. ?> data-label="<?php echo esc_attr( $heads[ $i ] ); ?>"><?php echo nl2br( esc_html( $cells[ $i ] ) ); ?></<?php echo $cell_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+						<<?php echo $cell_tag . $scope; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed strings set above. ?> data-label="<?php echo esc_attr( $heads[ $i ] ); ?>"><?php echo nl2br( cbae_link_phone_numbers( $cells[ $i ] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside the helper. ?></<?php echo $cell_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 							<?php
 						}
 						?>
